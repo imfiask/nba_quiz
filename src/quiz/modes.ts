@@ -5,6 +5,7 @@ import {
   playerById,
   players,
   playersInScope,
+  rosterOf,
   teamById,
   teams,
   teamsInScope,
@@ -12,13 +13,24 @@ import {
   type Scope,
   type Team,
 } from '../data';
-import { matchName, type MatchResult } from './match';
+import type { Difficulty } from '../prefs';
+import { normalize } from './match';
 
 export interface Choice {
   key: string;
   label?: string;
   image?: string;
   imageKind?: 'logo' | 'photo';
+  /** Se la scelta è un giocatore, per mostrarne il numero di maglia accanto al nome. */
+  playerId?: string;
+}
+
+export interface SearchOption {
+  key: string;
+  label: string;
+  playerId?: string;
+  /** Testo normalizzato su cui cercare. */
+  haystack: string;
 }
 
 export interface Question {
@@ -29,12 +41,15 @@ export interface Question {
     sub?: string;
     image?: string;
     imageKind?: 'logo' | 'photo';
+    /** Se il testo è il nome di un giocatore. */
+    playerId?: string;
   };
   /** Squadra da usare come colore d'accento della domanda. */
   accentTeamId?: string;
   input:
     | { kind: 'choice'; choices: Choice[]; answer: string }
-    | { kind: 'text'; placeholder: string; answer: string; check: (s: string) => MatchResult };
+    | { kind: 'search'; options: SearchOption[]; placeholder: string; answer: string }
+    | { kind: 'text'; placeholder: string; answer: string; check: (s: string) => boolean };
   /** Cosa mostrare come "scheda" dopo la risposta. */
   reveal: { playerId?: string; teamId?: string };
 }
@@ -45,7 +60,6 @@ export type ModeId =
   | 'team-conference'
   | 'team-division'
   | 'player-photo-name'
-  | 'player-photo-type'
   | 'player-name-photo'
   | 'player-team'
   | 'player-jersey'
@@ -57,10 +71,14 @@ export interface ModeDef {
   icon: string;
   title: string;
   description: string;
+  /** Descrizione della versione difficile; se manca la modalità ha un solo livello. */
+  hard?: string;
   /** false = non ha senso su una singola squadra (es. "dove gioca?"). */
   singleTeamOk: boolean;
+  /** Nasconde il numero di maglia accanto ai nomi (sarebbe la risposta). */
+  hidesJersey?: boolean;
   items: (scope: Scope) => string[];
-  build: (itemId: string, scope: Scope) => Question;
+  build: (itemId: string, scope: Scope, difficulty: Difficulty) => Question;
 }
 
 // ---------- utilità ----------
@@ -98,6 +116,27 @@ function playerDistractors(p: Player, scope: Scope): Player[] {
 
 const teamChoice = (t: Team): Choice => ({ key: t.id, label: t.name, image: t.logo ?? undefined, imageKind: 'logo' });
 
+/** Le opzioni di ricerca sono sempre su tutta la lega: così l'autocompletamento non suggerisce troppo. */
+const teamOptions: SearchOption[] = teams.map((t) => ({
+  key: t.id,
+  label: t.name,
+  haystack: normalize(`${t.name} ${t.abbr}`),
+}));
+const playerOptions: SearchOption[] = players
+  .map((p) => ({ key: p.id, label: p.name, playerId: p.id, haystack: normalize(p.name) }))
+  .sort((a, b) => a.label.localeCompare(b.label));
+
+/** Prompt con il giocatore: in facile con la foto, in difficile solo il nome. */
+function playerPrompt(p: Player, difficulty: Difficulty, sub: string): Question['prompt'] {
+  return {
+    image: difficulty === 'easy' ? (p.headshot ?? undefined) : undefined,
+    imageKind: 'photo',
+    text: p.name,
+    playerId: p.id,
+    sub,
+  };
+}
+
 // ---------- modalità ----------
 
 export const MODES: ModeDef[] = [
@@ -107,20 +146,26 @@ export const MODES: ModeDef[] = [
     icon: '🛡️',
     title: 'Logo → Squadra',
     description: 'Vedi il logo, scegli il nome della squadra.',
+    hard: 'Vedi il logo e scrivi il nome della squadra.',
     singleTeamOk: false,
     items: (scope) => teamsInScope(scope).map((t) => t.id),
-    build(id, scope) {
+    build(id, scope, difficulty) {
       const t = team(id);
-      const others = distractors(t, teamsInScope(scope), teams);
       return {
         mode: 'team-logo-name',
         itemId: id,
         prompt: { image: t.logo ?? undefined, imageKind: 'logo', text: 'Che squadra è?' },
-        input: {
-          kind: 'choice',
-          answer: t.id,
-          choices: shuffle([t, ...others]).map((x) => ({ key: x.id, label: x.name })),
-        },
+        input:
+          difficulty === 'hard'
+            ? { kind: 'search', options: teamOptions, placeholder: 'Scrivi la squadra…', answer: t.id }
+            : {
+                kind: 'choice',
+                answer: t.id,
+                choices: shuffle([t, ...distractors(t, teamsInScope(scope), teams)]).map((x) => ({
+                  key: x.id,
+                  label: x.name,
+                })),
+              },
         reveal: { teamId: id },
       };
     },
@@ -130,12 +175,13 @@ export const MODES: ModeDef[] = [
     group: 'team',
     icon: '🎯',
     title: 'Squadra → Logo',
-    description: 'Leggi il nome, trova il logo giusto.',
+    description: 'Leggi il nome, trova il logo giusto tra 4.',
+    hard: 'Leggi il nome, trova il logo tra tutti e 30.',
     singleTeamOk: false,
     items: (scope) => teamsInScope(scope).map((t) => t.id),
-    build(id, scope) {
+    build(id, scope, difficulty) {
       const t = team(id);
-      const others = distractors(t, teamsInScope(scope), teams);
+      const options = difficulty === 'hard' ? teams : [t, ...distractors(t, teamsInScope(scope), teams)];
       return {
         mode: 'team-name-logo',
         itemId: id,
@@ -143,7 +189,7 @@ export const MODES: ModeDef[] = [
         input: {
           kind: 'choice',
           answer: t.id,
-          choices: shuffle([t, ...others]).map((x) => ({ key: x.id, image: x.logo ?? undefined, imageKind: 'logo' })),
+          choices: shuffle(options).map((x) => ({ key: x.id, image: x.logo ?? undefined, imageKind: 'logo' })),
         },
         reveal: { teamId: id },
       };
@@ -168,8 +214,9 @@ export const MODES: ModeDef[] = [
           kind: 'choice',
           answer: t.conference,
           choices: [
-            { key: 'East', label: `⬅️ ${CONFERENCE_LABEL.East}` },
-            { key: 'West', label: `${CONFERENCE_LABEL.West} ➡️` },
+            // come sulla cartina: Ovest a sinistra, Est a destra
+            { key: 'West', label: `⬅️ ${CONFERENCE_LABEL.West}` },
+            { key: 'East', label: `${CONFERENCE_LABEL.East} ➡️` },
           ],
         },
         reveal: { teamId: id },
@@ -181,7 +228,7 @@ export const MODES: ModeDef[] = [
     group: 'team',
     icon: '🗺️',
     title: 'Division',
-    description: 'In quale delle 6 division gioca? (livello avanzato)',
+    description: 'In quale delle 6 division gioca?',
     singleTeamOk: false,
     items: (scope) => teamsInScope(scope).map((t) => t.id),
     build(id) {
@@ -206,45 +253,28 @@ export const MODES: ModeDef[] = [
     icon: '📸',
     title: 'Foto → Nome',
     description: 'Vedi la foto, scegli tra 4 nomi.',
+    hard: 'Vedi la foto e scrivi il nome.',
     singleTeamOk: true,
     items: (scope) => withPhoto(playersInScope(scope)).map((p) => p.id),
-    build(id, scope) {
+    build(id, scope, difficulty) {
       const p = player(id);
       return {
         mode: 'player-photo-name',
         itemId: id,
         accentTeamId: p.teamId,
         prompt: { image: p.headshot!, imageKind: 'photo', text: 'Chi è?' },
-        input: {
-          kind: 'choice',
-          answer: p.id,
-          choices: shuffle([p, ...playerDistractors(p, scope)]).map((x) => ({ key: x.id, label: x.name })),
-        },
-        reveal: { playerId: id },
-      };
-    },
-  },
-  {
-    id: 'player-photo-type',
-    group: 'player',
-    icon: '⌨️',
-    title: 'Foto → Scrivi il nome',
-    description: 'Vedi la foto e scrivi il nome (basta il cognome, perdona i refusi).',
-    singleTeamOk: true,
-    items: (scope) => withPhoto(playersInScope(scope)).map((p) => p.id),
-    build(id) {
-      const p = player(id);
-      return {
-        mode: 'player-photo-type',
-        itemId: id,
-        accentTeamId: p.teamId,
-        prompt: { image: p.headshot!, imageKind: 'photo', text: 'Chi è?', sub: team(p.teamId).name },
-        input: {
-          kind: 'text',
-          placeholder: 'Nome o cognome…',
-          answer: p.name,
-          check: (s) => matchName(s, p),
-        },
+        input:
+          difficulty === 'hard'
+            ? { kind: 'search', options: playerOptions, placeholder: 'Scrivi il nome…', answer: p.id }
+            : {
+                kind: 'choice',
+                answer: p.id,
+                choices: shuffle([p, ...playerDistractors(p, scope)]).map((x) => ({
+                  key: x.id,
+                  label: x.name,
+                  playerId: x.id,
+                })),
+              },
         reveal: { playerId: id },
       };
     },
@@ -255,23 +285,30 @@ export const MODES: ModeDef[] = [
     icon: '🔍',
     title: 'Nome → Foto',
     description: 'Leggi il nome, riconosci il giocatore tra 4 foto.',
+    hard: 'Leggi il nome, trovalo tra le facce di un intero roster.',
     singleTeamOk: true,
     items: (scope) => withPhoto(playersInScope(scope)).map((p) => p.id),
-    build(id, scope) {
+    build(id, scope, difficulty) {
       const p = player(id);
+      let options: Player[];
+      if (difficulty === 'hard') {
+        // singola squadra: tutto il roster; altrimenti tante facce quante un roster
+        const size = withPhoto(rosterOf(p.teamId)).length;
+        options = scope.startsWith('team:')
+          ? withPhoto(rosterOf(p.teamId))
+          : [p, ...distractors(p, withPhoto(playersInScope(scope)), withPhoto(players), size - 1)];
+      } else {
+        options = [p, ...playerDistractors(p, scope)];
+      }
       return {
         mode: 'player-name-photo',
         itemId: id,
         accentTeamId: p.teamId,
-        prompt: { text: p.name, sub: 'Chi è tra questi?' },
+        prompt: { text: p.name, playerId: p.id, sub: 'Chi è tra questi?' },
         input: {
           kind: 'choice',
           answer: p.id,
-          choices: shuffle([p, ...playerDistractors(p, scope)]).map((x) => ({
-            key: x.id,
-            image: x.headshot!,
-            imageKind: 'photo',
-          })),
+          choices: shuffle(options).map((x) => ({ key: x.id, image: x.headshot!, imageKind: 'photo' })),
         },
         reveal: { playerId: id },
       };
@@ -282,19 +319,19 @@ export const MODES: ModeDef[] = [
     group: 'player',
     icon: '🏟️',
     title: 'Dove gioca?',
-    description: 'Dato un giocatore, scegli la sua squadra.',
+    description: 'Dato un giocatore (con foto), scegli tra 4 squadre.',
+    hard: 'Solo il nome, scegli tra tutte le 30 squadre.',
     singleTeamOk: false,
     items: (scope) => playersInScope(scope).map((p) => p.id),
-    build(id, scope) {
+    build(id, scope, difficulty) {
       const p = player(id);
       const t = team(p.teamId);
-      const others = distractors(t, teamsInScope(scope), teams);
+      const options = difficulty === 'hard' ? teams : shuffle([t, ...distractors(t, teamsInScope(scope), teams)]);
       return {
         mode: 'player-team',
         itemId: id,
-        // niente foto: la maglia svelerebbe la risposta
-        prompt: { text: p.name, sub: 'In che squadra gioca?' },
-        input: { kind: 'choice', answer: t.id, choices: shuffle([t, ...others]).map(teamChoice) },
+        prompt: playerPrompt(p, difficulty, 'In che squadra gioca?'),
+        input: { kind: 'choice', answer: t.id, choices: options.map(teamChoice) },
         reveal: { playerId: id },
       };
     },
@@ -304,21 +341,23 @@ export const MODES: ModeDef[] = [
     group: 'player',
     icon: '🔢',
     title: 'Numero di maglia',
-    description: 'Che numero indossa? Scrivilo.',
+    description: 'Vedi foto e nome, scrivi il numero.',
+    hard: 'Solo il nome, scrivi il numero.',
     singleTeamOk: true,
+    hidesJersey: true,
     items: (scope) => playersInScope(scope).filter((p) => p.jersey).map((p) => p.id),
-    build(id) {
+    build(id, _scope, difficulty) {
       const p = player(id);
       return {
         mode: 'player-jersey',
         itemId: id,
         accentTeamId: p.teamId,
-        prompt: { image: p.headshot ?? undefined, imageKind: 'photo', text: p.name, sub: `${team(p.teamId).name} · che numero ha?` },
+        prompt: playerPrompt(p, difficulty, `${team(p.teamId).name} · che numero ha?`),
         input: {
           kind: 'text',
           placeholder: '#',
           answer: `#${p.jersey}`,
-          check: (s) => (s.trim().replace(/^#/, '') === p.jersey ? 'exact' : 'wrong'),
+          check: (s) => s.trim().replace(/^#/, '') === p.jersey,
         },
         reveal: { playerId: id },
       };
@@ -329,16 +368,17 @@ export const MODES: ModeDef[] = [
     group: 'player',
     icon: '📍',
     title: 'Ruolo',
-    description: 'Guardia, ala o centro?',
+    description: 'Vedi foto e nome: guardia, ala o centro?',
+    hard: 'Solo il nome: guardia, ala o centro?',
     singleTeamOk: true,
     items: (scope) => playersInScope(scope).filter((p) => p.position).map((p) => p.id),
-    build(id) {
+    build(id, _scope, difficulty) {
       const p = player(id);
       return {
         mode: 'player-position',
         itemId: id,
         accentTeamId: p.teamId,
-        prompt: { image: p.headshot ?? undefined, imageKind: 'photo', text: p.name, sub: 'Che ruolo ha?' },
+        prompt: playerPrompt(p, difficulty, `${team(p.teamId).name} · che ruolo ha?`),
         input: {
           kind: 'choice',
           answer: p.position!,
@@ -354,4 +394,33 @@ export const modeById = new Map(MODES.map((m) => [m.id, m]));
 
 export function modeAvailable(mode: ModeDef, scope: Scope): boolean {
   return mode.singleTeamOk || !scope.startsWith('team:');
+}
+
+/** La difficoltà effettiva: le modalità a livello unico sono sempre "facile". */
+export function effectiveDifficulty(mode: ModeDef, difficulty: Difficulty): Difficulty {
+  return mode.hard ? difficulty : 'easy';
+}
+
+/** Chiave sotto cui salvare i progressi: facile e difficile si imparano separatamente. */
+export function statsKey(mode: ModeDef, difficulty: Difficulty): string {
+  return effectiveDifficulty(mode, difficulty) === 'hard' ? `${mode.id}:hard` : mode.id;
+}
+
+/** Filtra e ordina le opzioni di ricerca: prima chi inizia con il testo, poi chi ha una parola che inizia così. */
+export function searchOptions(options: SearchOption[], query: string, limit = 8): SearchOption[] {
+  const q = normalize(query);
+  if (!q) return [];
+  const scored: [number, SearchOption][] = [];
+  for (const o of options) {
+    let score: number;
+    if (o.haystack.startsWith(q)) score = 0;
+    else if (o.haystack.split(' ').some((w) => w.startsWith(q)) || o.haystack.includes(` ${q}`)) score = 1;
+    else if (o.haystack.includes(q)) score = 2;
+    else continue;
+    scored.push([score, o]);
+  }
+  return scored
+    .sort((a, b) => a[0] - b[0] || a[1].label.localeCompare(b[1].label))
+    .slice(0, limit)
+    .map(([, o]) => o);
 }

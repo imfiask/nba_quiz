@@ -1,8 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
 import { playerById, scopeLabel, teamById, type Scope } from '../data';
-import { modeById, type ModeId, type Question } from '../quiz/modes';
-import type { MatchResult } from '../quiz/match';
+import {
+  effectiveDifficulty,
+  modeById,
+  searchOptions,
+  statsKey,
+  type ModeId,
+  type Question,
+  type SearchOption,
+} from '../quiz/modes';
 import { getStats, needsReview, record, weightedPick } from '../progress';
+import { setPref, usePrefs, type Difficulty } from '../prefs';
 import { navigate } from '../router';
 import { Img, PlayerReveal, TeamReveal } from '../components/Cards';
 
@@ -11,12 +19,13 @@ interface Props {
   scope: Scope;
   /** 0 = tutti gli elementi dell'ambito */
   count: number;
+  difficulty: Difficulty;
   reviewOnly: boolean;
 }
 
 interface Answer {
   given: string;
-  result: MatchResult;
+  correct: boolean;
 }
 
 /** Quante volte un elemento sbagliato viene riproposto nella stessa sessione. */
@@ -30,14 +39,30 @@ function preload(q?: Question) {
   for (const u of urls) if (u) new Image().src = u;
 }
 
-export default function Quiz({ mode, scope, count, reviewOnly }: Props) {
+export default function Quiz({ mode, scope, count, difficulty: requested, reviewOnly }: Props) {
   const def = modeById.get(mode);
+  const difficulty = def ? effectiveDifficulty(def, requested) : 'easy';
+  const key = def ? statsKey(def, difficulty) : mode;
+  const prefs = usePrefs();
+  const showJersey = prefs.showJersey && !def?.hidesJersey;
+
+  /** Nome del giocatore con il numero di maglia, se l'interruttore è attivo. */
+  const withJersey = (text: string, playerId?: string) => {
+    const jersey = playerId && showJersey ? playerById.get(playerId)?.jersey : null;
+    return jersey ? (
+      <>
+        {text} <span className="jersey">#{jersey}</span>
+      </>
+    ) : (
+      text
+    );
+  };
 
   const [queue, setQueue] = useState<Question[]>(() => {
     if (!def) return [];
     let items = def.items(scope);
-    if (reviewOnly) items = items.filter((id) => needsReview(getStats(mode, id)));
-    return weightedPick(mode, items, count || items.length).map((id) => def.build(id, scope));
+    if (reviewOnly) items = items.filter((id) => needsReview(getStats(key, id)));
+    return weightedPick(key, items, count || items.length).map((id) => def.build(id, scope, difficulty));
   });
   const [index, setIndex] = useState(0);
   const [answer, setAnswer] = useState<Answer | null>(null);
@@ -57,11 +82,9 @@ export default function Quiz({ mode, scope, count, reviewOnly }: Props) {
 
   const submit = (given: string) => {
     if (!q || answer) return;
-    const result: MatchResult =
-      q.input.kind === 'choice' ? (given === q.input.answer ? 'exact' : 'wrong') : q.input.check(given);
-    const correct = result !== 'wrong';
-    record(mode, q.itemId, correct);
-    setAnswer({ given, result });
+    const correct = q.input.kind === 'text' ? q.input.check(given) : given === q.input.answer;
+    record(key, q.itemId, correct);
+    setAnswer({ given, correct });
     setScore((s) => (correct ? { ...s, right: s.right + 1 } : { ...s, wrong: s.wrong + 1 }));
     if (!correct) {
       setMissed((m) => (m.includes(q.itemId) ? m : [...m, q.itemId]));
@@ -70,21 +93,22 @@ export default function Quiz({ mode, scope, count, reviewOnly }: Props) {
         retries.current.set(q.itemId, n + 1);
         setQueue((list) => {
           const copy = list.slice();
-          copy.splice(Math.min(index + 1 + RETRY_GAP, copy.length), 0, def.build(q.itemId, scope));
+          copy.splice(Math.min(index + 1 + RETRY_GAP, copy.length), 0, def.build(q.itemId, scope, difficulty));
           return copy;
         });
       }
     }
   };
 
-  // Avanza da solo se hai risposto giusto
+  // Se hai risposto giusto avanza da solo, a meno che tu non voglia fermarti sulla soluzione
+  const waitForNext = !!answer && (!answer.correct || prefs.holdOnCorrect);
   useEffect(() => {
-    if (!answer || answer.result === 'wrong') return;
-    const t = setTimeout(next, answer.result === 'close' ? 1800 : 900);
+    if (!answer || waitForNext) return;
+    const t = setTimeout(next, 900);
     return () => clearTimeout(t);
-  }, [answer]);
+  }, [answer, waitForNext]);
 
-  // Tastiera: 1-6 per scegliere, Invio per andare avanti
+  // Tastiera: 1-9 per scegliere, Invio per andare avanti
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (answer && e.key === 'Enter') {
@@ -92,9 +116,8 @@ export default function Quiz({ mode, scope, count, reviewOnly }: Props) {
         next();
         return;
       }
-      if (!answer && q?.input.kind === 'choice' && !(e.target instanceof HTMLInputElement)) {
-        const n = Number(e.key);
-        const choice = q.input.choices[n - 1];
+      if (!answer && q?.input.kind === 'choice' && q.input.choices.length <= 9 && !(e.target instanceof HTMLInputElement)) {
+        const choice = q.input.choices[Number(e.key) - 1];
         if (choice) submit(choice.key);
       }
     };
@@ -103,6 +126,8 @@ export default function Quiz({ mode, scope, count, reviewOnly }: Props) {
   });
 
   if (!def) return <p>Modalità sconosciuta. <a href="#/">Torna alla home</a></p>;
+
+  const title = `${def.icon} ${def.title}${def.hard ? ` · ${difficulty === 'hard' ? 'Difficile' : 'Facile'}` : ''}`;
 
   if (queue.length === 0) {
     return (
@@ -120,9 +145,7 @@ export default function Quiz({ mode, scope, count, reviewOnly }: Props) {
     const total = score.right + score.wrong;
     return (
       <div className="panel summary">
-        <h2>
-          {def.icon} {def.title} — fatto!
-        </h2>
+        <h2>{title} — fatto!</h2>
         <div className="big-score">
           {score.right}/{total} <span>({Math.round((score.right / Math.max(total, 1)) * 100)}%)</span>
         </div>
@@ -145,7 +168,7 @@ export default function Quiz({ mode, scope, count, reviewOnly }: Props) {
             Rigioca
           </button>
           {missed.length > 0 && (
-            <button onClick={() => navigate('quiz', { mode, scope, n: 0, review: 1 })}>Ripassa errori</button>
+            <button onClick={() => navigate('quiz', { mode, scope, n: 0, d: difficulty, review: 1 })}>Ripassa errori</button>
           )}
           <button onClick={() => navigate('home', { scope })}>Altre modalità</button>
         </div>
@@ -156,6 +179,8 @@ export default function Quiz({ mode, scope, count, reviewOnly }: Props) {
   const accent = q.accentTeamId ? teamById.get(q.accentTeamId)?.color : undefined;
   const revealPlayer = q.reveal.playerId ? playerById.get(q.reveal.playerId) : undefined;
   const revealTeam = q.reveal.teamId ? teamById.get(q.reveal.teamId) : undefined;
+  const correctLabel =
+    q.input.kind === 'search' ? q.input.options.find((o) => o.key === q.input.answer)?.label : q.input.answer;
 
   return (
     <div className="quiz" style={accent ? ({ '--team': accent } as React.CSSProperties) : undefined}>
@@ -164,10 +189,19 @@ export default function Quiz({ mode, scope, count, reviewOnly }: Props) {
           ← Esci
         </button>
         <span>
-          {def.icon} {def.title} · {scopeLabel(scope)}
+          {title} · {scopeLabel(scope)}
         </span>
-        <span className="score">
-          ✅ {score.right} ❌ {score.wrong} · {index + 1}/{queue.length}
+        <span className="quiz-right">
+          <button
+            className={`toggle ${prefs.holdOnCorrect ? 'on' : ''}`}
+            title="Se attivo, anche dopo una risposta giusta resti sulla soluzione finché non premi Avanti"
+            onClick={() => setPref('holdOnCorrect', !prefs.holdOnCorrect)}
+          >
+            ⏸ Fermati sempre {prefs.holdOnCorrect ? 'ON' : 'OFF'}
+          </button>
+          <span className="score">
+            ✅ {score.right} ❌ {score.wrong} · {index + 1}/{queue.length}
+          </span>
         </span>
       </div>
       <div className="bar thin">
@@ -176,43 +210,43 @@ export default function Quiz({ mode, scope, count, reviewOnly }: Props) {
 
       <div className="panel question">
         {q.prompt.image && <Img src={q.prompt.image} kind={q.prompt.imageKind ?? 'logo'} />}
-        {q.prompt.text && <div className="prompt-text">{q.prompt.text}</div>}
+        {q.prompt.text && <div className="prompt-text">{withJersey(q.prompt.text, q.prompt.playerId)}</div>}
         {q.prompt.sub && <div className="prompt-sub">{q.prompt.sub}</div>}
 
-        {q.input.kind === 'choice' ? (
-          <div className={`choices ${q.input.choices.some((c) => c.image && !c.label) ? 'images' : ''} n${q.input.choices.length}`}>
-            {q.input.choices.map((c, i) => {
-              let cls = 'choice';
-              if (answer) {
-                if (c.key === q.input.answer) cls += ' correct';
-                else if (c.key === answer.given) cls += ' wrong';
-                else cls += ' dim';
-              }
-              return (
-                <button key={c.key} className={cls} onClick={() => submit(c.key)} disabled={!!answer}>
-                  <span className="kbd">{i + 1}</span>
-                  {c.image && <Img src={c.image} kind={c.imageKind ?? 'logo'} />}
-                  {c.label && <span>{c.label}</span>}
-                </button>
-              );
-            })}
-          </div>
-        ) : (
+        {q.input.kind === 'choice' && (
+          <ChoiceGrid
+            input={q.input}
+            answer={answer}
+            onPick={submit}
+            label={(c) => withJersey(c.label ?? '', c.playerId)}
+          />
+        )}
+        {q.input.kind === 'search' && (
+          <SearchAnswer
+            key={index}
+            options={q.input.options}
+            placeholder={q.input.placeholder}
+            answered={answer ? { ...answer, correctKey: q.input.answer } : null}
+            onSubmit={submit}
+            label={(o) => withJersey(o.label, o.playerId)}
+          />
+        )}
+        {q.input.kind === 'text' && (
           <TextAnswer key={index} placeholder={q.input.placeholder} disabled={!!answer} onSubmit={submit} />
         )}
 
         {answer && (
-          <div className={`feedback ${answer.result}`}>
+          <div className={`feedback ${answer.correct ? 'ok' : 'ko'}`}>
             <div className="feedback-title">
-              {answer.result === 'exact' && 'Giusto! ✅'}
-              {answer.result === 'close' && <>Quasi perfetto ✅ — si scrive <b>{q.input.answer}</b></>}
-              {answer.result === 'wrong' && (
+              {answer.correct ? (
+                'Giusto! ✅'
+              ) : (
                 <>
                   Sbagliato ❌
-                  {q.input.kind === 'text' && (
+                  {q.input.kind !== 'choice' && correctLabel && (
                     <>
                       {' '}
-                      — era <b>{q.input.answer}</b>
+                      — era <b>{correctLabel}</b>
                     </>
                   )}
                 </>
@@ -220,7 +254,7 @@ export default function Quiz({ mode, scope, count, reviewOnly }: Props) {
             </div>
             {revealPlayer && <PlayerReveal p={revealPlayer} />}
             {!revealPlayer && revealTeam && <TeamReveal t={revealTeam} />}
-            {answer.result === 'wrong' && (
+            {waitForNext && (
               <button className="primary" onClick={next} autoFocus>
                 Avanti (Invio)
               </button>
@@ -228,6 +262,123 @@ export default function Quiz({ mode, scope, count, reviewOnly }: Props) {
           </div>
         )}
       </div>
+    </div>
+  );
+}
+
+function ChoiceGrid({
+  input,
+  answer,
+  onPick,
+  label,
+}: {
+  input: Extract<Question['input'], { kind: 'choice' }>;
+  answer: Answer | null;
+  onPick: (key: string) => void;
+  label: (c: (typeof input.choices)[number]) => React.ReactNode;
+}) {
+  const n = input.choices.length;
+  const imagesOnly = input.choices.some((c) => c.image && !c.label);
+  const size = n <= 2 ? 'n2' : n <= 4 ? 'n4' : n <= 9 ? 'n6' : 'many';
+  return (
+    <div className={`choices ${imagesOnly ? 'images' : ''} ${size}`}>
+      {input.choices.map((c, i) => {
+        let cls = 'choice';
+        if (answer) {
+          if (c.key === input.answer) cls += ' correct';
+          else if (c.key === answer.given) cls += ' wrong';
+          else cls += ' dim';
+        }
+        return (
+          <button key={c.key} className={cls} onClick={() => onPick(c.key)} disabled={!!answer}>
+            {n <= 9 && <span className="kbd">{i + 1}</span>}
+            {c.image && <Img src={c.image} kind={c.imageKind ?? 'logo'} />}
+            {c.label && <span>{label(c)}</span>}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+/** Casella con suggerimenti istantanei: frecce per muoversi, Invio o clic per scegliere. */
+function SearchAnswer({
+  options,
+  placeholder,
+  answered,
+  onSubmit,
+  label,
+}: {
+  options: SearchOption[];
+  placeholder: string;
+  answered: (Answer & { correctKey: string }) | null;
+  onSubmit: (key: string) => void;
+  label: (o: SearchOption) => React.ReactNode;
+}) {
+  const [value, setValue] = useState('');
+  const [active, setActive] = useState(0);
+  const matches = answered ? [] : searchOptions(options, value);
+
+  const pick = (o: SearchOption) => {
+    setValue(o.label);
+    onSubmit(o.key);
+  };
+
+  const onKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setActive((a) => Math.min(a + 1, matches.length - 1));
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setActive((a) => Math.max(a - 1, 0));
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      e.stopPropagation();
+      if (matches[active]) pick(matches[active]);
+    }
+  };
+
+  const state = answered ? (answered.correct ? 'correct' : 'wrong') : '';
+
+  return (
+    <div className="search-answer">
+      <div className="text-answer">
+        <input
+          autoFocus
+          className={state}
+          value={value}
+          placeholder={placeholder}
+          disabled={!!answered}
+          onChange={(e) => {
+            setValue(e.target.value);
+            setActive(0);
+          }}
+          onKeyDown={onKeyDown}
+          autoComplete="off"
+          spellCheck={false}
+        />
+        <button type="button" disabled={!!answered} onClick={() => onSubmit('')}>
+          Non lo so
+        </button>
+      </div>
+      {matches.length > 0 && (
+        <ul className="suggestions">
+          {matches.map((o, i) => (
+            <li
+              key={o.key}
+              className={i === active ? 'active' : ''}
+              onMouseEnter={() => setActive(i)}
+              onMouseDown={(e) => {
+                e.preventDefault(); // non perdere il focus dalla casella
+                pick(o);
+              }}
+            >
+              {label(o)}
+            </li>
+          ))}
+        </ul>
+      )}
+      {!answered && value.trim() && matches.length === 0 && <div className="muted small">Nessuna corrispondenza</div>}
     </div>
   );
 }

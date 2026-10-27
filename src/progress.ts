@@ -19,6 +19,13 @@ function load(): Store {
   if (cache) return cache;
   try {
     cache = JSON.parse(localStorage.getItem(KEY) ?? '{}') as Store;
+    // "Foto → Scrivi il nome" è diventata la versione difficile di "Foto → Nome"
+    for (const key of Object.keys(cache)) {
+      if (key.startsWith('player-photo-type|')) {
+        cache[key.replace('player-photo-type|', 'player-photo-name:hard|')] = cache[key];
+        delete cache[key];
+      }
+    }
   } catch {
     cache = {};
   }

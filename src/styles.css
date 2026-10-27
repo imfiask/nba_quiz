@@ -114,9 +114,11 @@ main { max-width: 1100px; margin: 0 auto; padding: 24px 16px 64px; }
 .prompt-text { font-size: 1.6rem; font-weight: 800; text-align: center; }
 .prompt-sub { color: var(--muted); }
 
-.choices { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; margin-top: 10px; }
+/* flex invece di grid: l'ultima riga, se incompleta, resta centrata */
+.choices { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; width: 100%; margin-top: 10px; }
+.choices .choice { flex: 0 0 calc((100% - 10px) / 2); }
 .choices.n2 .choice { padding: 20px; font-size: 1.2rem; }
-.choices.n6 { grid-template-columns: 1fr 1fr 1fr; }
+.choices.n6 .choice { flex-basis: calc((100% - 20px) / 3); }
 .choice { position: relative; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 14px; font-size: 1.05rem; min-height: 56px; }
 .choice .img.logo { width: 40px; height: 40px; }
 .choices.images .choice { flex-direction: column; padding: 14px; }
@@ -132,8 +134,8 @@ main { max-width: 1100px; margin: 0 auto; padding: 24px 16px 64px; }
 
 .feedback { width: 100%; display: flex; flex-direction: column; gap: 12px; align-items: center; margin-top: 8px; padding-top: 14px; border-top: 1px solid var(--border); }
 .feedback-title { font-weight: 700; font-size: 1.1rem; }
-.feedback.exact .feedback-title, .feedback.close .feedback-title { color: var(--ok); }
-.feedback.wrong .feedback-title { color: #ff7b72; }
+.feedback.ok .feedback-title { color: var(--ok); }
+.feedback.ko .feedback-title { color: #ff7b72; }
 
 .reveal { display: flex; gap: 14px; align-items: center; background: var(--panel-2); border-left: 4px solid var(--team); border-radius: 10px; padding: 10px 14px; width: 100%; }
 .reveal .img.photo { width: 96px; height: 70px; }
@@ -182,8 +184,48 @@ th { color: var(--muted); font-weight: 500; font-size: 0.85rem; }
 
 @media (max-width: 700px) {
   .conferences { grid-template-columns: 1fr; }
-  .choices.n6 { grid-template-columns: 1fr 1fr; }
+  .choices.n6 .choice { flex-basis: calc((100% - 10px) / 2); }
   .question > .img.photo { width: 100%; }
   .topbar { padding: 10px 16px; }
   .settings select { min-width: 0; width: 100%; }
 }
+
+/* ---------- difficoltà, numeri, ricerca ---------- */
+.toggle { padding: 6px 12px; font-size: 0.9rem; color: var(--muted); margin-left: 8px; }
+.toggle.on { color: #111; background: var(--accent); border-color: var(--accent); font-weight: 600; }
+.segmented button.on.hard { background: var(--bad); border-color: var(--bad); color: #fff; }
+.badge { margin-left: 8px; font-size: 0.7rem; font-weight: 600; padding: 2px 6px; border-radius: 6px; background: var(--panel-2); color: var(--muted); vertical-align: middle; }
+.badge.hard { background: color-mix(in srgb, var(--bad) 35%, var(--panel-2)); color: #ffb3ad; }
+
+.choices.many { gap: 8px; }
+.choices.many .choice { flex: 0 0 110px; }
+.choices.many .choice { padding: 8px; font-size: 0.85rem; min-height: 0; flex-direction: column; gap: 4px; }
+.choices.many .choice .img.logo { width: 34px; height: 34px; }
+.choices.many.images .img.logo { width: 64px; height: 64px; }
+.choices.many.images .img.photo { width: 100%; height: 80px; }
+.quiz:has(.choices.many) { max-width: 1000px; }
+
+.search-answer { width: 100%; position: relative; }
+.search-answer input.correct { border-color: var(--ok); background: color-mix(in srgb, var(--ok) 20%, var(--panel-2)); }
+.search-answer input.wrong { border-color: var(--bad); background: color-mix(in srgb, var(--bad) 20%, var(--panel-2)); }
+.suggestions { list-style: none; margin: 4px 0 0; padding: 4px; background: var(--panel-2); border: 1px solid var(--border); border-radius: 8px; }
+.suggestions li { padding: 8px 12px; border-radius: 6px; cursor: pointer; }
+.suggestions li.active { background: var(--accent); color: #111; }
+.suggestions li.active .jersey { color: #111; }
+
+.quiz-head .toggle { margin-left: 0; padding: 4px 10px; font-size: 0.8rem; }
+.quiz-right { display: flex; align-items: center; gap: 10px; }
+
+/* ---------- quintetto base ---------- */
+.roster h3 { margin-top: 20px; }
+.player-grid.starters { grid-template-columns: repeat(5, 1fr); }
+.player-grid.starters .player-card { border: 1px solid var(--team); }
+.slot-badge { position: absolute; top: 8px; left: 10px; font-size: 0.75rem; font-weight: 800; padding: 2px 6px; border-radius: 6px; background: var(--team); color: #fff; }
+@media (max-width: 700px) { .player-grid.starters { grid-template-columns: repeat(2, 1fr); } }
+
+/* ---------- guida ---------- */
+.guide { display: grid; gap: 16px; }
+.guide td { vertical-align: top; }
+.slot-pill { display: inline-block; min-width: 34px; text-align: center; font-weight: 800; font-size: 0.85rem; padding: 2px 6px; border-radius: 6px; background: var(--accent); color: #111; }
+.help-link { margin-left: 8px; font-size: 0.8rem; text-transform: none; letter-spacing: 0; font-weight: 400; color: var(--accent); }
+.help-link:hover { text-decoration: underline; }

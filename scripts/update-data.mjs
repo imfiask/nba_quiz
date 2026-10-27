@@ -24,6 +24,25 @@ async function getJson(url) {
   return res.json();
 }
 
+// Quintetto base dal depth chart ESPN: il primo di ogni ruolo (senza ripetere giocatori).
+const STARTER_SLOTS = ['pg', 'sg', 'sf', 'pf', 'c'];
+
+async function getStarters(teamId) {
+  try {
+    const depth = await getJson(`${BASE}/teams/${teamId}/depthcharts`);
+    const positions = depth.depthchart?.[0]?.positions ?? {};
+    const starters = new Map();
+    for (const slot of STARTER_SLOTS) {
+      const first = positions[slot]?.athletes?.find((a) => !starters.has(a.id));
+      if (first) starters.set(first.id, slot.toUpperCase());
+    }
+    return starters;
+  } catch (err) {
+    console.warn(`  depth chart non disponibile per la squadra ${teamId}: ${err.message}`);
+    return new Map();
+  }
+}
+
 const inchesToCm = (inches) => (inches ? Math.round(inches * 2.54) : null);
 const lbsToKg = (lbs) => (lbs ? Math.round(lbs * 0.4536) : null);
 
@@ -51,6 +70,7 @@ async function main() {
   const players = [];
   for (const team of teams) {
     const roster = await getJson(`${BASE}/teams/${team.id}/roster`);
+    const starters = await getStarters(team.id);
     for (const a of roster.athletes) {
       players.push({
         id: a.id,
@@ -68,9 +88,10 @@ async function main() {
         college: a.college?.name ?? null,
         country: a.birthPlace?.country ?? null,
         headshot: a.headshot?.href ?? null,
+        starter: starters.get(a.id) ?? null,
       });
     }
-    console.log(`${team.abbr.padEnd(5)} ${roster.athletes.length} giocatori`);
+    console.log(`${team.abbr.padEnd(5)} ${roster.athletes.length} giocatori, ${starters.size} titolari`);
   }
 
   const data = {

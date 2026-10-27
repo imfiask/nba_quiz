@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CONFERENCE_LABEL, DIVISIONS, rosterOf, teamById, teams } from '../data';
+import { CONFERENCE_LABEL, DIVISIONS, STARTER_SLOTS, rosterOf, teamById, teams, type Player } from '../data';
 import { navigate } from '../router';
 import { Img, PlayerFacts } from '../components/Cards';
 
@@ -39,6 +39,9 @@ export default function Study({ teamId }: { teamId?: string }) {
 function TeamRoster({ teamId }: { teamId: string }) {
   const t = teamById.get(teamId)!;
   const roster = rosterOf(teamId);
+  const slots = Object.keys(STARTER_SLOTS);
+  const starters = roster.filter((p) => p.starter).sort((a, b) => slots.indexOf(a.starter!) - slots.indexOf(b.starter!));
+  const bench = roster.filter((p) => !p.starter);
   const [hideNames, setHideNames] = useState(false);
   const [revealed, setRevealed] = useState<Set<string>>(new Set());
   const scope = `team:${teamId}`;
@@ -50,6 +53,29 @@ function TeamRoster({ teamId }: { teamId: string }) {
       else n.add(id);
       return n;
     });
+
+  const card = (p: Player) => {
+    const hidden = hideNames && !revealed.has(p.id);
+    return (
+      <button key={p.id} className="player-card" onClick={() => hideNames && toggle(p.id)}>
+        {p.starter && (
+          <span className="slot-badge" title={STARTER_SLOTS[p.starter]}>
+            {p.starter}
+          </span>
+        )}
+        <Img src={p.headshot} kind="photo" />
+        {p.jersey && <span className="jersey-badge">#{p.jersey}</span>}
+        {hidden ? (
+          <div className="hidden-name">Clicca per scoprire</div>
+        ) : (
+          <>
+            <div className="player-name">{p.name}</div>
+            <PlayerFacts p={p} starter={false} />
+          </>
+        )}
+      </button>
+    );
+  };
 
   return (
     <div className="roster" style={{ '--team': t.color } as React.CSSProperties}>
@@ -68,7 +94,9 @@ function TeamRoster({ teamId }: { teamId: string }) {
           <button className="primary" onClick={() => navigate('quiz', { mode: 'player-photo-name', scope, n: 0 })}>
             📸 Quiz foto
           </button>
-          <button onClick={() => navigate('quiz', { mode: 'player-photo-type', scope, n: 0 })}>⌨️ Scrivi nomi</button>
+          <button onClick={() => navigate('quiz', { mode: 'player-photo-name', scope, n: 0, d: 'hard' })}>
+            ⌨️ Scrivi nomi
+          </button>
           <button onClick={() => navigate('quiz', { mode: 'player-jersey', scope, n: 0 })}>🔢 Numeri</button>
           <label className="check">
             <input
@@ -84,25 +112,19 @@ function TeamRoster({ teamId }: { teamId: string }) {
         </div>
       </div>
 
-      <div className="player-grid">
-        {roster.map((p) => {
-          const hidden = hideNames && !revealed.has(p.id);
-          return (
-            <button key={p.id} className="player-card" onClick={() => hideNames && toggle(p.id)}>
-              <Img src={p.headshot} kind="photo" />
-              {p.jersey && <span className="jersey-badge">#{p.jersey}</span>}
-              {hidden ? (
-                <div className="hidden-name">Clicca per scoprire</div>
-              ) : (
-                <>
-                  <div className="player-name">{p.name}</div>
-                  <PlayerFacts p={p} />
-                </>
-              )}
-            </button>
-          );
-        })}
-      </div>
+      {starters.length > 0 && (
+        <>
+          <h3>
+            Quintetto base{' '}
+            <a className="help-link" href="#/guide">
+              cosa vogliono dire PG, SG…?
+            </a>
+          </h3>
+          <div className="player-grid starters">{starters.map(card)}</div>
+          <h3>Panchina</h3>
+        </>
+      )}
+      <div className="player-grid">{(starters.length > 0 ? bench : roster).map(card)}</div>
     </div>
   );
 }

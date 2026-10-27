@@ -31,6 +31,8 @@ export interface Player {
   college: string | null;
   country: string | null;
   headshot: string | null;
+  /** Ruolo nel quintetto base (PG, SG, SF, PF, C) secondo il depth chart ESPN; null se in panchina. */
+  starter: string | null;
 }
 
 export const season: string = raw.season ?? '';
@@ -59,6 +61,15 @@ export const DIVISIONS: { name: string; conference: Conference }[] = [
   { name: 'Pacific', conference: 'West' },
   { name: 'Southwest', conference: 'West' },
 ];
+
+/** Ordine e nomi dei ruoli del quintetto base. */
+export const STARTER_SLOTS: Record<string, string> = {
+  PG: 'Playmaker',
+  SG: 'Guardia tiratrice',
+  SF: 'Ala piccola',
+  PF: 'Ala grande',
+  C: 'Centro',
+};
 
 export const POSITION_LABEL: Record<string, string> = {
   G: 'Guardia',
