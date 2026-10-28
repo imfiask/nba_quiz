@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import { playerById, scopeLabel, teamById, type Scope } from '../data';
 import {
   effectiveDifficulty,
@@ -9,7 +9,7 @@ import {
   type Question,
   type SearchOption,
 } from '../quiz/modes';
-import { getStats, needsReview, record, weightedPick } from '../progress';
+import { balancedPick, getStats, needsReview, record, weightedPick } from '../progress';
 import { setPref, usePrefs, type Difficulty } from '../prefs';
 import { navigate } from '../router';
 import { Img, PlayerReveal, TeamReveal } from '../components/Cards';
@@ -62,7 +62,10 @@ export default function Quiz({ mode, scope, count, difficulty: requested, review
     if (!def) return [];
     let items = def.items(scope);
     if (reviewOnly) items = items.filter((id) => needsReview(getStats(key, id)));
-    return weightedPick(key, items, count || items.length).map((id) => def.build(id, scope, difficulty));
+    const n = count || items.length;
+    // con "Tutti" non serve bilanciare: escono comunque tutti
+    const picked = def.category && count ? balancedPick(key, items, n, def.category) : weightedPick(key, items, n);
+    return picked.map((id) => def.build(id, scope, difficulty));
   });
   const [index, setIndex] = useState(0);
   const [answer, setAnswer] = useState<Answer | null>(null);
@@ -157,7 +160,12 @@ export default function Quiz({ mode, scope, count, difficulty: requested, review
                 def.group === 'player' ? (
                   <PlayerReveal key={id} p={playerById.get(id)!} />
                 ) : (
-                  <TeamReveal key={id} t={teamById.get(id)!} />
+                  // "Scontro" ha come id una coppia di squadre: "idA-idB"
+                  <div key={id} className="missed-group">
+                    {id.split('-').map((teamId) => (
+                      <TeamReveal key={teamId} t={teamById.get(teamId)!} />
+                    ))}
+                  </div>
                 ),
               )}
             </div>
@@ -210,6 +218,22 @@ export default function Quiz({ mode, scope, count, difficulty: requested, review
 
       <div className="panel question">
         {q.prompt.image && <Img src={q.prompt.image} kind={q.prompt.imageKind ?? 'logo'} />}
+        {q.prompt.matchup && (
+          <div className="matchup">
+            {q.prompt.matchup.map((teamId, i) => {
+              const t = teamById.get(teamId)!;
+              return (
+                <Fragment key={teamId}>
+                  {i === 1 && <span className="vs">VS</span>}
+                  <div className="matchup-team" style={{ '--team': t.color } as React.CSSProperties}>
+                    <Img src={t.logo} kind="logo" />
+                    <span>{t.name}</span>
+                  </div>
+                </Fragment>
+              );
+            })}
+          </div>
+        )}
         {q.prompt.text && <div className="prompt-text">{withJersey(q.prompt.text, q.prompt.playerId)}</div>}
         {q.prompt.sub && <div className="prompt-sub">{q.prompt.sub}</div>}
 
@@ -254,6 +278,7 @@ export default function Quiz({ mode, scope, count, difficulty: requested, review
             </div>
             {revealPlayer && <PlayerReveal p={revealPlayer} />}
             {!revealPlayer && revealTeam && <TeamReveal t={revealTeam} />}
+            {q.reveal.teamIds?.map((teamId) => <TeamReveal key={teamId} t={teamById.get(teamId)!} />)}
             {waitForNext && (
               <button className="primary" onClick={next} autoFocus>
                 Avanti (Invio)

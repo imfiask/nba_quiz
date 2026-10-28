@@ -229,3 +229,22 @@ th { color: var(--muted); font-weight: 500; font-size: 0.85rem; }
 .slot-pill { display: inline-block; min-width: 34px; text-align: center; font-weight: 800; font-size: 0.85rem; padding: 2px 6px; border-radius: 6px; background: var(--accent); color: #111; }
 .help-link { margin-left: 8px; font-size: 0.8rem; text-transform: none; letter-spacing: 0; font-weight: 400; color: var(--accent); }
 .help-link:hover { text-decoration: underline; }
+
+/* ---------- scelta squadre ---------- */
+.team-picker { margin: -8px 0 24px; }
+.picker-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.picker-divisions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.picker-division { display: flex; flex-direction: column; gap: 6px; }
+.division-toggle { text-align: left; font-weight: 700; color: var(--text) !important; margin-bottom: 2px; }
+.picker-team { display: flex; align-items: center; gap: 8px; padding: 6px 10px; text-align: left; font-size: 0.88rem; opacity: 0.5; border-left: 4px solid transparent; }
+.picker-team .img.logo { width: 26px; height: 26px; }
+.picker-team.on { opacity: 1; border-left-color: var(--team); background: color-mix(in srgb, var(--team) 25%, var(--panel-2)); }
+@media (max-width: 700px) { .picker-divisions { grid-template-columns: 1fr 1fr; } }
+
+/* ---------- scontro ---------- */
+.matchup { display: flex; align-items: center; justify-content: center; gap: 24px; width: 100%; }
+.matchup-team { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 12px; border-radius: 12px; background: var(--panel-2); border-bottom: 4px solid var(--team); font-weight: 700; text-align: center; }
+.matchup-team .img.logo { width: 110px; height: 110px; }
+.vs { font-size: 1.6rem; font-weight: 900; color: var(--muted); }
+.missed-group { display: grid; gap: 4px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+@media (max-width: 700px) { .matchup { gap: 10px; } .matchup-team .img.logo { width: 72px; height: 72px; } }

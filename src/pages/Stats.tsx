@@ -43,6 +43,11 @@ export default function Stats() {
       const p = playerById.get(id);
       return { name: p?.name ?? id, img: p?.headshot, kind: 'photo' as const };
     }
+    if (id.includes('-')) {
+      // "Scontro": coppia di squadre
+      const [a, b] = id.split('-').map((teamId) => teamById.get(teamId));
+      return { name: `${a?.name ?? '?'} vs ${b?.name ?? '?'}`, img: a?.logo, kind: 'logo' as const };
+    }
     const t = teamById.get(id);
     return { name: t?.name ?? id, img: t?.logo, kind: 'logo' as const };
   };

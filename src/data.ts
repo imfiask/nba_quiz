@@ -77,19 +77,36 @@ export const POSITION_LABEL: Record<string, string> = {
   C: 'Centro',
 };
 
-/** Ambito del quiz: tutta la lega, una conference o una singola squadra. */
+/** Ambito del quiz: tutta la lega, una conference o una scelta di squadre (`team:1,2,13`). */
 export type Scope = 'all' | Conference | `team:${string}`;
+
+/** Gli id delle squadre scelte, se l'ambito è una scelta di squadre. */
+export function pickedTeamIds(scope: Scope): string[] | null {
+  if (!scope.startsWith('team:')) return null;
+  return scope.slice(5).split(',').filter((id) => teamById.has(id));
+}
+
+export const teamsScope = (ids: string[]): Scope => `team:${ids.join(',')}`;
+
+export function isSingleTeam(scope: Scope): boolean {
+  return pickedTeamIds(scope)?.length === 1;
+}
 
 export function scopeLabel(scope: Scope): string {
   if (scope === 'all') return 'Tutta la NBA';
   if (scope === 'East' || scope === 'West') return `Conference ${CONFERENCE_LABEL[scope]}`;
-  return teamById.get(scope.slice(5))?.name ?? scope;
+  const ids = pickedTeamIds(scope) ?? [];
+  if (ids.length === 0) return 'Nessuna squadra scelta';
+  if (ids.length === 1) return teamById.get(ids[0])!.name;
+  if (ids.length <= 4) return ids.map((id) => teamById.get(id)!.abbr).join(', ');
+  return `${ids.length} squadre`;
 }
 
 export function teamsInScope(scope: Scope): Team[] {
   if (scope === 'all') return teams;
   if (scope === 'East' || scope === 'West') return teams.filter((t) => t.conference === scope);
-  return teams.filter((t) => t.id === scope.slice(5));
+  const ids = new Set(pickedTeamIds(scope));
+  return teams.filter((t) => ids.has(t.id));
 }
 
 export function playersInScope(scope: Scope): Player[] {

@@ -1,6 +1,7 @@
 import {
   CONFERENCE_LABEL,
   DIVISIONS,
+  isSingleTeam,
   POSITION_LABEL,
   playerById,
   players,
@@ -43,6 +44,8 @@ export interface Question {
     imageKind?: 'logo' | 'photo';
     /** Se il testo è il nome di un giocatore. */
     playerId?: string;
+    /** Due squadre una contro l'altra (modalità "Scontro"). */
+    matchup?: [string, string];
   };
   /** Squadra da usare come colore d'accento della domanda. */
   accentTeamId?: string;
@@ -51,7 +54,7 @@ export interface Question {
     | { kind: 'search'; options: SearchOption[]; placeholder: string; answer: string }
     | { kind: 'text'; placeholder: string; answer: string; check: (s: string) => boolean };
   /** Cosa mostrare come "scheda" dopo la risposta. */
-  reveal: { playerId?: string; teamId?: string };
+  reveal: { playerId?: string; teamId?: string; teamIds?: string[] };
 }
 
 export type ModeId =
@@ -59,6 +62,7 @@ export type ModeId =
   | 'team-name-logo'
   | 'team-conference'
   | 'team-division'
+  | 'team-matchup'
   | 'player-photo-name'
   | 'player-name-photo'
   | 'player-team'
@@ -78,6 +82,8 @@ export interface ModeDef {
   /** Nasconde il numero di maglia accanto ai nomi (sarebbe la risposta). */
   hidesJersey?: boolean;
   items: (scope: Scope) => string[];
+  /** Se presente, le domande si estraggono in parti uguali tra le categorie. */
+  category?: (itemId: string) => string;
   build: (itemId: string, scope: Scope, difficulty: Difficulty) => Question;
 }
 
@@ -112,6 +118,13 @@ function playerDistractors(p: Player, scope: Scope): Player[] {
   const pool = withPhoto(playersInScope(scope));
   const samePos = pool.filter((x) => x.position === p.position);
   return distractors(p, samePos.length >= 4 ? samePos : pool, withPhoto(players));
+}
+
+/** Tutte le coppie di squadre dell'ambito, come "idA-idB". */
+function matchupIds(list: Team[]): string[] {
+  const ids: string[] = [];
+  for (let i = 0; i < list.length; i++) for (let j = i + 1; j < list.length; j++) ids.push(`${list[i].id}-${list[j].id}`);
+  return ids;
 }
 
 const teamChoice = (t: Team): Choice => ({ key: t.id, label: t.name, image: t.logo ?? undefined, imageKind: 'logo' });
@@ -248,6 +261,57 @@ export const MODES: ModeDef[] = [
     },
   },
   {
+    id: 'team-matchup',
+    group: 'team',
+    icon: '⚔️',
+    title: 'Scontro',
+    description: 'Due squadre: sfida di conference Est, Ovest o possibili NBA Finals?',
+    hard: 'Come il facile, ma se sono della stessa division devi indicare quale.',
+    singleTeamOk: false,
+    items: (scope) => matchupIds(teamsInScope(scope)),
+    // a caso, metà delle coppie sarebbero Finals: estraiamo i tipi di sfida in parti uguali
+    category(id) {
+      const [a, b] = id.split('-').map(team);
+      if (a.conference !== b.conference) return 'finals';
+      return a.division === b.division ? 'division' : 'conference';
+    },
+    build(id, _scope, difficulty) {
+      const [a, b] = id.split('-').map(team);
+      const sameConference = a.conference === b.conference;
+      const sameDivision = a.division === b.division;
+      const conferenceKey = (c: Team['conference']) => `conf:${c}`;
+      const answer = !sameConference
+        ? 'finals'
+        : difficulty === 'hard' && sameDivision
+          ? `div:${a.division}`
+          : conferenceKey(a.conference);
+      const finals: Choice = { key: 'finals', label: '🏆 NBA Finals' };
+      // in difficile: le division sopra, poi Ovest generico · Finals · Est generico
+      const choices: Choice[] =
+        difficulty === 'hard'
+          ? [
+              ...DIVISIONS.filter((d) => d.conference === 'West').map((d) => ({ key: `div:${d.name}`, label: d.name })),
+              ...DIVISIONS.filter((d) => d.conference === 'East').map((d) => ({ key: `div:${d.name}`, label: d.name })),
+              { key: conferenceKey('West'), label: '⬅️ Ovest (division diverse)' },
+              finals,
+              { key: conferenceKey('East'), label: 'Est (division diverse) ➡️' },
+            ]
+          : [
+              { key: conferenceKey('West'), label: `⬅️ Conference ${CONFERENCE_LABEL.West}` },
+              { key: conferenceKey('East'), label: `Conference ${CONFERENCE_LABEL.East} ➡️` },
+              finals,
+            ];
+      const shown = shuffle([a.id, b.id]) as [string, string];
+      return {
+        mode: 'team-matchup',
+        itemId: id,
+        prompt: { matchup: shown, sub: 'Che tipo di sfida sarebbe?' },
+        input: { kind: 'choice', answer, choices },
+        reveal: { teamIds: shown },
+      };
+    },
+  },
+  {
     id: 'player-photo-name',
     group: 'player',
     icon: '📸',
@@ -294,7 +358,7 @@ export const MODES: ModeDef[] = [
       if (difficulty === 'hard') {
         // singola squadra: tutto il roster; altrimenti tante facce quante un roster
         const size = withPhoto(rosterOf(p.teamId)).length;
-        options = scope.startsWith('team:')
+        options = isSingleTeam(scope)
           ? withPhoto(rosterOf(p.teamId))
           : [p, ...distractors(p, withPhoto(playersInScope(scope)), withPhoto(players), size - 1)];
       } else {
@@ -393,7 +457,7 @@ export const MODES: ModeDef[] = [
 export const modeById = new Map(MODES.map((m) => [m.id, m]));
 
 export function modeAvailable(mode: ModeDef, scope: Scope): boolean {
-  return mode.singleTeamOk || !scope.startsWith('team:');
+  return mode.singleTeamOk || !isSingleTeam(scope);
 }
 
 /** La difficoltà effettiva: le modalità a livello unico sono sempre "facile". */

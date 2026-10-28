@@ -88,6 +88,20 @@ function weight(s?: ItemStats): number {
   return w / (1 + Math.min(s.streak, 6) * 0.5);
 }
 
+/** Come `weightedPick`, ma prende lo stesso numero di elementi da ogni categoria. */
+export function balancedPick(mode: string, itemIds: string[], count: number, category: (id: string) => string): string[] {
+  const groups = new Map<string, string[]>();
+  for (const id of itemIds) groups.set(category(id), [...(groups.get(category(id)) ?? []), id]);
+  const perGroup = Math.ceil(count / groups.size);
+  const picked = [...groups.values()].flatMap((ids) => weightedPick(mode, ids, perGroup));
+  // mescola e taglia: così le categorie non escono a blocchi
+  for (let i = picked.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [picked[i], picked[j]] = [picked[j], picked[i]];
+  }
+  return picked.slice(0, count);
+}
+
 /** Estrae `count` elementi distinti, privilegiando quelli che sbagli più spesso. */
 export function weightedPick(mode: string, itemIds: string[], count: number): string[] {
   const pool = itemIds.map((id) => ({ id, w: weight(getStats(mode, id)) }));
