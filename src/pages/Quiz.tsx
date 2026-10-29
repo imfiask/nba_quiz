@@ -306,7 +306,7 @@ function ChoiceGrid({
   const imagesOnly = input.choices.some((c) => c.image && !c.label);
   const size = n <= 2 ? 'n2' : n <= 4 ? 'n4' : n <= 9 ? 'n6' : 'many';
   return (
-    <div className={`choices ${imagesOnly ? 'images' : ''} ${size}`}>
+    <div className={`choices ${imagesOnly ? 'images' : ''} ${size} ${input.columns === 2 ? 'cols2' : ''}`}>
       {input.choices.map((c, i) => {
         let cls = 'choice';
         if (answer) {

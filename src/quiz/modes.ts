@@ -17,6 +17,8 @@ import {
 import type { Difficulty } from '../prefs';
 import { normalize } from './match';
 
+const DIVISION_GRID = ['Northwest', 'Atlantic', 'Pacific', 'Central', 'Southwest', 'Southeast'];
+
 export interface Choice {
   key: string;
   label?: string;
@@ -50,7 +52,7 @@ export interface Question {
   /** Squadra da usare come colore d'accento della domanda. */
   accentTeamId?: string;
   input:
-    | { kind: 'choice'; choices: Choice[]; answer: string }
+    | { kind: 'choice'; choices: Choice[]; answer: string; columns?: 2 }
     | { kind: 'search'; options: SearchOption[]; placeholder: string; answer: string }
     | { kind: 'text'; placeholder: string; answer: string; check: (s: string) => boolean };
   /** Cosa mostrare come "scheda" dopo la risposta. */
@@ -254,7 +256,12 @@ export const MODES: ModeDef[] = [
         input: {
           kind: 'choice',
           answer: t.division,
-          choices: DIVISIONS.map((d) => ({ key: d.name, label: `${d.name} (${CONFERENCE_LABEL[d.conference]})` })),
+          // come sulla mappa: Ovest a sinistra, Est a destra; righe nord, centro, sud
+          columns: 2,
+          choices: DIVISION_GRID.map((name) => {
+            const d = DIVISIONS.find((x) => x.name === name)!;
+            return { key: d.name, label: `${d.name} (${CONFERENCE_LABEL[d.conference]})` };
+          }),
         },
         reveal: { teamId: id },
       };

@@ -119,6 +119,7 @@ main { max-width: 1100px; margin: 0 auto; padding: 24px 16px 64px; }
 .choices .choice { flex: 0 0 calc((100% - 10px) / 2); }
 .choices.n2 .choice { padding: 20px; font-size: 1.2rem; }
 .choices.n6 .choice { flex-basis: calc((100% - 20px) / 3); }
+.choices.cols2 .choice { flex-basis: calc((100% - 10px) / 2); }
 .choice { position: relative; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 14px; font-size: 1.05rem; min-height: 56px; }
 .choice .img.logo { width: 40px; height: 40px; }
 .choices.images .choice { flex-direction: column; padding: 14px; }
