@@ -62,6 +62,16 @@ export const DIVISIONS: { name: string; conference: Conference }[] = [
   { name: 'Southwest', conference: 'West' },
 ];
 
+/** Colori delle division sulla mappa: caldi a Ovest (il tramonto), freddi a Est. */
+export const DIVISION_COLOR: Record<string, string> = {
+  Northwest: '#f2c94c',
+  Pacific: '#f2994a',
+  Southwest: '#eb5757',
+  Atlantic: '#56ccf2',
+  Central: '#6fcf97',
+  Southeast: '#bb86fc',
+};
+
 /** Ordine e nomi dei ruoli del quintetto base. */
 export const STARTER_SLOTS: Record<string, string> = {
   PG: 'Playmaker',

@@ -13,6 +13,8 @@ import { balancedPick, getStats, needsReview, record, weightedPick } from '../pr
 import { setPref, usePrefs, type Difficulty } from '../prefs';
 import { navigate } from '../router';
 import { Img, PlayerReveal, TeamReveal } from '../components/Cards';
+import { TeamsMap, UsMap, type Dot } from '../components/UsMap';
+import { cityByName } from '../geo';
 
 interface Props {
   mode: ModeId;
@@ -119,9 +121,14 @@ export default function Quiz({ mode, scope, count, difficulty: requested, review
         next();
         return;
       }
-      if (!answer && q?.input.kind === 'choice' && q.input.choices.length <= 9 && !(e.target instanceof HTMLInputElement)) {
+      if (answer || !q || e.target instanceof HTMLInputElement) return;
+      if (q.input.kind === 'choice' && q.input.choices.length <= 9) {
         const choice = q.input.choices[Number(e.key) - 1];
         if (choice) submit(choice.key);
+      }
+      if (q.input.kind === 'map' && q.input.numbered) {
+        const city = q.input.cities[Number(e.key) - 1];
+        if (city) submit(city);
       }
     };
     window.addEventListener('keydown', onKey);
@@ -255,6 +262,7 @@ export default function Quiz({ mode, scope, count, difficulty: requested, review
             label={(o) => withJersey(o.label, o.playerId)}
           />
         )}
+        {q.input.kind === 'map' && <MapAnswer input={q.input} answer={answer} onPick={submit} />}
         {q.input.kind === 'text' && (
           <TextAnswer key={index} placeholder={q.input.placeholder} disabled={!!answer} onSubmit={submit} />
         )}
@@ -279,6 +287,7 @@ export default function Quiz({ mode, scope, count, difficulty: requested, review
             {revealPlayer && <PlayerReveal p={revealPlayer} />}
             {!revealPlayer && revealTeam && <TeamReveal t={revealTeam} />}
             {q.reveal.teamIds?.map((teamId) => <TeamReveal key={teamId} t={teamById.get(teamId)!} />)}
+            {q.reveal.map && <TeamsMap teamIds={q.reveal.teamIds ?? (q.reveal.teamId ? [q.reveal.teamId] : [])} />}
             {waitForNext && (
               <button className="primary" onClick={next} autoFocus>
                 Avanti (Invio)
@@ -306,7 +315,7 @@ function ChoiceGrid({
   const imagesOnly = input.choices.some((c) => c.image && !c.label);
   const size = n <= 2 ? 'n2' : n <= 4 ? 'n4' : n <= 9 ? 'n6' : 'many';
   return (
-    <div className={`choices ${imagesOnly ? 'images' : ''} ${size}`}>
+    <div className={`choices ${imagesOnly ? 'images' : ''} ${size} ${input.columns === 2 ? 'cols2' : ''}`}>
       {input.choices.map((c, i) => {
         let cls = 'choice';
         if (answer) {
@@ -324,6 +333,33 @@ function ChoiceGrid({
       })}
     </div>
   );
+}
+
+/** Le città sulla mappa: dopo la risposta compaiono i nomi di quella giusta e di quella scelta. */
+function MapAnswer({
+  input,
+  answer,
+  onPick,
+}: {
+  input: Extract<Question['input'], { kind: 'map' }>;
+  answer: Answer | null;
+  onPick: (city: string) => void;
+}) {
+  const dots: Dot[] = input.cities.map((name, i) => {
+    const c = cityByName.get(name)!;
+    const isAnswer = name === input.answer;
+    const isGiven = name === answer?.given;
+    return {
+      key: name,
+      x: c.x,
+      y: c.y,
+      number: input.numbered ? i + 1 : undefined,
+      size: input.numbered ? 'big' : undefined,
+      label: answer && (isAnswer || isGiven) ? name : undefined,
+      state: !answer ? undefined : isAnswer ? 'correct' : isGiven ? 'wrong' : 'dim',
+    };
+  });
+  return <UsMap dots={dots} onPick={answer ? undefined : onPick} className="answer" />;
 }
 
 /** Casella con suggerimenti istantanei: frecce per muoversi, Invio o clic per scegliere. */

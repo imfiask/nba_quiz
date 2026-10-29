@@ -1,5 +1,8 @@
-import { CONFERENCE_LABEL, DIVISIONS, STARTER_SLOTS, teams } from '../data';
+import { useState } from 'react';
+import { CONFERENCE_LABEL, DIVISION_COLOR, DIVISIONS, STARTER_SLOTS, teamById, teams } from '../data';
 import { Img } from '../components/Cards';
+import { UsMap } from '../components/UsMap';
+import { cities, cityByName, divisionOf } from '../geo';
 
 /** Dove sta ogni division, per ricordarla come "nord / centro / sud" della propria conference. */
 const DIVISION_INFO: Record<string, { zone: string; meaning: string; note: string }> = {
@@ -59,6 +62,7 @@ export default function Guide() {
           Le 30 squadre sono divise in due conference, Est e Ovest, e ognuna in 3 division da 5 squadre. Per
           ricordarle, pensa a ogni conference divisa in nord, centro e sud.
         </p>
+        <DivisionMap />
         <table>
           <thead>
             <tr>
@@ -73,6 +77,7 @@ export default function Guide() {
               return (
                 <tr key={d.name}>
                   <td>
+                    <span className="legend-dot" style={{ background: DIVISION_COLOR[d.name] }} />
                     <b>{d.name}</b>
                     <div className="muted small">"{info.meaning}"</div>
                   </td>
@@ -164,6 +169,59 @@ export default function Guide() {
           sigle come un'indicazione di massima.
         </p>
       </section>
+    </div>
+  );
+}
+
+/** Tutte le città NBA colorate per division; toccandone una si vedono le sue squadre. */
+function DivisionMap() {
+  const [selected, setSelected] = useState<string | null>(null);
+  const city = selected ? cityByName.get(selected) : undefined;
+  const dots = cities.map((c) => ({
+    key: c.city,
+    x: c.x,
+    y: c.y,
+    color: DIVISION_COLOR[divisionOf(c)],
+    size: 'big' as const,
+    label: c.teams.map((id) => teamById.get(id)!.abbr).join(' '),
+    state: c.city === selected ? ('selected' as const) : undefined,
+  }));
+  return (
+    <div className="division-map">
+      <UsMap dots={dots} onPick={(key) => setSelected((s) => (s === key ? null : key))} className="guide-map" />
+      <div className="map-legend">
+        {(['West', 'East'] as const).map((conf) => (
+          <div key={conf}>
+            <span className="muted small">{CONFERENCE_LABEL[conf]}:</span>
+            {DIVISIONS.filter((d) => d.conference === conf).map((d) => (
+              <span key={d.name} className="legend-item">
+                <span className="legend-dot" style={{ background: DIVISION_COLOR[d.name] }} />
+                {d.name}
+              </span>
+            ))}
+          </div>
+        ))}
+      </div>
+      <div className="map-info">
+        {city ? (
+          <>
+            <b>{city.city}</b>
+            {city.teams.map((id) => {
+              const t = teamById.get(id)!;
+              return (
+                <span key={id} className="division-team">
+                  <Img src={t.logo} kind="logo" /> {t.name}
+                </span>
+              );
+            })}
+            <span className="muted small">
+              {divisionOf(city)} · {CONFERENCE_LABEL[teamById.get(city.teams[0])!.conference]}
+            </span>
+          </>
+        ) : (
+          <span className="muted small">Tocca una città per vedere le sue squadre.</span>
+        )}
+      </div>
     </div>
   );
 }
