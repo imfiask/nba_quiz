@@ -257,3 +257,44 @@ th { color: var(--muted); font-weight: 500; font-size: 0.85rem; }
 .division-teams { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-bottom: 4px; }
 .division-team { display: inline-flex; align-items: center; gap: 4px; font-size: 0.88rem; }
 .division-team .img.logo { width: 20px; height: 20px; }
+
+/* ---------- mappa ---------- */
+.us-map { display: block; width: 100%; height: auto; }
+.us-map.pickable { cursor: crosshair; }
+.map-neighbours { fill: #1a2029; stroke: #2d3540; stroke-width: 1; }
+.map-usa { fill: #26303c; stroke: #4a5563; stroke-width: 1; }
+.map-states { fill: none; stroke: #36404c; stroke-width: 1; }
+.map-lakes { fill: var(--bg); stroke: #4a5563; stroke-width: 1; }
+.map-dot circle { fill: var(--dot, #8b949e); stroke: var(--bg); stroke-width: 2; transform-box: fill-box; transform-origin: center; }
+.map-dot.small circle { opacity: 0.6; }
+.map-dot.selected circle { stroke: var(--text); }
+.map-dot.correct circle { fill: var(--ok); stroke: var(--text); }
+.map-dot.wrong circle { fill: var(--bad); stroke: var(--text); }
+.map-dot.dim circle { opacity: 0.35; }
+.map-number { fill: #111; font-size: 13px; font-weight: 700; text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+.map-dot.correct .map-number, .map-dot.wrong .map-number { fill: #fff; }
+.map-label { fill: var(--text); font-size: 20px; font-weight: 600; dominant-baseline: central; paint-order: stroke; stroke: var(--bg); stroke-width: 5px; stroke-linejoin: round; pointer-events: none; }
+.map-label.correct { fill: #7ee2a0; }
+.map-label.wrong { fill: #ffb3ad; }
+.us-map.answer { margin-top: 10px; border-radius: 10px; background: var(--bg); }
+.us-map.mini { margin-top: 10px; border-radius: 10px; background: var(--bg); max-width: 520px; margin-inline: auto; }
+.us-map.guide-map { border-radius: 10px; background: var(--bg); }
+.us-map.guide-map .map-label { font-size: 15px; }
+.division-map { margin: 12px 0 16px; }
+.map-legend { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 8px; }
+.map-legend > div { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; }
+.legend-item { display: inline-flex; align-items: center; gap: 6px; font-size: 0.9rem; }
+.legend-dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+.legend-item .legend-dot { margin-right: 0; }
+.map-info { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin-top: 8px; min-height: 40px; }
+@media (max-width: 700px) {
+  .us-map.guide-map .map-label { display: none; }
+  /* sul telefono la mappa è larga un terzo: punti, numeri e nomi molto più grandi */
+  .map-dot circle { transform: scale(2); }
+  .map-number { font-size: 26px; }
+  .map-label { font-size: 36px; stroke-width: 8px; transform: translateX(10px); }
+  .map-label.end { transform: translateX(-10px); }
+  .us-map.guide-map .map-dot circle { transform: scale(1.6); }
+  .us-map.answer .map-dot.big circle { transform: scale(2.6); }
+  .us-map.answer .map-dot.big .map-number { font-size: 32px; }
+}

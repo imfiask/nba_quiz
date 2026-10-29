@@ -16,6 +16,7 @@ import {
 } from '../data';
 import type { Difficulty } from '../prefs';
 import { normalize } from './match';
+import { cities, cityOf, type City } from '../geo';
 
 const DIVISION_GRID = ['Northwest', 'Atlantic', 'Pacific', 'Central', 'Southwest', 'Southeast'];
 
@@ -54,9 +55,11 @@ export interface Question {
   input:
     | { kind: 'choice'; choices: Choice[]; answer: string; columns?: 2 }
     | { kind: 'search'; options: SearchOption[]; placeholder: string; answer: string }
-    | { kind: 'text'; placeholder: string; answer: string; check: (s: string) => boolean };
-  /** Cosa mostrare come "scheda" dopo la risposta. */
-  reveal: { playerId?: string; teamId?: string; teamIds?: string[] };
+    | { kind: 'text'; placeholder: string; answer: string; check: (s: string) => boolean }
+    /** Un punto sulla mappa: le chiavi sono i nomi delle città. */
+    | { kind: 'map'; cities: string[]; answer: string; numbered: boolean };
+  /** Cosa mostrare come "scheda" dopo la risposta; `map` aggiunge la mappa con le squadre. */
+  reveal: { playerId?: string; teamId?: string; teamIds?: string[]; map?: boolean };
 }
 
 export type ModeId =
@@ -64,6 +67,7 @@ export type ModeId =
   | 'team-name-logo'
   | 'team-conference'
   | 'team-division'
+  | 'team-map'
   | 'team-matchup'
   | 'player-photo-name'
   | 'player-name-photo'
@@ -127,6 +131,19 @@ function matchupIds(list: Team[]): string[] {
   const ids: string[] = [];
   for (let i = 0; i < list.length; i++) for (let j = i + 1; j < list.length; j++) ids.push(`${list[i].id}-${list[j].id}`);
   return ids;
+}
+
+/** Distanza minima tra i punti proposti in "Dove gioca?" facile, perché non si confondano. */
+const MIN_CITY_GAP = 110;
+
+/** `n` città a caso, lontane tra loro e da quella giusta. */
+function spreadCities(home: City, n: number): City[] {
+  const picked = [home];
+  for (const c of shuffle(cities)) {
+    if (picked.length > n) break;
+    if (picked.every((p) => Math.hypot(p.x - c.x, p.y - c.y) >= MIN_CITY_GAP)) picked.push(c);
+  }
+  return picked.slice(1);
 }
 
 const teamChoice = (t: Team): Choice => ({ key: t.id, label: t.name, image: t.logo ?? undefined, imageKind: 'logo' });
@@ -234,7 +251,7 @@ export const MODES: ModeDef[] = [
             { key: 'East', label: `${CONFERENCE_LABEL.East} ➡️` },
           ],
         },
-        reveal: { teamId: id },
+        reveal: { teamId: id, map: true },
       };
     },
   },
@@ -262,6 +279,35 @@ export const MODES: ModeDef[] = [
             const d = DIVISIONS.find((x) => x.name === name)!;
             return { key: d.name, label: `${d.name} (${CONFERENCE_LABEL[d.conference]})` };
           }),
+        },
+        reveal: { teamId: id, map: true },
+      };
+    },
+  },
+  {
+    id: 'team-map',
+    group: 'team',
+    icon: '📍',
+    title: 'Dove gioca?',
+    description: 'Tocca la città della squadra sulla mappa, tra 6 possibili.',
+    hard: 'Tocca la città della squadra tra tutte le città NBA.',
+    singleTeamOk: false,
+    items: (scope) => teamsInScope(scope).map((t) => t.id),
+    build(id, _scope, difficulty) {
+      const t = team(id);
+      const home = cityOf(id);
+      const shown = difficulty === 'hard' ? cities : [home, ...spreadCities(home, 5)];
+      return {
+        mode: 'team-map',
+        itemId: id,
+        accentTeamId: id,
+        prompt: { image: t.logo ?? undefined, imageKind: 'logo', text: t.name, sub: 'Dove gioca? Tocca la sua città' },
+        input: {
+          kind: 'map',
+          answer: home.city,
+          // in facile i punti sono numerati, per sceglierli anche da tastiera
+          numbered: difficulty !== 'hard',
+          cities: shuffle(shown.map((c) => c.city)),
         },
         reveal: { teamId: id },
       };
@@ -314,7 +360,7 @@ export const MODES: ModeDef[] = [
         itemId: id,
         prompt: { matchup: shown, sub: 'Che tipo di sfida sarebbe?' },
         input: { kind: 'choice', answer, choices },
-        reveal: { teamIds: shown },
+        reveal: { teamIds: shown, map: true },
       };
     },
   },
