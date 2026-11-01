@@ -34,7 +34,7 @@ export default function App() {
       />
     );
   } else if (page === 'study') {
-    content = <Study teamId={params.get('team') ?? undefined} />;
+    content = <Study teamId={params.get('team') ?? undefined} view={params.get('view') ?? undefined} />;
   } else if (page === 'stats') {
     content = <Stats />;
   } else if (page === 'guide') {

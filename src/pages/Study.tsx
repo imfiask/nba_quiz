@@ -2,14 +2,35 @@ import { useState } from 'react';
 import { CONFERENCE_LABEL, DIVISIONS, STARTER_SLOTS, rosterOf, teamById, teams, type Player } from '../data';
 import { navigate } from '../router';
 import { Img, PlayerFacts } from '../components/Cards';
+import { PlayerStatsModal } from '../components/PlayerStats';
+import { StandingsTable, TeamRecord } from '../components/StandingsTable';
 
-export default function Study({ teamId }: { teamId?: string }) {
+export default function Study({ teamId, view }: { teamId?: string; view?: string }) {
   const team = teamId ? teamById.get(teamId) : undefined;
   if (team) return <TeamRoster teamId={team.id} />;
 
   return (
     <div className="study">
-      <p className="muted">Scegli una squadra per vedere il roster. Le squadre sono divise per conference e division.</p>
+      <div className="segmented study-tabs">
+        <a href="#/study" className={view !== 'standings' ? 'on' : ''}>
+          Squadre
+        </a>
+        <a href="#/study?view=standings" className={view === 'standings' ? 'on' : ''}>
+          Classifica
+        </a>
+      </div>
+      {view === 'standings' ? <StandingsTable /> : <TeamsByDivision />}
+    </div>
+  );
+}
+
+function TeamsByDivision() {
+  return (
+    <>
+      <p className="muted">
+        Scegli una squadra per vedere il roster; clicca un giocatore per le sue statistiche. Le squadre sono divise per
+        conference e division.
+      </p>
       <div className="conferences">
         {(['East', 'West'] as const).map((conf) => (
           <section key={conf} className="panel">
@@ -32,7 +53,7 @@ export default function Study({ teamId }: { teamId?: string }) {
           </section>
         ))}
       </div>
-    </div>
+    </>
   );
 }
 
@@ -44,6 +65,7 @@ function TeamRoster({ teamId }: { teamId: string }) {
   const bench = roster.filter((p) => !p.starter);
   const [hideNames, setHideNames] = useState(false);
   const [revealed, setRevealed] = useState<Set<string>>(new Set());
+  const [statsFor, setStatsFor] = useState<Player | null>(null);
   const scope = `team:${teamId}`;
 
   const toggle = (id: string) =>
@@ -57,7 +79,8 @@ function TeamRoster({ teamId }: { teamId: string }) {
   const card = (p: Player) => {
     const hidden = hideNames && !revealed.has(p.id);
     return (
-      <button key={p.id} className="player-card" onClick={() => hideNames && toggle(p.id)}>
+      // in modalità flashcard il primo clic scopre il nome; poi (o sempre, senza flashcard) apre le statistiche
+      <button key={p.id} className="player-card" onClick={() => (hidden ? toggle(p.id) : setStatsFor(p))}>
         {p.starter && (
           <span className="slot-badge" title={STARTER_SLOTS[p.starter]}>
             {p.starter}
@@ -89,6 +112,7 @@ function TeamRoster({ teamId }: { teamId: string }) {
           <div className="muted">
             Conference {CONFERENCE_LABEL[t.conference]} · Division {t.division} · {roster.length} giocatori
           </div>
+          <TeamRecord teamId={t.id} />
         </div>
         <div className="actions">
           <button className="primary" onClick={() => navigate('quiz', { mode: 'player-photo-name', scope, n: 0 })}>
@@ -125,6 +149,7 @@ function TeamRoster({ teamId }: { teamId: string }) {
         </>
       )}
       <div className="player-grid">{(starters.length > 0 ? bench : roster).map(card)}</div>
+      {statsFor && <PlayerStatsModal player={statsFor} onClose={() => setStatsFor(null)} />}
     </div>
   );
 }
