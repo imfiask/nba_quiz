@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useRef, useState } from 'react';
-import { playerById, scopeLabel, teamById, type Scope } from '../data';
+import { STARTER_SLOTS, playerById, scopeLabel, teamById, type Scope } from '../data';
 import {
   effectiveDifficulty,
   modeById,
@@ -194,6 +194,9 @@ export default function Quiz({ mode, scope, count, difficulty: requested, review
   const accent = q.accentTeamId ? teamById.get(q.accentTeamId)?.color : undefined;
   const revealPlayer = q.reveal.playerId ? playerById.get(q.reveal.playerId) : undefined;
   const revealTeam = q.reveal.teamId ? teamById.get(q.reveal.teamId) : undefined;
+  // In facile segnaliamo se il giocatore della domanda è titolare (nel quiz "Ruolo" senza dire il ruolo, che è la risposta)
+  const subject = q.reveal.playerId ? playerById.get(q.reveal.playerId) : undefined;
+  const starter = difficulty === 'easy' ? subject?.starter : null;
   const correctLabel =
     q.input.kind === 'search' ? q.input.options.find((o) => o.key === q.input.answer)?.label : q.input.answer;
 
@@ -243,6 +246,11 @@ export default function Quiz({ mode, scope, count, difficulty: requested, review
         )}
         {q.prompt.text && <div className="prompt-text">{withJersey(q.prompt.text, q.prompt.playerId)}</div>}
         {q.prompt.sub && <div className="prompt-sub">{q.prompt.sub}</div>}
+        {starter && (
+          <div className="starter-badge">
+            ⭐ Titolare{mode !== 'player-position' && ` · ${STARTER_SLOTS[starter] ?? starter}`}
+          </div>
+        )}
 
         {q.input.kind === 'choice' && (
           <ChoiceGrid
@@ -315,7 +323,7 @@ function ChoiceGrid({
   const imagesOnly = input.choices.some((c) => c.image && !c.label);
   const size = n <= 2 ? 'n2' : n <= 4 ? 'n4' : n <= 9 ? 'n6' : 'many';
   return (
-    <div className={`choices ${imagesOnly ? 'images' : ''} ${size} ${input.columns === 2 ? 'cols2' : ''}`}>
+    <div className={`choices ${imagesOnly ? 'images' : ''} ${size} ${input.layout ?? ''}`}>
       {input.choices.map((c, i) => {
         let cls = 'choice';
         if (answer) {

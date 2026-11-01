@@ -119,7 +119,6 @@ main { max-width: 1100px; margin: 0 auto; padding: 24px 16px 64px; }
 .choices .choice { flex: 0 0 calc((100% - 10px) / 2); }
 .choices.n2 .choice { padding: 20px; font-size: 1.2rem; }
 .choices.n6 .choice { flex-basis: calc((100% - 20px) / 3); }
-.choices.cols2 .choice { flex-basis: calc((100% - 10px) / 2); }
 .choice { position: relative; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 14px; font-size: 1.05rem; min-height: 56px; }
 .choice .img.logo { width: 40px; height: 40px; }
 .choices.images .choice { flex-direction: column; padding: 14px; }
@@ -298,3 +297,9 @@ th { color: var(--muted); font-weight: 500; font-size: 0.85rem; }
   .us-map.answer .map-dot.big circle { transform: scale(2.6); }
   .us-map.answer .map-dot.big .map-number { font-size: 32px; }
 }
+
+/* division su due colonne (Ovest | Est); in "Scontro" sotto restano Ovest · Finals · Est */
+.choices.divisions .choice { flex-basis: calc((100% - 10px) / 2); }
+.choices.divisions .choice:nth-child(n + 7) { flex-basis: calc((100% - 20px) / 3); }
+
+.starter-badge { font-size: 0.85rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: color-mix(in srgb, #f5c518 22%, var(--panel-2)); color: #f5c518; }

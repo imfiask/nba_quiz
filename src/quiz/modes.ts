@@ -18,8 +18,6 @@ import type { Difficulty } from '../prefs';
 import { normalize } from './match';
 import { cities, cityOf, type City } from '../geo';
 
-const DIVISION_GRID = ['Northwest', 'Atlantic', 'Pacific', 'Central', 'Southwest', 'Southeast'];
-
 export interface Choice {
   key: string;
   label?: string;
@@ -53,7 +51,13 @@ export interface Question {
   /** Squadra da usare come colore d'accento della domanda. */
   accentTeamId?: string;
   input:
-    | { kind: 'choice'; choices: Choice[]; answer: string; columns?: 2 }
+    | {
+        kind: 'choice';
+        choices: Choice[];
+        answer: string;
+        /** "divisions": due colonne, Ovest a sinistra ed Est a destra, una riga per nord/centro/sud. */
+        layout?: 'divisions';
+      }
     | { kind: 'search'; options: SearchOption[]; placeholder: string; answer: string }
     | { kind: 'text'; placeholder: string; answer: string; check: (s: string) => boolean }
     /** Un punto sulla mappa: le chiavi sono i nomi delle città. */
@@ -144,6 +148,13 @@ function spreadCities(home: City, n: number): City[] {
     if (picked.every((p) => Math.hypot(p.x - c.x, p.y - c.y) >= MIN_CITY_GAP)) picked.push(c);
   }
   return picked.slice(1);
+}
+
+/** Le division in ordine per la griglia a due colonne: Ovest | Est, da nord a sud. */
+function divisionsGrid() {
+  const west = DIVISIONS.filter((d) => d.conference === 'West');
+  const east = DIVISIONS.filter((d) => d.conference === 'East');
+  return west.flatMap((w, i) => [w, east[i]]);
 }
 
 const teamChoice = (t: Team): Choice => ({ key: t.id, label: t.name, image: t.logo ?? undefined, imageKind: 'logo' });
@@ -273,12 +284,8 @@ export const MODES: ModeDef[] = [
         input: {
           kind: 'choice',
           answer: t.division,
-          // come sulla mappa: Ovest a sinistra, Est a destra; righe nord, centro, sud
-          columns: 2,
-          choices: DIVISION_GRID.map((name) => {
-            const d = DIVISIONS.find((x) => x.name === name)!;
-            return { key: d.name, label: `${d.name} (${CONFERENCE_LABEL[d.conference]})` };
-          }),
+          layout: 'divisions',
+          choices: divisionsGrid().map((d) => ({ key: d.name, label: `${d.name} (${CONFERENCE_LABEL[d.conference]})` })),
         },
         reveal: { teamId: id, map: true },
       };
@@ -339,12 +346,11 @@ export const MODES: ModeDef[] = [
           ? `div:${a.division}`
           : conferenceKey(a.conference);
       const finals: Choice = { key: 'finals', label: '🏆 NBA Finals' };
-      // in difficile: le division sopra, poi Ovest generico · Finals · Est generico
+      // in difficile: le division su due colonne (Ovest | Est), poi Ovest generico · Finals · Est generico
       const choices: Choice[] =
         difficulty === 'hard'
           ? [
-              ...DIVISIONS.filter((d) => d.conference === 'West').map((d) => ({ key: `div:${d.name}`, label: d.name })),
-              ...DIVISIONS.filter((d) => d.conference === 'East').map((d) => ({ key: `div:${d.name}`, label: d.name })),
+              ...divisionsGrid().map((d) => ({ key: `div:${d.name}`, label: d.name })),
               { key: conferenceKey('West'), label: '⬅️ Ovest (division diverse)' },
               finals,
               { key: conferenceKey('East'), label: 'Est (division diverse) ➡️' },
@@ -359,7 +365,7 @@ export const MODES: ModeDef[] = [
         mode: 'team-matchup',
         itemId: id,
         prompt: { matchup: shown, sub: 'Che tipo di sfida sarebbe?' },
-        input: { kind: 'choice', answer, choices },
+        input: { kind: 'choice', answer, choices, layout: difficulty === 'hard' ? 'divisions' : undefined },
         reveal: { teamIds: shown, map: true },
       };
     },
