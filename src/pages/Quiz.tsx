@@ -1,14 +1,16 @@
 import { Fragment, useEffect, useRef, useState } from 'react';
 import { STARTER_SLOTS, playerById, scopeLabel, teamById, type Scope } from '../data';
 import {
+  dailyQuestions,
   effectiveDifficulty,
   modeById,
   searchOptions,
+  setRotationOnly,
   statsKey,
+  type Choice,
   type ModeId,
   type Question,
   type SearchOption,
-  setRotationOnly,
 } from '../quiz/modes';
 import { balancedPick, getStats, needsReview, record, weightedPick } from '../progress';
 import { setPref, usePrefs, type Difficulty } from '../prefs';
@@ -18,7 +20,8 @@ import { TeamsMap, UsMap, type Dot } from '../components/UsMap';
 import { cityByName } from '../geo';
 
 interface Props {
-  mode: ModeId;
+  /** "daily" = Ripasso del giorno: domande di tutte le modalità */
+  mode: ModeId | 'daily';
   scope: Scope;
   /** 0 = tutti gli elementi dell'ambito */
   count: number;
@@ -40,49 +43,58 @@ const RETRY_GAP = 3;
 
 function preload(q?: Question) {
   if (!q) return;
-  const urls = [q.prompt.image, ...(q.input.kind === 'choice' ? q.input.choices.map((c) => c.image) : [])];
-  for (const u of urls) if (u) new Image().src = u;
+  const choices =
+    q.input.kind === 'choice' ? q.input.choices : q.input.kind === 'lineup' ? q.input.candidates : (q.input.kind === 'clues' && q.input.choices) || [];
+  const clues = q.input.kind === 'clues' ? q.input.clues : [];
+  for (const u of [q.prompt.image, ...choices.map((c) => c.image), ...clues.map((c) => c.image)]) if (u) new Image().src = u;
 }
 
+const isHard = (q: Question) => !!q.statsKey?.endsWith(':hard');
+
 export default function Quiz({ mode, scope, count, difficulty: requested, reviewOnly, allPlayers }: Props) {
-  const def = modeById.get(mode);
-  const difficulty = def ? effectiveDifficulty(def, requested) : 'easy';
+  const daily = mode === 'daily';
+  const def = daily ? undefined : modeById.get(mode);
+  const difficulty = def ? effectiveDifficulty(def, requested) : requested;
   const key = def ? statsKey(def, difficulty) : mode;
   const prefs = usePrefs();
-  const showJersey = prefs.showJersey && !def?.hidesJersey;
 
-  /** Nome del giocatore con il numero di maglia, se l'interruttore è attivo. */
-  const withJersey = (text: string, playerId?: string) => {
-    const jersey = playerId && showJersey ? playerById.get(playerId)?.jersey : null;
-    return jersey ? (
-      <>
-        {text} <span className="jersey">#{jersey}</span>
-      </>
-    ) : (
-      text
-    );
-  };
-
-  const [queue, setQueue] = useState<Question[]>(() => {
-    if (!def) return [];
+  const buildQueue = (): Question[] => {
     setRotationOnly(!allPlayers);
+    if (daily) return dailyQuestions(count);
+    if (!def) return [];
     let items = def.items(scope);
     if (reviewOnly) items = items.filter((id) => needsReview(getStats(key, id)));
     const n = count || items.length;
     // con "Tutti" non serve bilanciare: escono comunque tutti
     const picked = def.category && count ? balancedPick(key, items, n, def.category) : weightedPick(key, items, n);
-    return picked.map((id) => def.build(id, scope, difficulty));
-  });
+    return picked.map((id) => ({ ...def.build(id, scope, difficulty), statsKey: key }));
+  };
+
+  // le modalità "in diretta" scaricano prima i dati: finché non arrivano la coda è null
+  const [queue, setQueue] = useState<Question[] | null>(() => (def?.load ? null : buildQueue()));
+  const [loadError, setLoadError] = useState<string | null>(null);
   const [index, setIndex] = useState(0);
   const [answer, setAnswer] = useState<Answer | null>(null);
   const [score, setScore] = useState({ right: 0, wrong: 0 });
-  const [missed, setMissed] = useState<string[]>([]);
+  const [missed, setMissed] = useState<Question[]>([]);
   const retries = useRef(new Map<string, number>());
 
-  const q = queue[index];
-  const done = !!def && index >= queue.length;
+  useEffect(() => {
+    if (!def?.load) return;
+    let alive = true;
+    def.load().then(
+      () => alive && setQueue(buildQueue()),
+      (err: Error) => alive && setLoadError(err.message),
+    );
+    return () => {
+      alive = false;
+    };
+  }, []);
 
-  useEffect(() => preload(queue[index + 1]), [queue, index]);
+  const q = queue?.[index];
+  const done = !!queue && index >= queue.length;
+
+  useEffect(() => preload(queue?.[index + 1]), [queue, index]);
 
   const next = () => {
     setAnswer(null);
@@ -92,19 +104,27 @@ export default function Quiz({ mode, scope, count, difficulty: requested, review
   const submit = (given: string) => {
     if (!q || answer) return;
     const correct = q.input.kind === 'text' ? q.input.check(given) : given === q.input.answer;
-    record(key, q.itemId, correct);
+    const itemKey = q.statsKey ?? key;
+    record(itemKey, q.itemId, correct);
     setAnswer({ given, correct });
     setScore((s) => (correct ? { ...s, right: s.right + 1 } : { ...s, wrong: s.wrong + 1 }));
     if (!correct) {
-      setMissed((m) => (m.includes(q.itemId) ? m : [...m, q.itemId]));
-      const n = retries.current.get(q.itemId) ?? 0;
-      if (n < MAX_RETRIES && def) {
-        retries.current.set(q.itemId, n + 1);
-        setQueue((list) => {
-          const copy = list.slice();
-          copy.splice(Math.min(index + 1 + RETRY_GAP, copy.length), 0, def.build(q.itemId, scope, difficulty));
-          return copy;
-        });
+      const id = `${itemKey}|${q.itemId}`;
+      setMissed((m) => (m.some((x) => `${x.statsKey}|${x.itemId}` === id) ? m : [...m, q]));
+      const n = retries.current.get(id) ?? 0;
+      const qDef = modeById.get(q.mode);
+      if (n < MAX_RETRIES && qDef) {
+        retries.current.set(id, n + 1);
+        try {
+          const again = { ...qDef.build(q.itemId, daily ? 'all' : scope, isHard(q) ? 'hard' : 'easy'), statsKey: q.statsKey };
+          setQueue((list) => {
+            const copy = list!.slice();
+            copy.splice(Math.min(index + 1 + RETRY_GAP, copy.length), 0, again);
+            return copy;
+          });
+        } catch {
+          // se non si riesce a ricreare la domanda, pazienza: niente secondo tentativo
+        }
       }
     }
   };
@@ -139,23 +159,58 @@ export default function Quiz({ mode, scope, count, difficulty: requested, review
     return () => window.removeEventListener('keydown', onKey);
   });
 
-  if (!def) return <p>Modalità sconosciuta. <a href="#/">Torna alla home</a></p>;
+  if (!daily && !def) return <p>Modalità sconosciuta. <a href="#/">Torna alla home</a></p>;
 
-  const title = `${def.icon} ${def.title}${def.hard ? ` · ${difficulty === 'hard' ? 'Difficile' : 'Facile'}` : ''}`;
+  const title = daily
+    ? '🔁 Ripasso del giorno'
+    : `${def!.icon} ${def!.title}${def!.hard ? ` · ${difficulty === 'hard' ? 'Difficile' : 'Facile'}` : ''}`;
+  const where = daily || def?.ignoresScope ? '' : ` · ${scopeLabel(scope)}`;
+  const home = () => navigate('home', { scope });
 
-  if (queue.length === 0) {
+  if (loadError) {
     return (
       <div className="panel center">
-        <h2>Niente da ripassare 🎉</h2>
-        <p>Non ci sono errori recenti per questa modalità in {scopeLabel(scope)}.</p>
-        <button className="primary" onClick={() => navigate('home', { scope })}>
+        <h2>Dati non disponibili</h2>
+        <p className="muted">ESPN non ha risposto ({loadError}). Riprova tra poco.</p>
+        <div className="actions" style={{ justifyContent: 'center' }}>
+          <button className="primary" onClick={() => location.reload()}>
+            Riprova
+          </button>
+          <button onClick={home}>Torna alla home</button>
+        </div>
+      </div>
+    );
+  }
+
+  if (!queue) {
+    return (
+      <div className="panel center">
+        <h2>{title}</h2>
+        <p className="muted">Carico i dati da ESPN…</p>
+      </div>
+    );
+  }
+
+  if (queue.length === 0) {
+    const [heading, text] = daily
+      ? ['Niente da ripassare oggi 🎉', 'Gioca qualche quiz: quello che sbagli o impari torna qui nei giorni giusti.']
+      : reviewOnly
+        ? ['Niente da ripassare 🎉', `Non ci sono errori recenti per questa modalità${where}.`]
+        : mode === 'last-night'
+          ? ['Nessuna partita', 'Non ho trovato partite finite negli ultimi giorni.']
+          : ['Nessuna domanda', `Non ci sono domande per questa modalità${where}.`];
+    return (
+      <div className="panel center">
+        <h2>{heading}</h2>
+        <p>{text}</p>
+        <button className="primary" onClick={home}>
           Torna alla home
         </button>
       </div>
     );
   }
 
-  if (done) {
+  if (done || !q) {
     const total = score.right + score.wrong;
     return (
       <div className="panel summary">
@@ -167,18 +222,11 @@ export default function Quiz({ mode, scope, count, difficulty: requested, review
           <>
             <h3>Da rivedere</h3>
             <div className="missed">
-              {missed.map((id) =>
-                def.group === 'player' ? (
-                  <PlayerReveal key={id} p={playerById.get(id)!} />
-                ) : (
-                  // "Scontro" ha come id una coppia di squadre: "idA-idB"
-                  <div key={id} className="missed-group">
-                    {id.split('-').map((teamId) => (
-                      <TeamReveal key={teamId} t={teamById.get(teamId)!} />
-                    ))}
-                  </div>
-                ),
-              )}
+              {missed.map((m) => (
+                <div key={`${m.statsKey}|${m.itemId}`} className="missed-group">
+                  <RevealCards q={m} />
+                </div>
+              ))}
             </div>
           </>
         )}
@@ -186,32 +234,56 @@ export default function Quiz({ mode, scope, count, difficulty: requested, review
           <button className="primary" onClick={() => location.reload()}>
             Rigioca
           </button>
-          {missed.length > 0 && (
-            <button onClick={() => navigate('quiz', { mode, scope, n: 0, d: difficulty, review: 1, p: allPlayers ? 'all' : undefined })}>Ripassa errori</button>
+          {missed.length > 0 && !daily && !def?.load && (
+            <button onClick={() => navigate('quiz', { mode, scope, n: 0, d: difficulty, review: 1, p: allPlayers ? 'all' : undefined })}>
+              Ripassa errori
+            </button>
           )}
-          <button onClick={() => navigate('home', { scope })}>Altre modalità</button>
+          <button onClick={home}>Altre modalità</button>
         </div>
       </div>
     );
   }
 
+  const qDef = modeById.get(q.mode);
+  const qHard = isHard(q);
+  const showJersey = prefs.showJersey && !qDef?.hidesJersey;
+  /** Nome del giocatore con il numero di maglia, se l'interruttore è attivo. */
+  const withJersey = (text: string, playerId?: string) => {
+    const jersey = playerId && showJersey ? playerById.get(playerId)?.jersey : null;
+    return jersey ? (
+      <>
+        {text} <span className="jersey">#{jersey}</span>
+      </>
+    ) : (
+      text
+    );
+  };
+
   const accent = q.accentTeamId ? teamById.get(q.accentTeamId)?.color : undefined;
-  const revealPlayer = q.reveal.playerId ? playerById.get(q.reveal.playerId) : undefined;
-  const revealTeam = q.reveal.teamId ? teamById.get(q.reveal.teamId) : undefined;
-  // In facile segnaliamo se il giocatore della domanda è titolare (nel quiz "Ruolo" senza dire il ruolo, che è la risposta)
-  const subject = q.reveal.playerId ? playerById.get(q.reveal.playerId) : undefined;
-  const starter = difficulty === 'easy' ? subject?.starter : null;
+  // In facile segnaliamo se il giocatore della domanda è titolare, solo quando la domanda è su di lui
+  // (nel quiz "Ruolo" senza dire il ruolo, che è la risposta)
+  const subjectId = q.prompt.playerId ?? (q.prompt.imageKind === 'photo' ? q.reveal.playerId : undefined);
+  const starter = !qHard && subjectId ? playerById.get(subjectId)?.starter : null;
   const correctLabel =
-    q.input.kind === 'search' ? q.input.options.find((o) => o.key === q.input.answer)?.label : q.input.answer;
+    q.input.kind === 'search'
+      ? q.input.options.find((o) => o.key === q.input.answer)?.label
+      : q.input.kind === 'clues'
+        ? playerById.get(q.input.answer)?.name
+        : q.input.kind === 'text' || q.input.kind === 'map'
+          ? q.input.answer
+          : null;
 
   return (
     <div className="quiz" style={accent ? ({ '--team': accent } as React.CSSProperties) : undefined}>
       <div className="quiz-head">
-        <button className="link" onClick={() => navigate('home', { scope })}>
+        <button className="link" onClick={home}>
           ← Esci
         </button>
         <span>
-          {title} · {scopeLabel(scope)}
+          {title}
+          {where}
+          {daily && qDef && <span className="muted"> · {qDef.icon} {qDef.title}</span>}
         </span>
         <span className="quiz-right">
           <button
@@ -252,13 +324,15 @@ export default function Quiz({ mode, scope, count, difficulty: requested, review
         {q.prompt.sub && <div className="prompt-sub">{q.prompt.sub}</div>}
         {starter && (
           <div className="starter-badge">
-            ⭐ Titolare{mode !== 'player-position' && ` · ${STARTER_SLOTS[starter] ?? starter}`}
+            ⭐ Titolare{q.mode !== 'player-position' && ` · ${STARTER_SLOTS[starter] ?? starter}`}
           </div>
         )}
 
         {q.input.kind === 'choice' && (
           <ChoiceGrid
-            input={q.input}
+            choices={q.input.choices}
+            correctKey={q.input.answer}
+            layout={q.input.layout}
             answer={answer}
             onPick={submit}
             label={(c) => withJersey(c.label ?? '', c.playerId)}
@@ -269,7 +343,7 @@ export default function Quiz({ mode, scope, count, difficulty: requested, review
             key={index}
             options={q.input.options}
             placeholder={q.input.placeholder}
-            answered={answer ? { ...answer, correctKey: q.input.answer } : null}
+            answered={answer}
             onSubmit={submit}
             label={(o) => withJersey(o.label, o.playerId)}
           />
@@ -277,6 +351,12 @@ export default function Quiz({ mode, scope, count, difficulty: requested, review
         {q.input.kind === 'map' && <MapAnswer input={q.input} answer={answer} onPick={submit} />}
         {q.input.kind === 'text' && (
           <TextAnswer key={index} placeholder={q.input.placeholder} disabled={!!answer} onSubmit={submit} />
+        )}
+        {q.input.kind === 'lineup' && (
+          <LineupAnswer key={index} input={q.input} answer={answer} onSubmit={submit} label={(c) => withJersey(c.label ?? '', c.playerId)} />
+        )}
+        {q.input.kind === 'clues' && (
+          <ClueAnswer key={index} input={q.input} answer={answer} onSubmit={submit} label={(text, id) => withJersey(text, id)} />
         )}
 
         {answer && (
@@ -287,7 +367,7 @@ export default function Quiz({ mode, scope, count, difficulty: requested, review
               ) : (
                 <>
                   Sbagliato ❌
-                  {q.input.kind !== 'choice' && correctLabel && (
+                  {correctLabel && (
                     <>
                       {' '}
                       — era <b>{correctLabel}</b>
@@ -296,9 +376,7 @@ export default function Quiz({ mode, scope, count, difficulty: requested, review
                 </>
               )}
             </div>
-            {revealPlayer && <PlayerReveal p={revealPlayer} />}
-            {!revealPlayer && revealTeam && <TeamReveal t={revealTeam} />}
-            {q.reveal.teamIds?.map((teamId) => <TeamReveal key={teamId} t={teamById.get(teamId)!} />)}
+            <RevealCards q={q} />
             {q.reveal.map && <TeamsMap teamIds={q.reveal.teamIds ?? (q.reveal.teamId ? [q.reveal.teamId] : [])} />}
             {waitForNext && (
               <button className="primary" onClick={next} autoFocus>
@@ -312,37 +390,189 @@ export default function Quiz({ mode, scope, count, difficulty: requested, review
   );
 }
 
+/** Le schede della soluzione: giocatore, squadre e una riga di spiegazione. */
+function RevealCards({ q }: { q: Question }) {
+  const p = q.reveal.playerId ? playerById.get(q.reveal.playerId) : undefined;
+  const t = q.reveal.teamId ? teamById.get(q.reveal.teamId) : undefined;
+  return (
+    <>
+      {q.reveal.note && <div className="reveal-note">{q.reveal.note}</div>}
+      {p && <PlayerReveal p={p} />}
+      {t && <TeamReveal t={t} />}
+      {q.reveal.teamIds?.map((id) => <TeamReveal key={id} t={teamById.get(id)!} />)}
+    </>
+  );
+}
+
 function ChoiceGrid({
-  input,
+  choices,
+  correctKey,
+  layout,
   answer,
   onPick,
   label,
+  numbered = true,
 }: {
-  input: Extract<Question['input'], { kind: 'choice' }>;
+  choices: Choice[];
+  correctKey: string;
+  layout?: string;
   answer: Answer | null;
   onPick: (key: string) => void;
-  label: (c: (typeof input.choices)[number]) => React.ReactNode;
+  label: (c: Choice) => React.ReactNode;
+  numbered?: boolean;
 }) {
-  const n = input.choices.length;
-  const imagesOnly = input.choices.some((c) => c.image && !c.label);
+  const n = choices.length;
+  const imagesOnly = choices.some((c) => c.image && !c.label);
   const size = n <= 2 ? 'n2' : n <= 4 ? 'n4' : n <= 9 ? 'n6' : 'many';
   return (
-    <div className={`choices ${imagesOnly ? 'images' : ''} ${size} ${input.layout ?? ''}`}>
-      {input.choices.map((c, i) => {
+    <div className={`choices ${imagesOnly ? 'images' : ''} ${size} ${layout ?? ''}`}>
+      {choices.map((c, i) => {
         let cls = 'choice';
+        if (c.image && c.label) cls += ' with-image';
         if (answer) {
-          if (c.key === input.answer) cls += ' correct';
+          if (c.key === correctKey) cls += ' correct';
           else if (c.key === answer.given) cls += ' wrong';
           else cls += ' dim';
         }
         return (
           <button key={c.key} className={cls} onClick={() => onPick(c.key)} disabled={!!answer}>
-            {n <= 9 && <span className="kbd">{i + 1}</span>}
+            {numbered && n <= 9 && <span className="kbd">{i + 1}</span>}
             {c.image && <Img src={c.image} kind={c.imageKind ?? 'logo'} />}
             {c.label && <span>{label(c)}</span>}
           </button>
         );
       })}
+    </div>
+  );
+}
+
+/** Quintetto: si sceglie un giocatore per il ruolo evidenziato; clic su un ruolo già pieno per svuotarlo. */
+function LineupAnswer({
+  input,
+  answer,
+  onSubmit,
+  label,
+}: {
+  input: Extract<Question['input'], { kind: 'lineup' }>;
+  answer: Answer | null;
+  onSubmit: (given: string) => void;
+  label: (c: Choice) => React.ReactNode;
+}) {
+  const [picks, setPicks] = useState<(string | null)[]>(input.slots.map(() => null));
+  const correct = input.answer.split(',');
+  const active = picks.indexOf(null);
+  const byKey = new Map(input.candidates.map((c) => [c.key, c]));
+
+  const pick = (key: string) => {
+    if (answer || active === -1 || picks.includes(key)) return;
+    setPicks((p) => p.map((x, i) => (i === active ? key : x)));
+  };
+  const clear = (i: number) => !answer && setPicks((p) => p.map((x, j) => (j === i ? null : x)));
+
+  return (
+    <div className="lineup">
+      <div className="lineup-slots">
+        {input.slots.map((slot, i) => {
+          const chosen = picks[i] ? byKey.get(picks[i]!) : undefined;
+          const state = answer ? (picks[i] === correct[i] ? 'correct' : 'wrong') : i === active ? 'active' : '';
+          const right = answer && picks[i] !== correct[i] ? byKey.get(correct[i]) : undefined;
+          return (
+            <button key={slot.key} className={`lineup-slot ${state}`} onClick={() => clear(i)} disabled={!!answer}>
+              <span className="slot-name">
+                <b>{slot.key}</b> {slot.label}
+              </span>
+              {chosen ? (
+                <>
+                  <Img src={chosen.image} kind="photo" />
+                  {chosen.label && <span className="small">{label(chosen)}</span>}
+                </>
+              ) : (
+                <span className="slot-empty">{i === active ? 'Scegli qui sotto' : '—'}</span>
+              )}
+              {right && <span className="small slot-right">Era: {playerById.get(right.key)?.name}</span>}
+            </button>
+          );
+        })}
+      </div>
+      <div className="choices images many">
+        {input.candidates.map((c) => (
+          <button
+            key={c.key}
+            className={`choice ${picks.includes(c.key) ? 'dim' : ''}`}
+            onClick={() => pick(c.key)}
+            disabled={!!answer || picks.includes(c.key)}
+          >
+            <Img src={c.image} kind="photo" />
+            {c.label && <span>{label(c)}</span>}
+          </button>
+        ))}
+      </div>
+      {!answer && (
+        <div className="actions" style={{ justifyContent: 'center' }}>
+          <button className="primary" disabled={active !== -1} onClick={() => onSubmit(picks.join(','))}>
+            Conferma quintetto
+          </button>
+          <button onClick={() => onSubmit('')}>Non lo so</button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/** Indizi uno alla volta; si può rispondere in qualsiasi momento. */
+function ClueAnswer({
+  input,
+  answer,
+  onSubmit,
+  label,
+}: {
+  input: Extract<Question['input'], { kind: 'clues' }>;
+  answer: Answer | null;
+  onSubmit: (given: string) => void;
+  label: (text: string, playerId?: string) => React.ReactNode;
+}) {
+  const [shown, setShown] = useState(1);
+  const total = input.clues.length;
+  const visible = answer ? total : shown;
+  return (
+    <div className="clues">
+      <ol className="clue-list">
+        {input.clues.slice(0, visible).map((c, i) => (
+          <li key={i} className={answer && i >= shown ? 'extra' : ''}>
+            {c.image && <Img src={c.image} kind={c.imageKind ?? 'logo'} />}
+            {c.text && <span>{c.text}</span>}
+          </li>
+        ))}
+      </ol>
+      {!answer && shown < total && (
+        <button className="more-clue" onClick={() => setShown((n) => n + 1)}>
+          🔎 Altro indizio ({shown}/{total})
+        </button>
+      )}
+      {answer?.correct && (
+        <div className="muted small">
+          Indovinato con {shown} {shown === 1 ? 'indizio' : 'indizi'} su {total}
+        </div>
+      )}
+      {input.choices && (
+        <ChoiceGrid
+          choices={input.choices}
+          correctKey={input.answer}
+          answer={answer}
+          onPick={onSubmit}
+          label={(c) => label(c.label ?? '', c.playerId)}
+          numbered={false}
+        />
+      )}
+      {input.options && (
+        <SearchAnswer
+          options={input.options}
+          placeholder="Scrivi il nome…"
+          answered={answer}
+          onSubmit={onSubmit}
+          label={(o) => label(o.label, o.playerId)}
+        />
+      )}
     </div>
   );
 }
@@ -384,7 +614,7 @@ function SearchAnswer({
 }: {
   options: SearchOption[];
   placeholder: string;
-  answered: (Answer & { correctKey: string }) | null;
+  answered: Answer | null;
   onSubmit: (key: string) => void;
   label: (o: SearchOption) => React.ReactNode;
 }) {

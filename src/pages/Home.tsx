@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { DIVISIONS, pickedTeamIds, teams, teamsScope, scopeLabel, type Scope } from '../data';
 import { Img } from '../components/Cards';
-import { MODES, effectiveDifficulty, modeAvailable, statsKey, setRotationOnly, type ModeDef } from '../quiz/modes';
-import { getStats, isLearned, needsReview } from '../progress';
+import { MODES, effectiveDifficulty, modeAvailable, modeById, statsKey, setRotationOnly, type ModeDef, type ModeId } from '../quiz/modes';
+import { dueItems, getStats, isLearned, needsReview } from '../progress';
 import { setPref, usePrefs } from '../prefs';
 import { navigate } from '../router';
 
@@ -123,10 +123,17 @@ export default function Home({ initialScope }: { initialScope?: Scope }) {
       p: rotationOnly ? undefined : 'all',
     });
 
-  const groups: { title: string; group: ModeDef['group'] }[] = [
-    { title: 'Squadre', group: 'team' },
-    { title: 'Giocatori', group: 'player' },
+  // modalità "in diretta" a parte: caricano i dati da ESPN quando parti
+  const groups: { title: string; note?: string; filter: (m: ModeDef) => boolean }[] = [
+    { title: 'Squadre', filter: (m) => m.group === 'team' },
+    { title: 'Giocatori', filter: (m) => m.group === 'player' && !m.load },
+    { title: 'In diretta', note: 'Dati di ESPN aggiornati a ogni partita', filter: (m) => !!m.load },
   ];
+  // da ripassare oggi: solo modalità non "in diretta" (le loro domande cambiano ogni giorno)
+  const due = dueItems().filter(([k]) => {
+    const def = modeById.get(k.split(':')[0] as ModeId);
+    return def && !def.load;
+  }).length;
 
   return (
     <div className="home">
@@ -179,20 +186,39 @@ export default function Home({ initialScope }: { initialScope?: Scope }) {
 
       {picked && <TeamPicker selected={picked} />}
 
+      <button
+        className={`daily ${due ? '' : 'empty'}`}
+        onClick={() => navigate('quiz', { mode: 'daily', n: count, p: rotationOnly ? undefined : 'all' })}
+        disabled={!due}
+      >
+        <span className="daily-icon">🔁</span>
+        <span>
+          <b>Ripasso del giorno</b>
+          <span className="muted small">
+            {due
+              ? ` · ${due} da ripassare oggi, da tutte le modalità`
+              : ' · niente per oggi: quello che sbagli o impari torna qui dopo 1, 3, 7, 14 e 30 giorni'}
+          </span>
+        </span>
+      </button>
+
       {groups.map((g) => (
-        <section key={g.group}>
-          <h2>{g.title}</h2>
+        <section key={g.title}>
+          <h2>
+            {g.title} {g.note && <span className="heading-note">{g.note}</span>}
+          </h2>
           <div className="mode-grid">
-            {MODES.filter((m) => m.group === g.group).map((m) => {
-              const available = modeAvailable(m, scope);
+            {MODES.filter(g.filter).map((m) => {
+              const available = modeAvailable(m, scope) && (m.ignoresScope || picked?.length !== 0);
               const key = statsKey(m, difficulty);
-              const items = available ? m.items(scope) : [];
+              // le modalità "in diretta" conoscono le domande solo dopo aver scaricato i dati
+              const items = available && !m.load ? m.items(scope) : [];
               const learned = items.filter((id) => isLearned(getStats(key, id))).length;
               const review = items.filter((id) => needsReview(getStats(key, id))).length;
               const hard = effectiveDifficulty(m, difficulty) === 'hard';
               return (
                 <div key={m.id} className={`mode-card ${available ? '' : 'disabled'}`}>
-                  <button className="mode-main" disabled={!available || items.length === 0} onClick={() => start(m)}>
+                  <button className="mode-main" disabled={!available || (!m.load && items.length === 0)} onClick={() => start(m)}>
                     <span className="mode-icon">{m.icon}</span>
                     <span className="mode-title">
                       {m.title}
@@ -200,7 +226,7 @@ export default function Home({ initialScope }: { initialScope?: Scope }) {
                       {!m.hard && <span className="badge">Livello unico</span>}
                     </span>
                     <span className="mode-desc">
-                      {picked?.length === 0
+                      {picked?.length === 0 && !m.ignoresScope
                         ? 'Scegli almeno una squadra qui sopra.'
                         : available
                           ? hard
@@ -208,7 +234,7 @@ export default function Home({ initialScope }: { initialScope?: Scope }) {
                             : m.description
                           : 'Scegli più squadre per questa modalità.'}
                     </span>
-                    {available && (
+                    {available && !m.load && (
                       <span className="progress">
                         <span className="bar">
                           <span style={{ width: `${(learned / Math.max(items.length, 1)) * 100}%` }} />

@@ -39,9 +39,10 @@ export default function Stats() {
 
   const label = (mode: string, id: string) => {
     const def = modeById.get(mode.split(':')[0] as ModeId);
-    if (def?.group === 'player') {
-      const p = playerById.get(id);
-      return { name: p?.name ?? id, img: p?.headshot, kind: 'photo' as const };
+    // "Partite di ieri" usa "partita:giocatore"; quintetto e intruso usano la squadra
+    const p = playerById.get(id.split(':').pop()!);
+    if (def?.group === 'player' && p) {
+      return { name: p.name, img: p.headshot, kind: 'photo' as const };
     }
     if (id.includes('-')) {
       // "Scontro": coppia di squadre

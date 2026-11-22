@@ -215,3 +215,122 @@ export function fetchStandings(): Promise<Standings> {
 }
 
 export const useStandings = () => useLoadable('standings', fetchStandings);
+
+// ---------- medie di tutta la lega (per "Chi è più forte?") ----------
+
+const LEAGUE_STATS_URL = 'https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/statistics/byathlete';
+
+export interface LeagueLine {
+  games: number;
+  minutes: number;
+  points: number;
+  rebounds: number;
+  assists: number;
+}
+
+/** Medie a partita di tutti i giocatori della stagione in corso, in una sola richiesta. */
+export function fetchLeagueAverages(): Promise<Map<string, LeagueLine>> {
+  return cachedJson(`${LEAGUE_STATS_URL}?isqualified=false&limit=1000&season=${currentSeasonYear}&seasontype=2`, (json) => {
+    const names = (category: string): string[] => json.categories.find((c: any) => c.name === category)?.names ?? [];
+    const general = names('general');
+    const offensive = names('offensive');
+    const out = new Map<string, LeagueLine>();
+    for (const a of json.athletes ?? []) {
+      const values = (category: string) => a.categories.find((c: any) => c.name === category)?.values ?? [];
+      const g = values('general');
+      const o = values('offensive');
+      out.set(String(a.athlete.id), {
+        games: g[general.indexOf('gamesPlayed')] ?? 0,
+        minutes: g[general.indexOf('avgMinutes')] ?? 0,
+        rebounds: g[general.indexOf('avgRebounds')] ?? 0,
+        points: o[offensive.indexOf('avgPoints')] ?? 0,
+        assists: o[offensive.indexOf('avgAssists')] ?? 0,
+      });
+    }
+    return out;
+  });
+}
+
+// ---------- le partite dell'ultima notte ----------
+
+const SCOREBOARD_URL = 'https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard';
+const SUMMARY_URL = 'https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary';
+
+export interface BoxLine {
+  playerId: string;
+  teamId: string;
+  minutes: number;
+  points: number;
+  rebounds: number;
+  assists: number;
+  starter: boolean;
+}
+
+export interface NightGame {
+  id: string;
+  /** [ospite, casa] */
+  teamIds: [string, string];
+  /** Punteggio, es. "MIL 129 - 132 PHI" (ospite prima, come negli USA). */
+  label: string;
+  lines: BoxLine[];
+}
+
+export interface Night {
+  /** Data della giornata (ora di New York), es. "21/11". */
+  label: string;
+  games: NightGame[];
+}
+
+/** Giorno di calendario a New York, `ago` giorni fa, come YYYYMMDD. */
+function etDate(ago: number): string {
+  const d = new Date(Date.now() - ago * 24 * 60 * 60 * 1000);
+  return new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York' }).format(d).replaceAll('-', '');
+}
+
+/** Ultima giornata con partite finite (dall'Italia, la mattina, è quella della notte appena passata). */
+export async function fetchLastNight(): Promise<Night | null> {
+  for (let ago = 0; ago <= 5; ago++) {
+    const date = etDate(ago);
+    const events: any[] = await cachedJson(`${SCOREBOARD_URL}?dates=${date}`, (json) => json.events ?? []);
+    const finished = events.filter((e) => e.status?.type?.completed);
+    if (finished.length === 0) continue;
+    const games = await Promise.all(finished.map((e) => fetchGame(e)));
+    return { label: `${date.slice(6, 8)}/${date.slice(4, 6)}`, games: games.filter((g): g is NightGame => !!g) };
+  }
+  return null;
+}
+
+async function fetchGame(event: any): Promise<NightGame | null> {
+  const competitors: any[] = event.competitions?.[0]?.competitors ?? [];
+  const away = competitors.find((c) => c.homeAway === 'away');
+  const home = competitors.find((c) => c.homeAway === 'home');
+  if (!away || !home) return null;
+  const lines = await cachedJson(`${SUMMARY_URL}?event=${event.id}`, (json) => {
+    const out: BoxLine[] = [];
+    for (const side of json.boxscore?.players ?? []) {
+      const stats = side.statistics?.[0];
+      if (!stats) continue;
+      const names: string[] = stats.names;
+      for (const a of stats.athletes ?? []) {
+        if (a.didNotPlay || !a.stats?.length) continue;
+        const value = (name: string) => Number(a.stats[names.indexOf(name)]) || 0;
+        out.push({
+          playerId: String(a.athlete.id),
+          teamId: String(side.team.id),
+          minutes: value('MIN'),
+          points: value('PTS'),
+          rebounds: value('REB'),
+          assists: value('AST'),
+          starter: !!a.starter,
+        });
+      }
+    }
+    return out;
+  });
+  return {
+    id: String(event.id),
+    teamIds: [String(away.team.id), String(home.team.id)],
+    label: `${away.team.abbreviation} ${away.score} - ${home.score} ${home.team.abbreviation}`,
+    lines,
+  };
+}

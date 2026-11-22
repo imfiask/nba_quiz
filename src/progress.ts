@@ -116,3 +116,23 @@ export function weightedPick(mode: string, itemIds: string[], count: number): st
   }
   return out;
 }
+
+// ---------- ripasso del giorno (ripetizione spaziata) ----------
+
+const DAY_MS = 24 * 60 * 60 * 1000;
+/** Dopo quanti giorni ripassare, in base alle risposte giuste di fila: 1, 3, 7, 14, poi 30. */
+const INTERVALS_DAYS = [0, 1, 3, 7, 14, 30];
+
+/** Quando un elemento va ripassato: subito se l'ultima risposta era sbagliata. */
+export function dueAt(s: ItemStats): number {
+  if (s.streak === 0) return s.last;
+  return s.last + INTERVALS_DAYS[Math.min(s.streak, INTERVALS_DAYS.length - 1)] * DAY_MS;
+}
+
+/** Gli elementi già visti che oggi vanno ripassati (entro stasera), dai più in ritardo. */
+export function dueItems(): [key: string, itemId: string, stats: ItemStats][] {
+  const endOfToday = new Date().setHours(23, 59, 59, 999);
+  return allStats()
+    .filter(([, , s]) => dueAt(s) <= endOfToday)
+    .sort((a, b) => dueAt(a[2]) - dueAt(b[2]));
+}
