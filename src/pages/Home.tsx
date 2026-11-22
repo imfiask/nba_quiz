@@ -28,6 +28,7 @@ function setPicked(ids: string[]) {
 
 /** Griglia di loghi per scegliere più squadre: clic sul logo o sul nome della division. */
 function TeamPicker({ selected }: { selected: string[] }) {
+  const { pickerCollapsed: collapsed } = usePrefs();
   const set = new Set(selected);
   const toggle = (ids: string[]) => {
     const allOn = ids.every((id) => set.has(id));
@@ -39,39 +40,57 @@ function TeamPicker({ selected }: { selected: string[] }) {
     setPicked(teams.filter((t) => next.has(t.id)).map((t) => t.id));
   };
   return (
-    <section className="panel team-picker">
+    <section className={`panel team-picker ${collapsed ? 'collapsed' : ''}`}>
+      <button className="picker-toggle" onClick={() => setPref('pickerCollapsed', !collapsed)} aria-expanded={!collapsed}>
+        {collapsed ? '▸ Espandi' : '▾ Comprimi'}
+      </button>
       <div className="picker-head">
         <span>
           <b>{selected.length}</b> {selected.length === 1 ? 'squadra scelta' : 'squadre scelte'}
         </span>
-        <button className="link" onClick={() => setPicked([])} disabled={selected.length === 0}>
-          Deseleziona tutte
+        {!collapsed && (
+          <button className="link" onClick={() => setPicked([])} disabled={selected.length === 0}>
+            Deseleziona tutte
+          </button>
+        )}
+      </div>
+      {collapsed ? (
+        // compresso: solo i loghi delle squadre scelte, cliccando si riapre
+        <button className="picker-summary" onClick={() => setPref('pickerCollapsed', false)} title="Espandi per cambiare">
+          {selected.length === 0 ? (
+            <span className="muted small">Nessuna squadra: espandi per sceglierle.</span>
+          ) : (
+            teams
+              .filter((t) => set.has(t.id))
+              .map((t) => <Img key={t.id} src={t.logo} kind="logo" alt={t.name} />)
+          )}
         </button>
-      </div>
-      <div className="picker-divisions">
-        {DIVISIONS.map((d) => {
-          const divTeams = teams.filter((t) => t.division === d.name);
-          return (
-            <div key={d.name} className="picker-division">
-              <button className="link division-toggle" onClick={() => toggle(divTeams.map((t) => t.id))}>
-                {d.name} <span className="muted">({d.conference === 'East' ? 'Est' : 'Ovest'})</span>
-              </button>
-              {divTeams.map((t) => (
-                <button
-                  key={t.id}
-                  className={`picker-team ${set.has(t.id) ? 'on' : ''}`}
-                  style={{ '--team': t.color } as React.CSSProperties}
-                  onClick={() => toggle([t.id])}
-                  title={t.name}
-                >
-                  <Img src={t.logo} kind="logo" />
-                  <span>{t.name}</span>
+      ) : (
+        <div className="picker-divisions">
+          {DIVISIONS.map((d) => {
+            const divTeams = teams.filter((t) => t.division === d.name);
+            return (
+              <div key={d.name} className="picker-division">
+                <button className="link division-toggle" onClick={() => toggle(divTeams.map((t) => t.id))}>
+                  {d.name} <span className="muted">({d.conference === 'East' ? 'Est' : 'Ovest'})</span>
                 </button>
-              ))}
-            </div>
-          );
-        })}
-      </div>
+                {divTeams.map((t) => (
+                  <button
+                    key={t.id}
+                    className={`picker-team ${set.has(t.id) ? 'on' : ''}`}
+                    style={{ '--team': t.color } as React.CSSProperties}
+                    onClick={() => toggle([t.id])}
+                    title={t.name}
+                  >
+                    <Img src={t.logo} kind="logo" />
+                    <span>{t.name}</span>
+                  </button>
+                ))}
+              </div>
+            );
+          })}
+        </div>
+      )}
     </section>
   );
 }

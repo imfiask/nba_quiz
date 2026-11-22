@@ -355,3 +355,10 @@ th { color: var(--muted); font-weight: 500; font-size: 0.85rem; }
 .player-card.rarely-used { opacity: 0.55; }
 .player-card.rarely-used:hover { opacity: 1; }
 .heading-note { margin-left: 8px; font-size: 0.8rem; text-transform: none; letter-spacing: 0; font-weight: 400; color: var(--muted); }
+
+/* riquadro squadre comprimibile */
+.picker-toggle { display: block; margin-bottom: 8px; padding: 4px 10px; font-size: 0.85rem; color: var(--muted); }
+.picker-toggle:hover { color: var(--text); }
+.team-picker.collapsed .picker-head { margin-bottom: 8px; }
+.picker-summary { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; width: 100%; padding: 6px; background: none; border: 1px dashed var(--border); text-align: left; }
+.picker-summary .img.logo { width: 30px; height: 30px; }

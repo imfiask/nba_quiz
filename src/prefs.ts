@@ -15,10 +15,12 @@ export interface Prefs {
   holdOnCorrect: boolean;
   /** Quiz sui giocatori solo con chi è in rotazione (titolari e primi 9 per minuti). */
   rotationOnly: boolean;
+  /** Riquadro "Squadre a scelta" chiuso: si vedono solo i loghi scelti. */
+  pickerCollapsed: boolean;
 }
 
 const KEY = 'nba-quiz-prefs-v1';
-const DEFAULTS: Prefs = { scope: 'all', count: 10, difficulty: 'easy', showJersey: false, holdOnCorrect: false, rotationOnly: true };
+const DEFAULTS: Prefs = { scope: 'all', count: 10, difficulty: 'easy', showJersey: false, holdOnCorrect: false, rotationOnly: true, pickerCollapsed: false };
 
 function load(): Prefs {
   try {
