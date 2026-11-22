@@ -123,11 +123,22 @@ const player = (id: string) => playerById.get(id)!;
 
 const withPhoto = (list: Player[]) => list.filter((p) => p.headshot);
 
+/**
+ * Se true, i quiz sui giocatori usano solo chi è in rotazione (`Player.rotation`), anche per le
+ * risposte sbagliate: niente "terzo portiere". Lo imposta chi costruisce le domande (Home, Quiz).
+ */
+let rotationOnly = true;
+export function setRotationOnly(value: boolean) {
+  rotationOnly = value;
+}
+const inPool = (list: Player[]) => (rotationOnly ? list.filter((p) => p.rotation) : list);
+const poolInScope = (scope: Scope) => inPool(playersInScope(scope));
+
 /** Distrattori per un giocatore: stessa squadra/ambito se possibile, meglio se stesso ruolo. */
 function playerDistractors(p: Player, scope: Scope): Player[] {
-  const pool = withPhoto(playersInScope(scope));
+  const pool = withPhoto(poolInScope(scope));
   const samePos = pool.filter((x) => x.position === p.position);
-  return distractors(p, samePos.length >= 4 ? samePos : pool, withPhoto(players));
+  return distractors(p, samePos.length >= 4 ? samePos : pool, withPhoto(inPool(players)));
 }
 
 /** Tutte le coppie di squadre dell'ambito, come "idA-idB". */
@@ -378,7 +389,7 @@ export const MODES: ModeDef[] = [
     description: 'Vedi la foto, scegli tra 4 nomi.',
     hard: 'Vedi la foto e scrivi il nome.',
     singleTeamOk: true,
-    items: (scope) => withPhoto(playersInScope(scope)).map((p) => p.id),
+    items: (scope) => withPhoto(poolInScope(scope)).map((p) => p.id),
     build(id, scope, difficulty) {
       const p = player(id);
       return {
@@ -410,16 +421,16 @@ export const MODES: ModeDef[] = [
     description: 'Leggi il nome, riconosci il giocatore tra 4 foto.',
     hard: 'Leggi il nome, trovalo tra le facce di un intero roster.',
     singleTeamOk: true,
-    items: (scope) => withPhoto(playersInScope(scope)).map((p) => p.id),
+    items: (scope) => withPhoto(poolInScope(scope)).map((p) => p.id),
     build(id, scope, difficulty) {
       const p = player(id);
       let options: Player[];
       if (difficulty === 'hard') {
         // singola squadra: tutto il roster; altrimenti tante facce quante un roster
-        const size = withPhoto(rosterOf(p.teamId)).length;
+        const size = withPhoto(inPool(rosterOf(p.teamId))).length;
         options = isSingleTeam(scope)
-          ? withPhoto(rosterOf(p.teamId))
-          : [p, ...distractors(p, withPhoto(playersInScope(scope)), withPhoto(players), size - 1)];
+          ? withPhoto(inPool(rosterOf(p.teamId)))
+          : [p, ...distractors(p, withPhoto(poolInScope(scope)), withPhoto(inPool(players)), size - 1)];
       } else {
         options = [p, ...playerDistractors(p, scope)];
       }
@@ -445,7 +456,7 @@ export const MODES: ModeDef[] = [
     description: 'Dato un giocatore (con foto), scegli tra 4 squadre.',
     hard: 'Solo il nome, scegli tra tutte le 30 squadre.',
     singleTeamOk: false,
-    items: (scope) => playersInScope(scope).map((p) => p.id),
+    items: (scope) => poolInScope(scope).map((p) => p.id),
     build(id, scope, difficulty) {
       const p = player(id);
       const t = team(p.teamId);
@@ -468,7 +479,7 @@ export const MODES: ModeDef[] = [
     hard: 'Solo il nome, scrivi il numero.',
     singleTeamOk: true,
     hidesJersey: true,
-    items: (scope) => playersInScope(scope).filter((p) => p.jersey).map((p) => p.id),
+    items: (scope) => poolInScope(scope).filter((p) => p.jersey).map((p) => p.id),
     build(id, _scope, difficulty) {
       const p = player(id);
       return {
@@ -494,7 +505,7 @@ export const MODES: ModeDef[] = [
     description: 'Vedi foto e nome: guardia, ala o centro?',
     hard: 'Solo il nome: guardia, ala o centro?',
     singleTeamOk: true,
-    items: (scope) => playersInScope(scope).filter((p) => p.position).map((p) => p.id),
+    items: (scope) => poolInScope(scope).filter((p) => p.position).map((p) => p.id),
     build(id, _scope, difficulty) {
       const p = player(id);
       return {

@@ -43,6 +43,52 @@ async function getStarters(teamId) {
   }
 }
 
+// ---------- chi gioca davvero ----------
+// Per non far studiare il "terzo portiere": ogni giocatore riceve un punteggio di importanza
+// (minuti a partita pesati sulle partite giocate) e i primi della sua squadra sono "da sapere".
+
+const STATS_URL = 'https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/statistics/byathlete';
+/** Quanti giocatori per squadra contano come rotazione (in NBA di solito si gioca in 8-10). */
+const ROTATION_SIZE = 9;
+/** Sotto questi minuti "pesati" non si è in rotazione, anche se si è tra i primi 9. */
+const MIN_ROTATION_MINUTES = 10;
+
+/** Minuti a partita e partite giocate di tutta la lega in una stagione (anno di fine, es. 2027). */
+async function getSeasonMinutes(year) {
+  try {
+    const json = await getJson(`${STATS_URL}?isqualified=false&limit=1000&season=${year}&seasontype=2`);
+    const general = json.categories.find((c) => c.name === 'general').names;
+    const out = new Map();
+    for (const a of json.athletes) {
+      const values = a.categories.find((c) => c.name === 'general').values;
+      out.set(a.athlete.id, {
+        games: values[general.indexOf('gamesPlayed')] ?? 0,
+        minutes: values[general.indexOf('avgMinutes')] ?? 0,
+        teamId: a.athlete.teamId ?? null,
+      });
+    }
+    return out;
+  } catch (err) {
+    console.warn(`  statistiche ${year} non disponibili: ${err.message}`);
+    return new Map();
+  }
+}
+
+/**
+ * Importanza = minuti a partita × quota di partite giocate. Conta la stagione in corso, ma
+ * a inizio anno (poche partite) o per chi è infortunato pesa anche la stagione scorsa:
+ * così una stella ferma ai box resta "da sapere".
+ */
+function importanceOf(id, current, previous, teamGames) {
+  const cur = current.get(id);
+  const prev = previous.get(id);
+  const curScore = cur && teamGames ? cur.minutes * Math.min(1, cur.games / teamGames) : 0;
+  const prevScore = prev ? prev.minutes * Math.min(1, prev.games / 82) : 0;
+  // con poche partite giocate dalla squadra la stagione in corso conta meno
+  const weight = Math.min(1, teamGames / 20);
+  return Math.max(curScore * weight + prevScore * (1 - weight), prevScore * 0.8, curScore);
+}
+
 const inchesToCm = (inches) => (inches ? Math.round(inches * 2.54) : null);
 const lbsToKg = (lbs) => (lbs ? Math.round(lbs * 0.4536) : null);
 
@@ -66,6 +112,9 @@ async function main() {
       division,
     };
   });
+
+  const seasonYear = Number(league.season?.year) || new Date().getFullYear();
+  const [current, previous] = await Promise.all([getSeasonMinutes(seasonYear), getSeasonMinutes(seasonYear - 1)]);
 
   const players = [];
   for (const team of teams) {
@@ -91,7 +140,17 @@ async function main() {
         starter: starters.get(a.id) ?? null,
       });
     }
-    console.log(`${team.abbr.padEnd(5)} ${roster.athletes.length} giocatori, ${starters.size} titolari`);
+
+    // rotazione: titolari + i primi per importanza, fino a ROTATION_SIZE
+    const teamPlayers = players.filter((p) => p.teamId === team.id);
+    const teamGames = Math.max(0, ...teamPlayers.map((p) => current.get(p.id)?.games ?? 0));
+    for (const p of teamPlayers) p.minutes = Math.round(importanceOf(p.id, current, previous, teamGames) * 10) / 10;
+    const ranked = teamPlayers.slice().sort((x, y) => y.minutes - x.minutes);
+    ranked.forEach((p, i) => {
+      p.rotation = !!p.starter || (i < ROTATION_SIZE && p.minutes >= MIN_ROTATION_MINUTES);
+    });
+    const rotation = teamPlayers.filter((p) => p.rotation).length;
+    console.log(`${team.abbr.padEnd(5)} ${roster.athletes.length} giocatori, ${starters.size} titolari, ${rotation} in rotazione`);
   }
 
   const data = {

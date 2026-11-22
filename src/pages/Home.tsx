@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { DIVISIONS, pickedTeamIds, teams, teamsScope, scopeLabel, type Scope } from '../data';
 import { Img } from '../components/Cards';
-import { MODES, effectiveDifficulty, modeAvailable, statsKey, type ModeDef } from '../quiz/modes';
+import { MODES, effectiveDifficulty, modeAvailable, statsKey, setRotationOnly, type ModeDef } from '../quiz/modes';
 import { getStats, isLearned, needsReview } from '../progress';
 import { setPref, usePrefs } from '../prefs';
 import { navigate } from '../router';
@@ -84,7 +84,9 @@ const LENGTHS = [
 ];
 
 export default function Home({ initialScope }: { initialScope?: Scope }) {
-  const { scope, count, difficulty } = usePrefs();
+  const { scope, count, difficulty, rotationOnly } = usePrefs();
+  // i conteggi "imparati" sulle card devono usare lo stesso gruppo di giocatori del quiz
+  setRotationOnly(rotationOnly);
   const picked = pickedTeamIds(scope);
 
   // Se arrivi da un quiz lanciato da "Studia", l'ambito diventa quella squadra
@@ -99,6 +101,7 @@ export default function Home({ initialScope }: { initialScope?: Scope }) {
       n: count,
       d: effectiveDifficulty(mode, difficulty),
       review: review ? 1 : undefined,
+      p: rotationOnly ? undefined : 'all',
     });
 
   const groups: { title: string; group: ModeDef['group'] }[] = [
@@ -139,6 +142,17 @@ export default function Home({ initialScope }: { initialScope?: Scope }) {
             </button>
             <button className={difficulty === 'hard' ? 'on hard' : ''} onClick={() => setPref('difficulty', 'hard')}>
               Difficile
+            </button>
+          </div>
+        </div>
+        <div className="length">
+          <span title="In rotazione: titolari e primi 9 della squadra per minuti giocati">Giocatori</span>
+          <div className="segmented">
+            <button className={rotationOnly ? 'on' : ''} onClick={() => setPref('rotationOnly', true)}>
+              Solo chi gioca
+            </button>
+            <button className={!rotationOnly ? 'on' : ''} onClick={() => setPref('rotationOnly', false)}>
+              Tutti
             </button>
           </div>
         </div>

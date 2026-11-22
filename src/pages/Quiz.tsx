@@ -8,6 +8,7 @@ import {
   type ModeId,
   type Question,
   type SearchOption,
+  setRotationOnly,
 } from '../quiz/modes';
 import { balancedPick, getStats, needsReview, record, weightedPick } from '../progress';
 import { setPref, usePrefs, type Difficulty } from '../prefs';
@@ -23,6 +24,8 @@ interface Props {
   count: number;
   difficulty: Difficulty;
   reviewOnly: boolean;
+  /** Anche i giocatori fuori rotazione (di base solo quelli che giocano davvero). */
+  allPlayers: boolean;
 }
 
 interface Answer {
@@ -41,7 +44,7 @@ function preload(q?: Question) {
   for (const u of urls) if (u) new Image().src = u;
 }
 
-export default function Quiz({ mode, scope, count, difficulty: requested, reviewOnly }: Props) {
+export default function Quiz({ mode, scope, count, difficulty: requested, reviewOnly, allPlayers }: Props) {
   const def = modeById.get(mode);
   const difficulty = def ? effectiveDifficulty(def, requested) : 'easy';
   const key = def ? statsKey(def, difficulty) : mode;
@@ -62,6 +65,7 @@ export default function Quiz({ mode, scope, count, difficulty: requested, review
 
   const [queue, setQueue] = useState<Question[]>(() => {
     if (!def) return [];
+    setRotationOnly(!allPlayers);
     let items = def.items(scope);
     if (reviewOnly) items = items.filter((id) => needsReview(getStats(key, id)));
     const n = count || items.length;
@@ -183,7 +187,7 @@ export default function Quiz({ mode, scope, count, difficulty: requested, review
             Rigioca
           </button>
           {missed.length > 0 && (
-            <button onClick={() => navigate('quiz', { mode, scope, n: 0, d: difficulty, review: 1 })}>Ripassa errori</button>
+            <button onClick={() => navigate('quiz', { mode, scope, n: 0, d: difficulty, review: 1, p: allPlayers ? 'all' : undefined })}>Ripassa errori</button>
           )}
           <button onClick={() => navigate('home', { scope })}>Altre modalità</button>
         </div>

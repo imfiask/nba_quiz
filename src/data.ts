@@ -33,6 +33,10 @@ export interface Player {
   headshot: string | null;
   /** Ruolo nel quintetto base (PG, SG, SF, PF, C) secondo il depth chart ESPN; null se in panchina. */
   starter: string | null;
+  /** Minuti a partita "pesati" sulle partite giocate: quanto conta davvero (vedi scripts/update-data.mjs). */
+  minutes: number;
+  /** Titolare o tra i primi 9 della squadra per minuti: i giocatori da sapere. */
+  rotation: boolean;
 }
 
 export const season: string = raw.season ?? '';

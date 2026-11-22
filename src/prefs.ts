@@ -13,10 +13,12 @@ export interface Prefs {
   showJersey: boolean;
   /** Resta sulla soluzione anche quando rispondi giusto, finché non premi Avanti. */
   holdOnCorrect: boolean;
+  /** Quiz sui giocatori solo con chi è in rotazione (titolari e primi 9 per minuti). */
+  rotationOnly: boolean;
 }
 
 const KEY = 'nba-quiz-prefs-v1';
-const DEFAULTS: Prefs = { scope: 'all', count: 10, difficulty: 'easy', showJersey: false, holdOnCorrect: false };
+const DEFAULTS: Prefs = { scope: 'all', count: 10, difficulty: 'easy', showJersey: false, holdOnCorrect: false, rotationOnly: true };
 
 function load(): Prefs {
   try {

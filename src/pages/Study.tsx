@@ -62,7 +62,10 @@ function TeamRoster({ teamId }: { teamId: string }) {
   const roster = rosterOf(teamId);
   const slots = Object.keys(STARTER_SLOTS);
   const starters = roster.filter((p) => p.starter).sort((a, b) => slots.indexOf(a.starter!) - slots.indexOf(b.starter!));
-  const bench = roster.filter((p) => !p.starter);
+  // panchina divisa tra chi è in rotazione (in ordine di minuti) e chi gioca poco o niente
+  const byMinutes = (a: Player, b: Player) => b.minutes - a.minutes;
+  const rotation = roster.filter((p) => !p.starter && p.rotation).sort(byMinutes);
+  const rarelyUsed = roster.filter((p) => !p.starter && !p.rotation).sort(byMinutes);
   const [hideNames, setHideNames] = useState(false);
   const [revealed, setRevealed] = useState<Set<string>>(new Set());
   const [statsFor, setStatsFor] = useState<Player | null>(null);
@@ -80,7 +83,11 @@ function TeamRoster({ teamId }: { teamId: string }) {
     const hidden = hideNames && !revealed.has(p.id);
     return (
       // in modalità flashcard il primo clic scopre il nome; poi (o sempre, senza flashcard) apre le statistiche
-      <button key={p.id} className="player-card" onClick={() => (hidden ? toggle(p.id) : setStatsFor(p))}>
+      <button
+        key={p.id}
+        className={`player-card ${p.rotation ? '' : 'rarely-used'}`}
+        onClick={() => (hidden ? toggle(p.id) : setStatsFor(p))}
+      >
         {p.starter && (
           <span className="slot-badge" title={STARTER_SLOTS[p.starter]}>
             {p.starter}
@@ -94,6 +101,7 @@ function TeamRoster({ teamId }: { teamId: string }) {
           <>
             <div className="player-name">{p.name}</div>
             <PlayerFacts p={p} starter={false} />
+            <div className="minutes">{p.minutes >= 1 ? `~${Math.round(p.minutes)} min a partita` : 'Quasi mai in campo'}</div>
           </>
         )}
       </button>
@@ -145,10 +153,23 @@ function TeamRoster({ teamId }: { teamId: string }) {
             </a>
           </h3>
           <div className="player-grid starters">{starters.map(card)}</div>
-          <h3>Panchina</h3>
         </>
       )}
-      <div className="player-grid">{(starters.length > 0 ? bench : roster).map(card)}</div>
+      {rotation.length > 0 && (
+        <>
+          <h3>Rotazione</h3>
+          <div className="player-grid">{rotation.map(card)}</div>
+        </>
+      )}
+      {rarelyUsed.length > 0 && (
+        <>
+          <h3>
+            Giocano poco{' '}
+            <span className="heading-note">fuori rotazione: esclusi dai quiz con "Solo chi gioca"</span>
+          </h3>
+          <div className="player-grid">{rarelyUsed.map(card)}</div>
+        </>
+      )}
       {statsFor && <PlayerStatsModal player={statsFor} onClose={() => setStatsFor(null)} />}
     </div>
   );

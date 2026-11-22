@@ -31,6 +31,7 @@ export default function App() {
         count={Number(params.get('n') ?? 10)}
         difficulty={(params.get('d') ?? 'easy') as Difficulty}
         reviewOnly={params.get('review') === '1'}
+        allPlayers={params.get('p') === 'all'}
       />
     );
   } else if (page === 'study') {
