@@ -74,19 +74,29 @@ async function getSeasonMinutes(year) {
   }
 }
 
+/** Sotto queste partite i minuti della stagione in corso non dicono ancora niente. */
+const MIN_GAMES_PLAYING = 3;
+
 /**
  * Importanza = minuti a partita × quota di partite giocate. Conta la stagione in corso, ma
- * a inizio anno (poche partite) o per chi è infortunato pesa anche la stagione scorsa:
- * così una stella ferma ai box resta "da sapere".
+ * a inizio anno (poche partite) pesa anche la stagione scorsa. Per non perdere chi è
+ * infortunato (falso negativo, es. un titolare fermo un anno intero):
+ * - si guarda fino a due stagioni fa, con un peso che scende;
+ * - quest'anno conta anche quanto gioca *quando* gioca: 33 minuti in 4 partite su 16 sono
+ *   un titolare spesso ai box, non uno che non entra mai.
  */
-function importanceOf(id, current, previous, teamGames) {
+function importanceOf(id, seasons, teamGames) {
+  const [current, previous, twoAgo] = seasons;
   const cur = current.get(id);
-  const prev = previous.get(id);
-  const curScore = cur && teamGames ? cur.minutes * Math.min(1, cur.games / teamGames) : 0;
-  const prevScore = prev ? prev.minutes * Math.min(1, prev.games / 82) : 0;
+  const share = (s, games) => s.minutes * Math.min(1, s.games / games);
+  const curScore = cur && teamGames ? share(cur, teamGames) : 0;
+  const prevScore = previous.has(id) ? share(previous.get(id), 82) : 0;
+  const twoAgoScore = twoAgo.has(id) ? share(twoAgo.get(id), 82) : 0;
+  const whenPlaying =
+    cur && cur.games >= MIN_GAMES_PLAYING && teamGames ? cur.minutes * (0.4 + 0.6 * Math.min(1, cur.games / teamGames)) : 0;
   // con poche partite giocate dalla squadra la stagione in corso conta meno
   const weight = Math.min(1, teamGames / 20);
-  return Math.max(curScore * weight + prevScore * (1 - weight), prevScore * 0.8, curScore);
+  return Math.max(curScore * weight + prevScore * (1 - weight), prevScore * 0.8, twoAgoScore * 0.6, curScore, whenPlaying);
 }
 
 const inchesToCm = (inches) => (inches ? Math.round(inches * 2.54) : null);
@@ -114,7 +124,8 @@ async function main() {
   });
 
   const seasonYear = Number(league.season?.year) || new Date().getFullYear();
-  const [current, previous] = await Promise.all([getSeasonMinutes(seasonYear), getSeasonMinutes(seasonYear - 1)]);
+  const seasons = await Promise.all([0, 1, 2].map((ago) => getSeasonMinutes(seasonYear - ago)));
+  const [current] = seasons;
 
   const players = [];
   for (const team of teams) {
@@ -137,6 +148,8 @@ async function main() {
         college: a.college?.name ?? null,
         country: a.birthPlace?.country ?? null,
         headshot: a.headshot?.href ?? null,
+        // stato infortuni ESPN: "Out", "Day-To-Day"…; null se sta bene
+        injury: a.injuries?.[0]?.status ?? null,
         starter: starters.get(a.id) ?? null,
       });
     }
@@ -144,7 +157,7 @@ async function main() {
     // rotazione: titolari + i primi per importanza, fino a ROTATION_SIZE
     const teamPlayers = players.filter((p) => p.teamId === team.id);
     const teamGames = Math.max(0, ...teamPlayers.map((p) => current.get(p.id)?.games ?? 0));
-    for (const p of teamPlayers) p.minutes = Math.round(importanceOf(p.id, current, previous, teamGames) * 10) / 10;
+    for (const p of teamPlayers) p.minutes = Math.round(importanceOf(p.id, seasons, teamGames) * 10) / 10;
     const ranked = teamPlayers.slice().sort((x, y) => y.minutes - x.minutes);
     ranked.forEach((p, i) => {
       p.rotation = !!p.starter || (i < ROTATION_SIZE && p.minutes >= MIN_ROTATION_MINUTES);

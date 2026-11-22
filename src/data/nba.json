@@ -1,6 +1,6 @@
 {
   "season": "2026-27",
-  "updatedAt": "2026-11-22T21:03:31.446Z",
+  "updatedAt": "2026-11-22T21:49:24.031Z",
   "teams": [
     {
       "id": "1",
@@ -380,6 +380,7 @@
       "college": "Virginia Tech",
       "country": "Canada",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4278039.png",
+      "injury": null,
       "starter": "SG",
       "minutes": 31.9,
       "rotation": true
@@ -400,6 +401,7 @@
       "college": "George Washington",
       "country": "USA",
       "headshot": null,
+      "injury": null,
       "starter": null,
       "minutes": 0,
       "rotation": false
@@ -420,6 +422,7 @@
       "college": null,
       "country": "Australia",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4869342.png",
+      "injury": null,
       "starter": "SF",
       "minutes": 31.2,
       "rotation": true
@@ -440,8 +443,9 @@
       "college": "Baylor",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4431941.png",
+      "injury": null,
       "starter": null,
-      "minutes": 2.5,
+      "minutes": 5.5,
       "rotation": false
     },
     {
@@ -460,6 +464,7 @@
       "college": "Arizona State",
       "country": "Canada",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4397020.png",
+      "injury": null,
       "starter": null,
       "minutes": 24.4,
       "rotation": true
@@ -480,8 +485,9 @@
       "college": "St. John's",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5106262.png",
+      "injury": null,
       "starter": null,
-      "minutes": 7.3,
+      "minutes": 9,
       "rotation": false
     },
     {
@@ -500,8 +506,9 @@
       "college": "Florida",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/2578185.png",
+      "injury": null,
       "starter": null,
-      "minutes": 6,
+      "minutes": 13.3,
       "rotation": false
     },
     {
@@ -520,8 +527,9 @@
       "college": "Houston",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5149077.png",
+      "injury": null,
       "starter": "PG",
-      "minutes": 16.1,
+      "minutes": 18.3,
       "rotation": true
     },
     {
@@ -540,6 +548,7 @@
       "college": "Washington State",
       "country": "Senegal",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4712863.png",
+      "injury": "Out",
       "starter": null,
       "minutes": 11.5,
       "rotation": false
@@ -560,8 +569,9 @@
       "college": "Duke",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4701230.png",
+      "injury": null,
       "starter": "PF",
-      "minutes": 28.6,
+      "minutes": 30.6,
       "rotation": true
     },
     {
@@ -580,8 +590,9 @@
       "college": "Gonzaga",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4280151.png",
+      "injury": null,
       "starter": null,
-      "minutes": 10.5,
+      "minutes": 11.7,
       "rotation": false
     },
     {
@@ -600,9 +611,10 @@
       "college": "Saint Mary's",
       "country": "Australia",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3146557.png",
+      "injury": "Out",
       "starter": null,
       "minutes": 14.7,
-      "rotation": true
+      "rotation": false
     },
     {
       "id": "2490149",
@@ -620,8 +632,9 @@
       "college": "Lehigh",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/2490149.png",
+      "injury": "Out",
       "starter": null,
-      "minutes": 24,
+      "minutes": 24.4,
       "rotation": true
     },
     {
@@ -640,8 +653,9 @@
       "college": "Georgia",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4873201.png",
+      "injury": "Out",
       "starter": null,
-      "minutes": 4.9,
+      "minutes": 6.5,
       "rotation": false
     },
     {
@@ -660,6 +674,7 @@
       "college": "USC",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4431680.png",
+      "injury": null,
       "starter": "C",
       "minutes": 31,
       "rotation": true
@@ -680,6 +695,7 @@
       "college": "North Carolina",
       "country": "Estonia",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5105571.png",
+      "injury": "Out",
       "starter": null,
       "minutes": 0,
       "rotation": false
@@ -700,6 +716,7 @@
       "college": "Maryland",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4397183.png",
+      "injury": null,
       "starter": null,
       "minutes": 26.1,
       "rotation": true
@@ -720,9 +737,10 @@
       "college": "Kansas",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4431714.png",
+      "injury": null,
       "starter": null,
-      "minutes": 8.4,
-      "rotation": false
+      "minutes": 14.9,
+      "rotation": true
     },
     {
       "id": "4433188",
@@ -740,6 +758,7 @@
       "college": "Providence",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4433188.png",
+      "injury": null,
       "starter": null,
       "minutes": 6.8,
       "rotation": false
@@ -760,8 +779,9 @@
       "college": "Houston",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5142621.png",
+      "injury": null,
       "starter": null,
-      "minutes": 3.6,
+      "minutes": 5.5,
       "rotation": false
     },
     {
@@ -780,8 +800,9 @@
       "college": "Ohio State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3195.png",
+      "injury": null,
       "starter": null,
-      "minutes": 9.7,
+      "minutes": 12.8,
       "rotation": false
     },
     {
@@ -800,6 +821,7 @@
       "college": "Iowa",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4277951.png",
+      "injury": null,
       "starter": null,
       "minutes": 12.8,
       "rotation": false
@@ -820,8 +842,9 @@
       "college": "Fresno State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4251.png",
+      "injury": "Out",
       "starter": "PF",
-      "minutes": 26.4,
+      "minutes": 27.9,
       "rotation": true
     },
     {
@@ -840,6 +863,7 @@
       "college": null,
       "country": "Spain",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5175647.png",
+      "injury": null,
       "starter": null,
       "minutes": 13.1,
       "rotation": false
@@ -860,8 +884,9 @@
       "college": "Rutgers",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4397251.png",
+      "injury": null,
       "starter": null,
-      "minutes": 3.8,
+      "minutes": 5.3,
       "rotation": false
     },
     {
@@ -880,6 +905,7 @@
       "college": "Virginia",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4065804.png",
+      "injury": null,
       "starter": null,
       "minutes": 21.5,
       "rotation": true
@@ -900,6 +926,7 @@
       "college": "St. John's",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5106283.png",
+      "injury": null,
       "starter": null,
       "minutes": 0.1,
       "rotation": false
@@ -920,6 +947,7 @@
       "college": "Oregon",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4066354.png",
+      "injury": null,
       "starter": null,
       "minutes": 28.4,
       "rotation": true
@@ -940,8 +968,9 @@
       "college": "Utah State",
       "country": "Portugal",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4397424.png",
+      "injury": null,
       "starter": "C",
-      "minutes": 21.8,
+      "minutes": 22,
       "rotation": true
     },
     {
@@ -960,8 +989,9 @@
       "college": null,
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4351852.png",
+      "injury": "Out",
       "starter": null,
-      "minutes": 15.4,
+      "minutes": 16.3,
       "rotation": true
     },
     {
@@ -980,6 +1010,7 @@
       "college": "Creighton",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4593841.png",
+      "injury": null,
       "starter": null,
       "minutes": 19.3,
       "rotation": true
@@ -1000,8 +1031,9 @@
       "college": "Duke",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4065648.png",
+      "injury": null,
       "starter": "SF",
-      "minutes": 29.8,
+      "minutes": 31.5,
       "rotation": true
     },
     {
@@ -1020,6 +1052,7 @@
       "college": "Arkansas",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4683689.png",
+      "injury": null,
       "starter": "SG",
       "minutes": 15.2,
       "rotation": true
@@ -1040,6 +1073,7 @@
       "college": "Colorado",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3078576.png",
+      "injury": null,
       "starter": "PG",
       "minutes": 28.8,
       "rotation": true
@@ -1060,6 +1094,7 @@
       "college": "Kentucky",
       "country": "England",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4702745.png",
+      "injury": null,
       "starter": null,
       "minutes": 1.4,
       "rotation": false
@@ -1080,6 +1115,7 @@
       "college": "UCLA",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5105626.png",
+      "injury": null,
       "starter": null,
       "minutes": 0,
       "rotation": false
@@ -1100,8 +1136,9 @@
       "college": "Louisville",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5101761.png",
+      "injury": null,
       "starter": null,
-      "minutes": 16.8,
+      "minutes": 19.2,
       "rotation": true
     },
     {
@@ -1120,6 +1157,7 @@
       "college": "Alabama",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4712896.png",
+      "injury": null,
       "starter": null,
       "minutes": 21.2,
       "rotation": true
@@ -1140,8 +1178,9 @@
       "college": "BYU",
       "country": "Russia",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5175643.png",
+      "injury": null,
       "starter": "SG",
-      "minutes": 14.8,
+      "minutes": 18.2,
       "rotation": true
     },
     {
@@ -1160,8 +1199,9 @@
       "college": "Alabama",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4702177.png",
+      "injury": null,
       "starter": null,
-      "minutes": 18.1,
+      "minutes": 18.6,
       "rotation": true
     },
     {
@@ -1180,6 +1220,7 @@
       "college": "Iowa State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4870564.png",
+      "injury": null,
       "starter": null,
       "minutes": 0.3,
       "rotation": false
@@ -1200,8 +1241,9 @@
       "college": "Auburn",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5174655.png",
+      "injury": null,
       "starter": null,
-      "minutes": 15.1,
+      "minutes": 15.5,
       "rotation": false
     },
     {
@@ -1220,6 +1262,7 @@
       "college": "Florida State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3907823.png",
+      "injury": null,
       "starter": null,
       "minutes": 14.9,
       "rotation": false
@@ -1240,6 +1283,7 @@
       "college": "Memphis",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4687718.png",
+      "injury": null,
       "starter": null,
       "minutes": 8.1,
       "rotation": false
@@ -1260,6 +1304,7 @@
       "college": "Alabama",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4702670.png",
+      "injury": "Day-To-Day",
       "starter": null,
       "minutes": 0.3,
       "rotation": false
@@ -1280,8 +1325,9 @@
       "college": "Missouri",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4278104.png",
+      "injury": null,
       "starter": "SF",
-      "minutes": 30.7,
+      "minutes": 31.5,
       "rotation": true
     },
     {
@@ -1300,6 +1346,7 @@
       "college": "North Carolina",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5037873.png",
+      "injury": null,
       "starter": null,
       "minutes": 12.9,
       "rotation": false
@@ -1320,6 +1367,7 @@
       "college": "Kentucky",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3064514.png",
+      "injury": null,
       "starter": "PF",
       "minutes": 33.1,
       "rotation": true
@@ -1340,6 +1388,7 @@
       "college": null,
       "country": null,
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5242502.png",
+      "injury": null,
       "starter": null,
       "minutes": 8.9,
       "rotation": false
@@ -1360,6 +1409,7 @@
       "college": "North Carolina",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4432194.png",
+      "injury": null,
       "starter": "C",
       "minutes": 23.9,
       "rotation": true
@@ -1380,8 +1430,9 @@
       "college": null,
       "country": "France",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5279130.png",
+      "injury": "Out",
       "starter": "PG",
-      "minutes": 20.8,
+      "minutes": 21.4,
       "rotation": true
     },
     {
@@ -1400,9 +1451,10 @@
       "college": "Michigan",
       "country": "Germany",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3150844.png",
+      "injury": null,
       "starter": null,
       "minutes": 18.1,
-      "rotation": true
+      "rotation": false
     },
     {
       "id": "5107173",
@@ -1420,8 +1472,9 @@
       "college": "Michigan",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5107173.png",
+      "injury": null,
       "starter": null,
-      "minutes": 15.3,
+      "minutes": 18.4,
       "rotation": true
     },
     {
@@ -1440,6 +1493,7 @@
       "college": "Butler",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5176517.png",
+      "injury": null,
       "starter": null,
       "minutes": 0,
       "rotation": false
@@ -1460,8 +1514,9 @@
       "college": "Duke",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3135045.png",
+      "injury": "Day-To-Day",
       "starter": null,
-      "minutes": 23.5,
+      "minutes": 24.9,
       "rotation": true
     },
     {
@@ -1480,8 +1535,9 @@
       "college": "Texas Tech",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5060701.png",
+      "injury": null,
       "starter": null,
-      "minutes": 12.9,
+      "minutes": 13.3,
       "rotation": false
     },
     {
@@ -1500,6 +1556,7 @@
       "college": "Illinois",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4684269.png",
+      "injury": null,
       "starter": null,
       "minutes": 0,
       "rotation": false
@@ -1520,8 +1577,9 @@
       "college": "Michigan",
       "country": "France",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4433249.png",
+      "injury": null,
       "starter": "C",
-      "minutes": 25.7,
+      "minutes": 27.2,
       "rotation": true
     },
     {
@@ -1540,6 +1598,7 @@
       "college": "Clemson",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4701225.png",
+      "injury": null,
       "starter": null,
       "minutes": 2.1,
       "rotation": false
@@ -1560,6 +1619,7 @@
       "college": "Duke",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4602025.png",
+      "injury": null,
       "starter": null,
       "minutes": 27.3,
       "rotation": true
@@ -1580,6 +1640,7 @@
       "college": "Creighton",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4576060.png",
+      "injury": null,
       "starter": null,
       "minutes": 18.1,
       "rotation": true
@@ -1600,6 +1661,7 @@
       "college": "Duke",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5061575.png",
+      "injury": "Out",
       "starter": null,
       "minutes": 24.9,
       "rotation": true
@@ -1620,8 +1682,9 @@
       "college": "UConn",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5239590.png",
+      "injury": null,
       "starter": null,
-      "minutes": 4.8,
+      "minutes": 6.1,
       "rotation": false
     },
     {
@@ -1640,8 +1703,9 @@
       "college": "Alabama",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4433287.png",
+      "injury": null,
       "starter": "SG",
-      "minutes": 26.7,
+      "minutes": 28.3,
       "rotation": true
     },
     {
@@ -1660,6 +1724,7 @@
       "college": "Baylor",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/2583632.png",
+      "injury": null,
       "starter": null,
       "minutes": 22.1,
       "rotation": true
@@ -1680,6 +1745,7 @@
       "college": "LSU",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4396971.png",
+      "injury": null,
       "starter": "PF",
       "minutes": 31.1,
       "rotation": true
@@ -1700,8 +1766,9 @@
       "college": null,
       "country": "France",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5211176.png",
+      "injury": null,
       "starter": null,
-      "minutes": 12.7,
+      "minutes": 13,
       "rotation": false
     },
     {
@@ -1720,8 +1787,9 @@
       "college": null,
       "country": "Germany",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3032979.png",
+      "injury": "Out",
       "starter": null,
-      "minutes": 18.6,
+      "minutes": 22.7,
       "rotation": true
     },
     {
@@ -1740,8 +1808,9 @@
       "college": "Washington",
       "country": "Germany",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5281370.png",
+      "injury": null,
       "starter": null,
-      "minutes": 4.2,
+      "minutes": 7.6,
       "rotation": false
     },
     {
@@ -1760,8 +1829,9 @@
       "college": "North Carolina",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4395651.png",
+      "injury": null,
       "starter": "PG",
-      "minutes": 12.2,
+      "minutes": 17.9,
       "rotation": true
     },
     {
@@ -1780,8 +1850,9 @@
       "college": "Tennessee",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4066218.png",
+      "injury": "Day-To-Day",
       "starter": "SF",
-      "minutes": 6.9,
+      "minutes": 11.4,
       "rotation": true
     },
     {
@@ -1800,8 +1871,9 @@
       "college": "Arizona",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5105555.png",
+      "injury": null,
       "starter": null,
-      "minutes": 2.7,
+      "minutes": 5.7,
       "rotation": false
     },
     {
@@ -1820,6 +1892,7 @@
       "college": null,
       "country": null,
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4711294.png",
+      "injury": null,
       "starter": "PF",
       "minutes": 27.3,
       "rotation": true
@@ -1840,6 +1913,7 @@
       "college": "Georgia",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4278067.png",
+      "injury": "Out",
       "starter": null,
       "minutes": 18.7,
       "rotation": true
@@ -1860,8 +1934,9 @@
       "college": "Gonzaga",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4066650.png",
+      "injury": null,
       "starter": null,
-      "minutes": 7.3,
+      "minutes": 8.7,
       "rotation": false
     },
     {
@@ -1880,8 +1955,9 @@
       "college": null,
       "country": "France",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5242496.png",
+      "injury": null,
       "starter": null,
-      "minutes": 12.2,
+      "minutes": 12.5,
       "rotation": false
     },
     {
@@ -1900,6 +1976,7 @@
       "college": null,
       "country": null,
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4871145.png",
+      "injury": null,
       "starter": "PG",
       "minutes": 27.7,
       "rotation": true
@@ -1920,8 +1997,9 @@
       "college": "UConn",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4683750.png",
+      "injury": null,
       "starter": null,
-      "minutes": 6.8,
+      "minutes": 9.7,
       "rotation": false
     },
     {
@@ -1940,8 +2018,9 @@
       "college": "Oklahoma",
       "country": "Bahamas",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/2990984.png",
+      "injury": null,
       "starter": null,
-      "minutes": 14.1,
+      "minutes": 14.9,
       "rotation": false
     },
     {
@@ -1960,6 +2039,7 @@
       "college": "Duke",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4395626.png",
+      "injury": null,
       "starter": null,
       "minutes": 19.9,
       "rotation": true
@@ -1980,8 +2060,9 @@
       "college": null,
       "country": "Canada",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5044385.png",
+      "injury": null,
       "starter": null,
-      "minutes": 11.2,
+      "minutes": 12.3,
       "rotation": false
     },
     {
@@ -2000,6 +2081,7 @@
       "college": "Auburn",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4432822.png",
+      "injury": null,
       "starter": "SF",
       "minutes": 23.3,
       "rotation": true
@@ -2020,8 +2102,9 @@
       "college": "UCLA",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/2595516.png",
+      "injury": "Out",
       "starter": "SG",
-      "minutes": 25.5,
+      "minutes": 27.1,
       "rotation": true
     },
     {
@@ -2040,8 +2123,9 @@
       "college": "Fresno State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4593049.png",
+      "injury": null,
       "starter": null,
-      "minutes": 0.2,
+      "minutes": 5.6,
       "rotation": false
     },
     {
@@ -2060,8 +2144,9 @@
       "college": "Providence",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4898010.png",
+      "injury": null,
       "starter": null,
-      "minutes": 3.2,
+      "minutes": 5.1,
       "rotation": false
     },
     {
@@ -2080,8 +2165,9 @@
       "college": "Maryland",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4397189.png",
+      "injury": "Day-To-Day",
       "starter": "C",
-      "minutes": 21.3,
+      "minutes": 22.6,
       "rotation": true
     },
     {
@@ -2100,8 +2186,9 @@
       "college": "Texas",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4848625.png",
+      "injury": null,
       "starter": null,
-      "minutes": 1.8,
+      "minutes": 3.8,
       "rotation": false
     },
     {
@@ -2120,8 +2207,9 @@
       "college": "Florida State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4431687.png",
+      "injury": "Day-To-Day",
       "starter": null,
-      "minutes": 14.4,
+      "minutes": 15.5,
       "rotation": true
     },
     {
@@ -2140,8 +2228,9 @@
       "college": "North Carolina",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5095151.png",
+      "injury": "Out",
       "starter": null,
-      "minutes": 20.5,
+      "minutes": 24.6,
       "rotation": true
     },
     {
@@ -2160,8 +2249,9 @@
       "college": "Texas",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4066328.png",
+      "injury": null,
       "starter": "C",
-      "minutes": 22.2,
+      "minutes": 24.1,
       "rotation": true
     },
     {
@@ -2180,6 +2270,7 @@
       "college": "Pittsburgh",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4702099.png",
+      "injury": null,
       "starter": null,
       "minutes": 0,
       "rotation": false
@@ -2200,8 +2291,9 @@
       "college": "Indiana",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3934723.png",
+      "injury": null,
       "starter": null,
-      "minutes": 9.6,
+      "minutes": 11.8,
       "rotation": false
     },
     {
@@ -2220,6 +2312,7 @@
       "college": null,
       "country": "Senegal",
       "headshot": null,
+      "injury": null,
       "starter": null,
       "minutes": 0,
       "rotation": false
@@ -2240,8 +2333,9 @@
       "college": "Arizona State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3992.png",
+      "injury": null,
       "starter": "PG",
-      "minutes": 31.6,
+      "minutes": 32.4,
       "rotation": true
     },
     {
@@ -2260,6 +2354,7 @@
       "college": null,
       "country": "Croatia",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/2995706.png",
+      "injury": null,
       "starter": null,
       "minutes": 19.5,
       "rotation": true
@@ -2280,9 +2375,10 @@
       "college": "Utah State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4066757.png",
+      "injury": null,
       "starter": null,
-      "minutes": 15.3,
-      "rotation": false
+      "minutes": 18.3,
+      "rotation": true
     },
     {
       "id": "5177362",
@@ -2300,8 +2396,9 @@
       "college": "Morehead State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5177362.png",
+      "injury": null,
       "starter": null,
-      "minutes": 3.2,
+      "minutes": 7.4,
       "rotation": false
     },
     {
@@ -2320,8 +2417,9 @@
       "college": "Louisville",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3908809.png",
+      "injury": null,
       "starter": "SG",
-      "minutes": 31.2,
+      "minutes": 32,
       "rotation": true
     },
     {
@@ -2340,8 +2438,9 @@
       "college": "USC",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4432158.png",
+      "injury": "Out",
       "starter": "PF",
-      "minutes": 23,
+      "minutes": 26.4,
       "rotation": true
     },
     {
@@ -2360,8 +2459,9 @@
       "college": "Baylor",
       "country": "Nicaragua",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4702134.png",
+      "injury": null,
       "starter": null,
-      "minutes": 4.6,
+      "minutes": 8,
       "rotation": false
     },
     {
@@ -2380,6 +2480,7 @@
       "college": "Wichita State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4701233.png",
+      "injury": null,
       "starter": null,
       "minutes": 11.2,
       "rotation": false
@@ -2400,8 +2501,9 @@
       "college": "Duke",
       "country": "Australia",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5023693.png",
+      "injury": null,
       "starter": null,
-      "minutes": 19.2,
+      "minutes": 19.7,
       "rotation": true
     },
     {
@@ -2420,8 +2522,9 @@
       "college": "Arkansas",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5041951.png",
+      "injury": null,
       "starter": null,
-      "minutes": 19.5,
+      "minutes": 21.1,
       "rotation": true
     },
     {
@@ -2440,6 +2543,7 @@
       "college": "Memphis",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5106268.png",
+      "injury": "Out",
       "starter": null,
       "minutes": 9.8,
       "rotation": false
@@ -2460,9 +2564,10 @@
       "college": "California",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4683747.png",
+      "injury": "Out",
       "starter": null,
       "minutes": 17.3,
-      "rotation": true
+      "rotation": false
     },
     {
       "id": "5106261",
@@ -2480,6 +2585,7 @@
       "college": "Miami",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5106261.png",
+      "injury": null,
       "starter": null,
       "minutes": 0,
       "rotation": false
@@ -2500,8 +2606,9 @@
       "college": "UCLA",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4576087.png",
+      "injury": null,
       "starter": "SF",
-      "minutes": 21.2,
+      "minutes": 23.8,
       "rotation": true
     },
     {
@@ -2520,8 +2627,9 @@
       "college": "Loyola Maryland",
       "country": "Spain",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4593125.png",
+      "injury": null,
       "starter": null,
-      "minutes": 11.7,
+      "minutes": 12.1,
       "rotation": false
     },
     {
@@ -2540,6 +2648,7 @@
       "college": null,
       "country": "Bosnia & Herzegovina",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5148538.png",
+      "injury": "Out",
       "starter": null,
       "minutes": 0,
       "rotation": false
@@ -2560,6 +2669,7 @@
       "college": "Michigan State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4432582.png",
+      "injury": null,
       "starter": null,
       "minutes": 21.9,
       "rotation": true
@@ -2580,6 +2690,7 @@
       "college": "Memphis",
       "country": "Guinea",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4701208.png",
+      "injury": null,
       "starter": null,
       "minutes": 5.2,
       "rotation": false
@@ -2600,8 +2711,9 @@
       "college": "Florida",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4896372.png",
+      "injury": "Day-To-Day",
       "starter": null,
-      "minutes": 17.1,
+      "minutes": 17.6,
       "rotation": true
     },
     {
@@ -2620,8 +2732,9 @@
       "college": null,
       "country": "Spain",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5279129.png",
+      "injury": "Out",
       "starter": null,
-      "minutes": 2.9,
+      "minutes": 6.3,
       "rotation": false
     },
     {
@@ -2640,8 +2753,9 @@
       "college": "Duke",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5041939.png",
+      "injury": null,
       "starter": "SF",
-      "minutes": 31.5,
+      "minutes": 32.3,
       "rotation": true
     },
     {
@@ -2660,6 +2774,7 @@
       "college": "Arkansas",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4278049.png",
+      "injury": null,
       "starter": "C",
       "minutes": 21.8,
       "rotation": true
@@ -2680,6 +2795,7 @@
       "college": "Michigan",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5105806.png",
+      "injury": null,
       "starter": null,
       "minutes": 6.8,
       "rotation": false
@@ -2700,8 +2816,9 @@
       "college": "Duke",
       "country": "Australia",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/6442.png",
+      "injury": null,
       "starter": "PG",
-      "minutes": 25.2,
+      "minutes": 27.5,
       "rotation": true
     },
     {
@@ -2720,9 +2837,10 @@
       "college": "Michigan",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4873153.png",
+      "injury": null,
       "starter": null,
-      "minutes": 16,
-      "rotation": true
+      "minutes": 16.4,
+      "rotation": false
     },
     {
       "id": "5106040",
@@ -2740,8 +2858,9 @@
       "college": "Virginia Tech",
       "country": "England",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5106040.png",
+      "injury": "Out",
       "starter": null,
-      "minutes": 2.3,
+      "minutes": 3.2,
       "rotation": false
     },
     {
@@ -2760,8 +2879,9 @@
       "college": "Duke",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4683688.png",
+      "injury": "Out",
       "starter": null,
-      "minutes": 1.1,
+      "minutes": 6.1,
       "rotation": false
     },
     {
@@ -2780,8 +2900,9 @@
       "college": "Xavier",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4278594.png",
+      "injury": null,
       "starter": null,
-      "minutes": 21.3,
+      "minutes": 21.5,
       "rotation": true
     },
     {
@@ -2800,8 +2921,9 @@
       "college": "Nevada",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3138160.png",
+      "injury": null,
       "starter": "SG",
-      "minutes": 16,
+      "minutes": 18.1,
       "rotation": true
     },
     {
@@ -2820,6 +2942,7 @@
       "college": null,
       "country": "Spain",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5211175.png",
+      "injury": null,
       "starter": null,
       "minutes": 23.7,
       "rotation": true
@@ -2840,8 +2963,9 @@
       "college": "Houston",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4432107.png",
+      "injury": null,
       "starter": null,
-      "minutes": 11.1,
+      "minutes": 12.6,
       "rotation": false
     },
     {
@@ -2860,8 +2984,9 @@
       "college": "Kentucky",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4278078.png",
+      "injury": "Day-To-Day",
       "starter": "PF",
-      "minutes": 28.9,
+      "minutes": 29.6,
       "rotation": true
     },
     {
@@ -2880,9 +3005,10 @@
       "college": "Duke",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4277848.png",
+      "injury": null,
       "starter": null,
       "minutes": 12.7,
-      "rotation": true
+      "rotation": false
     },
     {
       "id": "4431767",
@@ -2900,6 +3026,7 @@
       "college": "Kansas",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4431767.png",
+      "injury": null,
       "starter": "SG",
       "minutes": 33.6,
       "rotation": true
@@ -2920,6 +3047,7 @@
       "college": "Arkansas",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4698719.png",
+      "injury": null,
       "starter": null,
       "minutes": 18.4,
       "rotation": true
@@ -2940,6 +3068,7 @@
       "college": "USC",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3978.png",
+      "injury": null,
       "starter": null,
       "minutes": 23.7,
       "rotation": true
@@ -2960,8 +3089,9 @@
       "college": "Providence",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4065813.png",
+      "injury": null,
       "starter": null,
-      "minutes": 2.3,
+      "minutes": 4.6,
       "rotation": false
     },
     {
@@ -2980,6 +3110,7 @@
       "college": "Arizona",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3064290.png",
+      "injury": null,
       "starter": "PF",
       "minutes": 29.3,
       "rotation": true
@@ -3000,6 +3131,7 @@
       "college": "Dayton",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4433607.png",
+      "injury": null,
       "starter": null,
       "minutes": 2,
       "rotation": false
@@ -3020,8 +3152,9 @@
       "college": "St. John's",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4565698.png",
+      "injury": null,
       "starter": null,
-      "minutes": 7.4,
+      "minutes": 9.6,
       "rotation": false
     },
     {
@@ -3040,8 +3173,9 @@
       "college": "North Carolina",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3138196.png",
+      "injury": null,
       "starter": "SF",
-      "minutes": 22.1,
+      "minutes": 24.6,
       "rotation": true
     },
     {
@@ -3060,6 +3194,7 @@
       "college": null,
       "country": "Serbia",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3112335.png",
+      "injury": null,
       "starter": "C",
       "minutes": 36.8,
       "rotation": true
@@ -3080,6 +3215,7 @@
       "college": "Stanford",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4592427.png",
+      "injury": null,
       "starter": null,
       "minutes": 13.8,
       "rotation": true
@@ -3100,9 +3236,10 @@
       "college": "Duke",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3135046.png",
+      "injury": null,
       "starter": null,
-      "minutes": 11,
-      "rotation": false
+      "minutes": 15.9,
+      "rotation": true
     },
     {
       "id": "3936299",
@@ -3120,6 +3257,7 @@
       "college": "Kentucky",
       "country": "Canada",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3936299.png",
+      "injury": null,
       "starter": "PG",
       "minutes": 36.4,
       "rotation": true
@@ -3140,6 +3278,7 @@
       "college": "Gonzaga",
       "country": "Canada",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4433629.png",
+      "injury": null,
       "starter": null,
       "minutes": 11.4,
       "rotation": false
@@ -3160,6 +3299,7 @@
       "college": "Arizona",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4431690.png",
+      "injury": null,
       "starter": null,
       "minutes": 6.1,
       "rotation": false
@@ -3180,8 +3320,9 @@
       "college": "Gonzaga",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4432181.png",
+      "injury": "Out",
       "starter": null,
-      "minutes": 8.4,
+      "minutes": 10.1,
       "rotation": false
     },
     {
@@ -3200,8 +3341,9 @@
       "college": "Villanova",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5105592.png",
+      "injury": null,
       "starter": null,
-      "minutes": 3.5,
+      "minutes": 6.1,
       "rotation": false
     },
     {
@@ -3220,6 +3362,7 @@
       "college": "Wake Forest",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3908845.png",
+      "injury": null,
       "starter": "C",
       "minutes": 25.9,
       "rotation": true
@@ -3240,8 +3383,9 @@
       "college": "Oklahoma State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4432166.png",
+      "injury": null,
       "starter": "PG",
-      "minutes": 32.6,
+      "minutes": 33.5,
       "rotation": true
     },
     {
@@ -3260,6 +3404,7 @@
       "college": "Memphis",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4433621.png",
+      "injury": "Out",
       "starter": null,
       "minutes": 19.3,
       "rotation": true
@@ -3280,6 +3425,7 @@
       "college": "Radford",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/2596112.png",
+      "injury": null,
       "starter": null,
       "minutes": 18.9,
       "rotation": true
@@ -3300,6 +3446,7 @@
       "college": "UNLV",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4397449.png",
+      "injury": null,
       "starter": null,
       "minutes": 5.3,
       "rotation": false
@@ -3320,6 +3467,7 @@
       "college": null,
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4683771.png",
+      "injury": null,
       "starter": null,
       "minutes": 15.1,
       "rotation": false
@@ -3340,6 +3488,7 @@
       "college": "Maryland",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4066372.png",
+      "injury": null,
       "starter": null,
       "minutes": 26.7,
       "rotation": true
@@ -3360,6 +3509,7 @@
       "college": "St. John's",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5107199.png",
+      "injury": null,
       "starter": "SG",
       "minutes": 30.1,
       "rotation": true
@@ -3380,6 +3530,7 @@
       "college": "Arkansas",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4395702.png",
+      "injury": null,
       "starter": null,
       "minutes": 14.7,
       "rotation": false
@@ -3400,8 +3551,9 @@
       "college": "Washington State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5107818.png",
+      "injury": null,
       "starter": null,
-      "minutes": 1,
+      "minutes": 2.2,
       "rotation": false
     },
     {
@@ -3420,8 +3572,9 @@
       "college": "Tennessee",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4700852.png",
+      "injury": null,
       "starter": null,
-      "minutes": 4,
+      "minutes": 5.8,
       "rotation": false
     },
     {
@@ -3440,8 +3593,9 @@
       "college": "Stanford",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5258459.png",
+      "injury": "Out",
       "starter": null,
-      "minutes": 1.3,
+      "minutes": 2.4,
       "rotation": false
     },
     {
@@ -3460,6 +3614,7 @@
       "college": "Virginia",
       "country": "Nigeria",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5037878.png",
+      "injury": null,
       "starter": null,
       "minutes": 0,
       "rotation": false
@@ -3480,8 +3635,9 @@
       "college": "Baylor",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/2990962.png",
+      "injury": "Out",
       "starter": null,
-      "minutes": 6,
+      "minutes": 15.8,
       "rotation": false
     },
     {
@@ -3500,6 +3656,7 @@
       "college": "DePaul",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4278562.png",
+      "injury": null,
       "starter": null,
       "minutes": 26.1,
       "rotation": true
@@ -3520,8 +3677,9 @@
       "college": "Michigan",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3157465.png",
+      "injury": "Out",
       "starter": "SF",
-      "minutes": 24.7,
+      "minutes": 26.8,
       "rotation": true
     },
     {
@@ -3540,8 +3698,9 @@
       "college": "Mississippi State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4397882.png",
+      "injury": null,
       "starter": null,
-      "minutes": 2.1,
+      "minutes": 2.7,
       "rotation": false
     },
     {
@@ -3560,8 +3719,9 @@
       "college": null,
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4684742.png",
+      "injury": null,
       "starter": "PF",
-      "minutes": 26.8,
+      "minutes": 27.6,
       "rotation": true
     },
     {
@@ -3580,8 +3740,9 @@
       "college": "Western Kentucky",
       "country": "Nigeria",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4397886.png",
+      "injury": null,
       "starter": "C",
-      "minutes": 13,
+      "minutes": 13.7,
       "rotation": true
     },
     {
@@ -3600,8 +3761,9 @@
       "college": "Marquette",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/6430.png",
+      "injury": "Out",
       "starter": null,
-      "minutes": 11.5,
+      "minutes": 12.8,
       "rotation": false
     },
     {
@@ -3620,8 +3782,9 @@
       "college": "Houston",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4433149.png",
+      "injury": null,
       "starter": null,
-      "minutes": 9.2,
+      "minutes": 10,
       "rotation": false
     },
     {
@@ -3640,8 +3803,9 @@
       "college": "Davidson",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3975.png",
+      "injury": "Out",
       "starter": null,
-      "minutes": 16.4,
+      "minutes": 20.4,
       "rotation": true
     },
     {
@@ -3660,8 +3824,9 @@
       "college": "Michigan State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/6589.png",
+      "injury": null,
       "starter": "PF",
-      "minutes": 21.2,
+      "minutes": 22.7,
       "rotation": true
     },
     {
@@ -3680,9 +3845,10 @@
       "college": "Florida",
       "country": "Dominican Republic",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3213.png",
+      "injury": null,
       "starter": null,
-      "minutes": 13.8,
-      "rotation": false
+      "minutes": 15,
+      "rotation": true
     },
     {
       "id": "4703396",
@@ -3700,8 +3866,9 @@
       "college": "Gonzaga",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4703396.png",
+      "injury": null,
       "starter": null,
-      "minutes": 7.7,
+      "minutes": 8.4,
       "rotation": false
     },
     {
@@ -3720,6 +3887,7 @@
       "college": "Michigan",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5175737.png",
+      "injury": null,
       "starter": "SF",
       "minutes": 31.6,
       "rotation": true
@@ -3740,8 +3908,9 @@
       "college": "Bradley",
       "country": "Netherlands",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4897449.png",
+      "injury": null,
       "starter": null,
-      "minutes": 4,
+      "minutes": 4.7,
       "rotation": false
     },
     {
@@ -3760,6 +3929,7 @@
       "college": "USC",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4066436.png",
+      "injury": null,
       "starter": "PG",
       "minutes": 22,
       "rotation": true
@@ -3780,9 +3950,10 @@
       "college": "Arkansas",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4432171.png",
+      "injury": "Out",
       "starter": null,
       "minutes": 15,
-      "rotation": true
+      "rotation": false
     },
     {
       "id": "2990969",
@@ -3800,6 +3971,7 @@
       "college": "Iowa State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/2990969.png",
+      "injury": null,
       "starter": null,
       "minutes": 18.9,
       "rotation": true
@@ -3820,8 +3992,9 @@
       "college": "Oregon State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3134903.png",
+      "injury": null,
       "starter": null,
-      "minutes": 12.5,
+      "minutes": 12.8,
       "rotation": false
     },
     {
@@ -3840,8 +4013,9 @@
       "college": "Santa Clara",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4709138.png",
+      "injury": null,
       "starter": "SG",
-      "minutes": 28,
+      "minutes": 29.5,
       "rotation": true
     },
     {
@@ -3860,8 +4034,9 @@
       "college": null,
       "country": "Latvia",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3102531.png",
+      "injury": "Out",
       "starter": null,
-      "minutes": 7.5,
+      "minutes": 8.9,
       "rotation": false
     },
     {
@@ -3880,8 +4055,9 @@
       "college": "Florida",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4897262.png",
+      "injury": null,
       "starter": null,
-      "minutes": 18.6,
+      "minutes": 19.1,
       "rotation": true
     },
     {
@@ -3900,8 +4076,9 @@
       "college": null,
       "country": "Brazil",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4997536.png",
+      "injury": null,
       "starter": null,
-      "minutes": 15.7,
+      "minutes": 16.8,
       "rotation": true
     },
     {
@@ -3920,6 +4097,7 @@
       "college": "Arizona",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4397040.png",
+      "injury": "Out",
       "starter": null,
       "minutes": 14.3,
       "rotation": false
@@ -3940,6 +4118,7 @@
       "college": "Pittsburgh",
       "country": "New Zealand",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/2991235.png",
+      "injury": null,
       "starter": null,
       "minutes": 7.1,
       "rotation": false
@@ -3960,6 +4139,7 @@
       "college": null,
       "country": "Serbia",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3037789.png",
+      "injury": null,
       "starter": null,
       "minutes": 12.4,
       "rotation": true
@@ -3980,6 +4160,7 @@
       "college": null,
       "country": "Switzerland",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3102529.png",
+      "injury": null,
       "starter": null,
       "minutes": 9,
       "rotation": false
@@ -4000,6 +4181,7 @@
       "college": "NC State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4683860.png",
+      "injury": null,
       "starter": null,
       "minutes": 0,
       "rotation": false
@@ -4020,8 +4202,9 @@
       "college": "Louisiana Tech",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4592857.png",
+      "injury": null,
       "starter": null,
-      "minutes": 3.8,
+      "minutes": 4.7,
       "rotation": false
     },
     {
@@ -4040,6 +4223,7 @@
       "college": "Texas",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3202.png",
+      "injury": null,
       "starter": "SF",
       "minutes": 33.6,
       "rotation": true
@@ -4060,6 +4244,7 @@
       "college": "LSU",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4433192.png",
+      "injury": null,
       "starter": null,
       "minutes": 24.9,
       "rotation": true
@@ -4080,8 +4265,9 @@
       "college": "Tennessee",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5105553.png",
+      "injury": null,
       "starter": null,
-      "minutes": 4.2,
+      "minutes": 8.2,
       "rotation": false
     },
     {
@@ -4100,8 +4286,9 @@
       "college": null,
       "country": "Türkiye",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4871144.png",
+      "injury": null,
       "starter": "C",
-      "minutes": 29.1,
+      "minutes": 30.7,
       "rotation": true
     },
     {
@@ -4120,6 +4307,7 @@
       "college": "Kentucky",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4711272.png",
+      "injury": null,
       "starter": null,
       "minutes": 20.9,
       "rotation": true
@@ -4140,6 +4328,7 @@
       "college": "Oklahoma State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/2990992.png",
+      "injury": null,
       "starter": null,
       "minutes": 17.3,
       "rotation": true
@@ -4160,6 +4349,7 @@
       "college": "Auburn",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4432639.png",
+      "injury": null,
       "starter": "PF",
       "minutes": 33.3,
       "rotation": true
@@ -4180,8 +4370,9 @@
       "college": "Ohio State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3136777.png",
+      "injury": null,
       "starter": null,
-      "minutes": 4,
+      "minutes": 4.3,
       "rotation": false
     },
     {
@@ -4200,6 +4391,7 @@
       "college": null,
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4684740.png",
+      "injury": null,
       "starter": "SG",
       "minutes": 31.7,
       "rotation": true
@@ -4220,8 +4412,9 @@
       "college": "Ohio State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5105837.png",
+      "injury": null,
       "starter": null,
-      "minutes": 2.4,
+      "minutes": 2.9,
       "rotation": false
     },
     {
@@ -4240,8 +4433,9 @@
       "college": "Kentucky",
       "country": "Congo",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4432827.png",
+      "injury": null,
       "starter": null,
-      "minutes": 4.7,
+      "minutes": 5.6,
       "rotation": false
     },
     {
@@ -4260,8 +4454,9 @@
       "college": "Wichita State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/2991230.png",
+      "injury": null,
       "starter": "PG",
-      "minutes": 24.6,
+      "minutes": 26.8,
       "rotation": true
     },
     {
@@ -4280,6 +4475,7 @@
       "college": "Missouri",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4431752.png",
+      "injury": null,
       "starter": null,
       "minutes": 9.4,
       "rotation": false
@@ -4300,6 +4496,7 @@
       "college": "Kansas",
       "country": "Australia",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5157066.png",
+      "injury": "Out",
       "starter": null,
       "minutes": 6.3,
       "rotation": false
@@ -4320,9 +4517,10 @@
       "college": "Iowa State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4396993.png",
+      "injury": "Out",
       "starter": null,
-      "minutes": 8.3,
-      "rotation": false
+      "minutes": 18.2,
+      "rotation": true
     },
     {
       "id": "4065731",
@@ -4340,9 +4538,10 @@
       "college": "Virginia",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4065731.png",
+      "injury": null,
       "starter": null,
       "minutes": 16.8,
-      "rotation": true
+      "rotation": false
     },
     {
       "id": "4592829",
@@ -4360,6 +4559,7 @@
       "college": "Texas A&M",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4592829.png",
+      "injury": null,
       "starter": null,
       "minutes": 21.9,
       "rotation": true
@@ -4380,8 +4580,9 @@
       "college": "Arizona",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/2530530.png",
+      "injury": "Out",
       "starter": null,
-      "minutes": 9.4,
+      "minutes": 10.4,
       "rotation": false
     },
     {
@@ -4400,8 +4601,9 @@
       "college": "Wyoming",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/2580365.png",
+      "injury": null,
       "starter": null,
-      "minutes": 12.6,
+      "minutes": 13,
       "rotation": false
     },
     {
@@ -4420,8 +4622,9 @@
       "college": "Gonzaga",
       "country": "Canada",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4395712.png",
+      "injury": null,
       "starter": "PG",
-      "minutes": 24.6,
+      "minutes": 27.8,
       "rotation": true
     },
     {
@@ -4440,8 +4643,9 @@
       "college": "Vanderbilt",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4396909.png",
+      "injury": null,
       "starter": "SF",
-      "minutes": 23.6,
+      "minutes": 25,
       "rotation": true
     },
     {
@@ -4460,8 +4664,9 @@
       "college": "Kansas",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3133603.png",
+      "injury": null,
       "starter": "SG",
-      "minutes": 21.2,
+      "minutes": 22.4,
       "rotation": true
     },
     {
@@ -4480,6 +4685,7 @@
       "college": "Belmont",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4433076.png",
+      "injury": "Out",
       "starter": null,
       "minutes": 13.6,
       "rotation": false
@@ -4500,8 +4706,9 @@
       "college": "New Mexico State",
       "country": "Cameroon",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3149673.png",
+      "injury": "Day-To-Day",
       "starter": "PF",
-      "minutes": 30.1,
+      "minutes": 30.9,
       "rotation": true
     },
     {
@@ -4520,8 +4727,9 @@
       "college": "Furman",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4398207.png",
+      "injury": null,
       "starter": null,
-      "minutes": 12.3,
+      "minutes": 13,
       "rotation": false
     },
     {
@@ -4540,8 +4748,9 @@
       "college": "Purdue",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5105854.png",
+      "injury": null,
       "starter": null,
-      "minutes": 8.4,
+      "minutes": 10.5,
       "rotation": false
     },
     {
@@ -4560,8 +4769,9 @@
       "college": "Dayton",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4278355.png",
+      "injury": null,
       "starter": null,
-      "minutes": 16.6,
+      "minutes": 18.1,
       "rotation": true
     },
     {
@@ -4580,6 +4790,7 @@
       "college": "Houston",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5106060.png",
+      "injury": null,
       "starter": null,
       "minutes": 19.4,
       "rotation": true
@@ -4600,8 +4811,9 @@
       "college": null,
       "country": "Bosnia & Herzegovina",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4017837.png",
+      "injury": null,
       "starter": "C",
-      "minutes": 16.5,
+      "minutes": 19.2,
       "rotation": true
     },
     {
@@ -4620,8 +4832,9 @@
       "college": "Florida",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/6580.png",
+      "injury": "Out",
       "starter": null,
-      "minutes": 1.2,
+      "minutes": 12.5,
       "rotation": false
     },
     {
@@ -4640,6 +4853,7 @@
       "college": "Minnesota",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4845363.png",
+      "injury": null,
       "starter": null,
       "minutes": 4.7,
       "rotation": false
@@ -4660,6 +4874,7 @@
       "college": "Kansas",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5106258.png",
+      "injury": null,
       "starter": null,
       "minutes": 15.7,
       "rotation": false
@@ -4680,6 +4895,7 @@
       "college": "Providence",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/2991139.png",
+      "injury": null,
       "starter": null,
       "minutes": 26.2,
       "rotation": true
@@ -4700,6 +4916,7 @@
       "college": "Vanderbilt",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4396907.png",
+      "injury": null,
       "starter": "PG",
       "minutes": 33.1,
       "rotation": true
@@ -4720,8 +4937,9 @@
       "college": "Gonzaga",
       "country": "Japan",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4066648.png",
+      "injury": null,
       "starter": "PF",
-      "minutes": 25.3,
+      "minutes": 26.8,
       "rotation": true
     },
     {
@@ -4740,6 +4958,7 @@
       "college": "Duke",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3913176.png",
+      "injury": "Out",
       "starter": null,
       "minutes": 25.4,
       "rotation": true
@@ -4760,9 +4979,10 @@
       "college": "Kentucky",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4432170.png",
+      "injury": null,
       "starter": null,
-      "minutes": 16.5,
-      "rotation": true
+      "minutes": 17,
+      "rotation": false
     },
     {
       "id": "3936099",
@@ -4780,8 +5000,9 @@
       "college": "UNLV",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3936099.png",
+      "injury": null,
       "starter": "SF",
-      "minutes": 26.5,
+      "minutes": 27.3,
       "rotation": true
     },
     {
@@ -4800,6 +5021,7 @@
       "college": "Stanford",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3448.png",
+      "injury": null,
       "starter": "C",
       "minutes": 24.6,
       "rotation": true
@@ -4820,8 +5042,9 @@
       "college": "Northwestern",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5105832.png",
+      "injury": null,
       "starter": null,
-      "minutes": 1.7,
+      "minutes": 2.8,
       "rotation": false
     },
     {
@@ -4840,8 +5063,9 @@
       "college": "Cincinnati",
       "country": "Spain",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5075626.png",
+      "injury": null,
       "starter": null,
-      "minutes": 7.1,
+      "minutes": 7.6,
       "rotation": false
     },
     {
@@ -4860,6 +5084,7 @@
       "college": "Miami",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4396818.png",
+      "injury": "Out",
       "starter": null,
       "minutes": 12.9,
       "rotation": false
@@ -4880,6 +5105,7 @@
       "college": "Penn State",
       "country": "Switzerland",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5108024.png",
+      "injury": null,
       "starter": null,
       "minutes": 4.1,
       "rotation": false
@@ -4900,6 +5126,7 @@
       "college": "Penn State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4398390.png",
+      "injury": null,
       "starter": null,
       "minutes": 7.9,
       "rotation": false
@@ -4920,6 +5147,7 @@
       "college": "Nevada",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4702352.png",
+      "injury": null,
       "starter": null,
       "minutes": 21.9,
       "rotation": true
@@ -4940,8 +5168,9 @@
       "college": "DePaul",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4065778.png",
+      "injury": null,
       "starter": "SG",
-      "minutes": 14.5,
+      "minutes": 18.3,
       "rotation": true
     },
     {
@@ -4960,6 +5189,7 @@
       "college": "Illinois",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5254165.png",
+      "injury": null,
       "starter": null,
       "minutes": 22.1,
       "rotation": true
@@ -4980,8 +5210,9 @@
       "college": "Notre Dame",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4683935.png",
+      "injury": null,
       "starter": null,
-      "minutes": 3.5,
+      "minutes": 5,
       "rotation": false
     },
     {
@@ -5000,8 +5231,9 @@
       "college": "Baylor",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5113969.png",
+      "injury": null,
       "starter": null,
-      "minutes": 2.2,
+      "minutes": 3.4,
       "rotation": false
     },
     {
@@ -5020,8 +5252,9 @@
       "college": "Michigan State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5105817.png",
+      "injury": null,
       "starter": null,
-      "minutes": 1.4,
+      "minutes": 3.9,
       "rotation": false
     },
     {
@@ -5040,8 +5273,9 @@
       "college": null,
       "country": "Slovenia",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3945274.png",
+      "injury": null,
       "starter": "PG",
-      "minutes": 32.1,
+      "minutes": 33.8,
       "rotation": true
     },
     {
@@ -5060,8 +5294,9 @@
       "college": "Houston",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4397014.png",
+      "injury": null,
       "starter": null,
-      "minutes": 25.8,
+      "minutes": 27,
       "rotation": true
     },
     {
@@ -5080,6 +5315,7 @@
       "college": null,
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4868423.png",
+      "injury": null,
       "starter": null,
       "minutes": 8.8,
       "rotation": false
@@ -5100,6 +5336,7 @@
       "college": "USC",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4683774.png",
+      "injury": null,
       "starter": null,
       "minutes": 3.7,
       "rotation": false
@@ -5120,6 +5357,7 @@
       "college": "Texas",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4433599.png",
+      "injury": null,
       "starter": null,
       "minutes": 0,
       "rotation": false
@@ -5140,8 +5378,9 @@
       "college": "Auburn",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4433136.png",
+      "injury": null,
       "starter": "C",
-      "minutes": 29.1,
+      "minutes": 29.8,
       "rotation": true
     },
     {
@@ -5160,8 +5399,9 @@
       "college": "Wake Forest",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4592691.png",
+      "injury": null,
       "starter": null,
-      "minutes": 23.9,
+      "minutes": 24.3,
       "rotation": true
     },
     {
@@ -5180,8 +5420,9 @@
       "college": "UCLA",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3155535.png",
+      "injury": null,
       "starter": null,
-      "minutes": 3.1,
+      "minutes": 8.4,
       "rotation": false
     },
     {
@@ -5200,6 +5441,7 @@
       "college": "Seton Hall",
       "country": "Georgia",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4278580.png",
+      "injury": null,
       "starter": null,
       "minutes": 23.1,
       "rotation": true
@@ -5220,6 +5462,7 @@
       "college": "Vanderbilt",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4702972.png",
+      "injury": null,
       "starter": null,
       "minutes": 0.4,
       "rotation": false
@@ -5240,6 +5483,7 @@
       "college": "Vanderbilt",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5114350.png",
+      "injury": null,
       "starter": null,
       "minutes": 0,
       "rotation": false
@@ -5260,8 +5504,9 @@
       "college": "Oklahoma",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4066457.png",
+      "injury": "Out",
       "starter": "SG",
-      "minutes": 24.9,
+      "minutes": 29,
       "rotation": true
     },
     {
@@ -5280,8 +5525,9 @@
       "college": "Alabama",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4277811.png",
+      "injury": null,
       "starter": null,
-      "minutes": 18,
+      "minutes": 18.1,
       "rotation": true
     },
     {
@@ -5300,8 +5546,9 @@
       "college": "Arkansas",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5060631.png",
+      "injury": null,
       "starter": null,
-      "minutes": 2.9,
+      "minutes": 5,
       "rotation": false
     },
     {
@@ -5320,6 +5567,7 @@
       "college": "Washington",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3907498.png",
+      "injury": null,
       "starter": "SF",
       "minutes": 24.9,
       "rotation": true
@@ -5340,6 +5588,7 @@
       "college": "Kentucky",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4278077.png",
+      "injury": null,
       "starter": null,
       "minutes": 11,
       "rotation": false
@@ -5360,8 +5609,9 @@
       "college": "Stanford",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4433137.png",
+      "injury": null,
       "starter": "PF",
-      "minutes": 19.4,
+      "minutes": 21.1,
       "rotation": true
     },
     {
@@ -5380,8 +5630,9 @@
       "college": "Duke",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5041935.png",
+      "injury": "Day-To-Day",
       "starter": "PF",
-      "minutes": 29.1,
+      "minutes": 29.8,
       "rotation": true
     },
     {
@@ -5400,8 +5651,9 @@
       "college": "Washington State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4903027.png",
+      "injury": null,
       "starter": "SG",
-      "minutes": 27.1,
+      "minutes": 27.8,
       "rotation": true
     },
     {
@@ -5420,8 +5672,9 @@
       "college": "Purdue",
       "country": "Canada",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4600663.png",
+      "injury": null,
       "starter": "C",
-      "minutes": 15.9,
+      "minutes": 17.9,
       "rotation": true
     },
     {
@@ -5440,8 +5693,9 @@
       "college": "Syracuse",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/2991070.png",
+      "injury": "Day-To-Day",
       "starter": null,
-      "minutes": 19.8,
+      "minutes": 20.7,
       "rotation": true
     },
     {
@@ -5460,8 +5714,9 @@
       "college": "UCF",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4684806.png",
+      "injury": null,
       "starter": null,
-      "minutes": 10.9,
+      "minutes": 12.2,
       "rotation": false
     },
     {
@@ -5480,8 +5735,9 @@
       "college": "South Carolina",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5105550.png",
+      "injury": "Out",
       "starter": null,
-      "minutes": 11.5,
+      "minutes": 12.4,
       "rotation": false
     },
     {
@@ -5500,8 +5756,9 @@
       "college": "Virginia",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4065733.png",
+      "injury": null,
       "starter": "PG",
-      "minutes": 21.4,
+      "minutes": 24.9,
       "rotation": true
     },
     {
@@ -5520,8 +5777,9 @@
       "college": null,
       "country": "Mexico",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5231919.png",
+      "injury": null,
       "starter": null,
-      "minutes": 1.1,
+      "minutes": 1.8,
       "rotation": false
     },
     {
@@ -5540,6 +5798,7 @@
       "college": "Tennessee",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4683934.png",
+      "injury": null,
       "starter": null,
       "minutes": 6.6,
       "rotation": false
@@ -5560,9 +5819,10 @@
       "college": "Iowa",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4594326.png",
+      "injury": null,
       "starter": null,
       "minutes": 13,
-      "rotation": true
+      "rotation": false
     },
     {
       "id": "4431785",
@@ -5580,8 +5840,9 @@
       "college": "Vanderbilt",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4431785.png",
+      "injury": "Out",
       "starter": null,
-      "minutes": 4.7,
+      "minutes": 12.3,
       "rotation": false
     },
     {
@@ -5600,6 +5861,7 @@
       "college": "Boston College",
       "country": "Netherlands",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4593016.png",
+      "injury": null,
       "starter": null,
       "minutes": 11.3,
       "rotation": false
@@ -5620,6 +5882,7 @@
       "college": "Marquette",
       "country": "Canada",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4595400.png",
+      "injury": null,
       "starter": null,
       "minutes": 9.6,
       "rotation": false
@@ -5640,6 +5903,7 @@
       "college": "BYU",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5105462.png",
+      "injury": "Out",
       "starter": null,
       "minutes": 0,
       "rotation": false
@@ -5660,9 +5924,10 @@
       "college": "West Virginia",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4781746.png",
+      "injury": "Day-To-Day",
       "starter": null,
-      "minutes": 11.7,
-      "rotation": false
+      "minutes": 15.9,
+      "rotation": true
     },
     {
       "id": "4433083",
@@ -5680,6 +5945,7 @@
       "college": "UConn",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4433083.png",
+      "injury": null,
       "starter": null,
       "minutes": 22.9,
       "rotation": true
@@ -5700,8 +5966,9 @@
       "college": "Washington",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4432810.png",
+      "injury": null,
       "starter": null,
-      "minutes": 13.4,
+      "minutes": 15.1,
       "rotation": true
     },
     {
@@ -5720,6 +5987,7 @@
       "college": "Washington State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5112087.png",
+      "injury": null,
       "starter": "SF",
       "minutes": 26.6,
       "rotation": true
@@ -5740,6 +6008,7 @@
       "college": "Kentucky",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4066261.png",
+      "injury": null,
       "starter": "C",
       "minutes": 32.3,
       "rotation": true
@@ -5760,6 +6029,7 @@
       "college": null,
       "country": "Greece",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3032977.png",
+      "injury": "Day-To-Day",
       "starter": "PF",
       "minutes": 32.1,
       "rotation": true
@@ -5780,8 +6050,9 @@
       "college": "Louisville",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5107157.png",
+      "injury": null,
       "starter": null,
-      "minutes": 15.1,
+      "minutes": 16,
       "rotation": true
     },
     {
@@ -5800,8 +6071,9 @@
       "college": "Miami",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4837356.png",
+      "injury": null,
       "starter": null,
-      "minutes": 0.4,
+      "minutes": 1,
       "rotation": false
     },
     {
@@ -5820,6 +6092,7 @@
       "college": null,
       "country": "Italy",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3899664.png",
+      "injury": null,
       "starter": null,
       "minutes": 11.4,
       "rotation": false
@@ -5840,8 +6113,9 @@
       "college": "Little Rock",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4431772.png",
+      "injury": null,
       "starter": null,
-      "minutes": 6,
+      "minutes": 7.6,
       "rotation": false
     },
     {
@@ -5860,6 +6134,7 @@
       "college": "Michigan",
       "country": "Russia",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4700818.png",
+      "injury": null,
       "starter": null,
       "minutes": 0.2,
       "rotation": false
@@ -5880,6 +6155,7 @@
       "college": "Michigan",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/2528210.png",
+      "injury": null,
       "starter": null,
       "minutes": 20.8,
       "rotation": true
@@ -5900,6 +6176,7 @@
       "college": "Arizona",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4431786.png",
+      "injury": null,
       "starter": null,
       "minutes": 2.7,
       "rotation": false
@@ -5920,8 +6197,9 @@
       "college": null,
       "country": null,
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4997528.png",
+      "injury": null,
       "starter": null,
-      "minutes": 8,
+      "minutes": 9.4,
       "rotation": false
     },
     {
@@ -5940,8 +6218,9 @@
       "college": "Arizona",
       "country": "Sweden",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4601025.png",
+      "injury": null,
       "starter": "SF",
-      "minutes": 22.7,
+      "minutes": 24.9,
       "rotation": true
     },
     {
@@ -5960,6 +6239,7 @@
       "college": "Baylor",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4278053.png",
+      "injury": null,
       "starter": "PG",
       "minutes": 35.6,
       "rotation": true
@@ -5980,6 +6260,7 @@
       "college": "Arkansas",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3064482.png",
+      "injury": null,
       "starter": null,
       "minutes": 19.8,
       "rotation": true
@@ -6000,8 +6281,9 @@
       "college": "Kentucky",
       "country": "Jamaica",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4278076.png",
+      "injury": null,
       "starter": null,
-      "minutes": 6.8,
+      "minutes": 9.2,
       "rotation": false
     },
     {
@@ -6020,6 +6302,7 @@
       "college": "Missouri",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4066993.png",
+      "injury": null,
       "starter": null,
       "minutes": 11.1,
       "rotation": false
@@ -6040,8 +6323,9 @@
       "college": "Washington State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/6475.png",
+      "injury": null,
       "starter": "SG",
-      "minutes": 22.6,
+      "minutes": 23.2,
       "rotation": true
     },
     {
@@ -6060,6 +6344,7 @@
       "college": "Kansas",
       "country": "Canada",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3059319.png",
+      "injury": null,
       "starter": null,
       "minutes": 26.5,
       "rotation": true
@@ -6080,8 +6365,9 @@
       "college": "Tennessee",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5164559.png",
+      "injury": null,
       "starter": null,
-      "minutes": 16.3,
+      "minutes": 17.2,
       "rotation": false
     },
     {
@@ -6100,6 +6386,7 @@
       "college": "Arizona",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5082206.png",
+      "injury": null,
       "starter": "PG",
       "minutes": 22.8,
       "rotation": true
@@ -6120,6 +6407,7 @@
       "college": null,
       "country": "France",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4997526.png",
+      "injury": "Out",
       "starter": null,
       "minutes": 10.7,
       "rotation": false
@@ -6140,6 +6428,7 @@
       "college": "Northern Iowa",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4397475.png",
+      "injury": null,
       "starter": null,
       "minutes": 22.1,
       "rotation": true
@@ -6160,8 +6449,9 @@
       "college": "Kentucky",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4395725.png",
+      "injury": null,
       "starter": "SG",
-      "minutes": 28.8,
+      "minutes": 29.5,
       "rotation": true
     },
     {
@@ -6180,8 +6470,9 @@
       "college": "Illinois",
       "country": "Lithuania",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5214640.png",
+      "injury": null,
       "starter": null,
-      "minutes": 17.5,
+      "minutes": 17.9,
       "rotation": true
     },
     {
@@ -6200,6 +6491,7 @@
       "college": "UCLA",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4432848.png",
+      "injury": null,
       "starter": null,
       "minutes": 27.1,
       "rotation": true
@@ -6220,6 +6512,7 @@
       "college": "Marquette",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4697268.png",
+      "injury": null,
       "starter": null,
       "minutes": 6,
       "rotation": false
@@ -6240,8 +6533,9 @@
       "college": "Utah",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3134907.png",
+      "injury": null,
       "starter": "SF",
-      "minutes": 25.8,
+      "minutes": 26.5,
       "rotation": true
     },
     {
@@ -6260,8 +6554,9 @@
       "college": "Michigan",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/2991043.png",
+      "injury": null,
       "starter": null,
-      "minutes": 11.3,
+      "minutes": 11.7,
       "rotation": false
     },
     {
@@ -6280,8 +6575,9 @@
       "college": null,
       "country": null,
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5214989.png",
+      "injury": null,
       "starter": null,
-      "minutes": 0.8,
+      "minutes": 2.2,
       "rotation": false
     },
     {
@@ -6300,6 +6596,7 @@
       "college": "North Carolina",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4397233.png",
+      "injury": null,
       "starter": null,
       "minutes": 7.2,
       "rotation": false
@@ -6320,6 +6617,7 @@
       "college": "Toledo",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4591725.png",
+      "injury": null,
       "starter": null,
       "minutes": 23.2,
       "rotation": true
@@ -6340,6 +6638,7 @@
       "college": "North Carolina",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4397114.png",
+      "injury": null,
       "starter": null,
       "minutes": 2.6,
       "rotation": false
@@ -6360,6 +6659,7 @@
       "college": "Texas",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4277922.png",
+      "injury": null,
       "starter": "C",
       "minutes": 12.9,
       "rotation": true
@@ -6380,8 +6680,9 @@
       "college": "Duke",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4277843.png",
+      "injury": null,
       "starter": null,
-      "minutes": 13.4,
+      "minutes": 13.9,
       "rotation": false
     },
     {
@@ -6400,8 +6701,9 @@
       "college": "Texas",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3133628.png",
+      "injury": null,
       "starter": "PF",
-      "minutes": 23.5,
+      "minutes": 24.7,
       "rotation": true
     },
     {
@@ -6420,6 +6722,7 @@
       "college": "Indiana",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5105623.png",
+      "injury": null,
       "starter": null,
       "minutes": 19.1,
       "rotation": true
@@ -6440,6 +6743,7 @@
       "college": null,
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4432816.png",
+      "injury": null,
       "starter": "PG",
       "minutes": 28.3,
       "rotation": true
@@ -6460,6 +6764,7 @@
       "college": null,
       "country": "France",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5279133.png",
+      "injury": null,
       "starter": null,
       "minutes": 16.8,
       "rotation": false
@@ -6480,6 +6785,7 @@
       "college": "Auburn",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4433569.png",
+      "injury": null,
       "starter": null,
       "minutes": 0.5,
       "rotation": false
@@ -6500,8 +6806,9 @@
       "college": "UCLA",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4432247.png",
+      "injury": "Out",
       "starter": null,
-      "minutes": 9.8,
+      "minutes": 11.2,
       "rotation": false
     },
     {
@@ -6520,6 +6827,7 @@
       "college": "Villanova",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3934673.png",
+      "injury": "Out",
       "starter": null,
       "minutes": 24.3,
       "rotation": true
@@ -6540,6 +6848,7 @@
       "college": "Illinois",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4397002.png",
+      "injury": null,
       "starter": "SG",
       "minutes": 31.8,
       "rotation": true
@@ -6560,8 +6869,9 @@
       "college": "Georgia",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4594268.png",
+      "injury": "Out",
       "starter": null,
-      "minutes": 20.8,
+      "minutes": 21,
       "rotation": true
     },
     {
@@ -6580,8 +6890,9 @@
       "college": "Duke",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5061585.png",
+      "injury": null,
       "starter": null,
-      "minutes": 1.4,
+      "minutes": 2.1,
       "rotation": false
     },
     {
@@ -6600,8 +6911,9 @@
       "college": null,
       "country": "France",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3032976.png",
+      "injury": null,
       "starter": "C",
-      "minutes": 27.9,
+      "minutes": 28.3,
       "rotation": true
     },
     {
@@ -6620,6 +6932,7 @@
       "college": "VCU",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4592492.png",
+      "injury": null,
       "starter": null,
       "minutes": 14.1,
       "rotation": false
@@ -6640,8 +6953,9 @@
       "college": null,
       "country": "Democratic Republic of Congo",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4433247.png",
+      "injury": null,
       "starter": "SF",
-      "minutes": 29.4,
+      "minutes": 30.1,
       "rotation": true
     },
     {
@@ -6660,6 +6974,7 @@
       "college": "Kentucky",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3136196.png",
+      "injury": null,
       "starter": null,
       "minutes": 18.5,
       "rotation": true
@@ -6680,6 +6995,7 @@
       "college": "Washington",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4431671.png",
+      "injury": null,
       "starter": "PF",
       "minutes": 33.9,
       "rotation": true
@@ -6700,8 +7016,9 @@
       "college": "Florida",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4592979.png",
+      "injury": null,
       "starter": null,
-      "minutes": 0.6,
+      "minutes": 1.7,
       "rotation": false
     },
     {
@@ -6720,8 +7037,9 @@
       "college": "Illinois",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4432847.png",
+      "injury": null,
       "starter": null,
-      "minutes": 18.9,
+      "minutes": 20.6,
       "rotation": true
     },
     {
@@ -6740,6 +7058,7 @@
       "college": "Colorado",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4895758.png",
+      "injury": null,
       "starter": null,
       "minutes": 15.9,
       "rotation": false
@@ -6760,6 +7079,7 @@
       "college": null,
       "country": null,
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5157587.png",
+      "injury": null,
       "starter": null,
       "minutes": 0.4,
       "rotation": false
@@ -6780,6 +7100,7 @@
       "college": "Villanova",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4397136.png",
+      "injury": null,
       "starter": null,
       "minutes": 30.1,
       "rotation": true
@@ -6800,6 +7121,7 @@
       "college": "Ole Miss",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4712862.png",
+      "injury": null,
       "starter": null,
       "minutes": 0.5,
       "rotation": false
@@ -6820,6 +7142,7 @@
       "college": "Oklahoma",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5144091.png",
+      "injury": null,
       "starter": "PG",
       "minutes": 30.3,
       "rotation": true
@@ -6840,8 +7163,9 @@
       "college": null,
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5170947.png",
+      "injury": null,
       "starter": null,
-      "minutes": 4.4,
+      "minutes": 4.7,
       "rotation": false
     },
     {
@@ -6860,6 +7184,7 @@
       "college": "Alabama",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4277813.png",
+      "injury": null,
       "starter": null,
       "minutes": 24.9,
       "rotation": true
@@ -6880,8 +7205,9 @@
       "college": "Texas A&M",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3442.png",
+      "injury": null,
       "starter": null,
-      "minutes": 3.9,
+      "minutes": 8,
       "rotation": false
     },
     {
@@ -6900,9 +7226,10 @@
       "college": "Arizona",
       "country": "Canada",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4683634.png",
+      "injury": "Out",
       "starter": null,
       "minutes": 15.8,
-      "rotation": true
+      "rotation": false
     },
     {
       "id": "4997538",
@@ -6920,8 +7247,9 @@
       "college": null,
       "country": null,
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4997538.png",
+      "injury": null,
       "starter": null,
-      "minutes": 16.2,
+      "minutes": 16.6,
       "rotation": true
     },
     {
@@ -6940,6 +7268,7 @@
       "college": "Nebraska",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4576086.png",
+      "injury": "Out",
       "starter": null,
       "minutes": 8.6,
       "rotation": false
@@ -6960,8 +7289,9 @@
       "college": "Baylor",
       "country": "Cameroon",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5061589.png",
+      "injury": null,
       "starter": "C",
-      "minutes": 12.7,
+      "minutes": 14.5,
       "rotation": true
     },
     {
@@ -6980,8 +7310,9 @@
       "college": "Virginia",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4397688.png",
+      "injury": "Day-To-Day",
       "starter": "SF",
-      "minutes": 22.8,
+      "minutes": 23.8,
       "rotation": true
     },
     {
@@ -7000,8 +7331,9 @@
       "college": "Washington",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3907497.png",
+      "injury": "Out",
       "starter": "SG",
-      "minutes": 15.7,
+      "minutes": 21.9,
       "rotation": true
     },
     {
@@ -7020,8 +7352,9 @@
       "college": "SMU",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4703115.png",
+      "injury": null,
       "starter": null,
-      "minutes": 5.5,
+      "minutes": 9,
       "rotation": false
     },
     {
@@ -7040,9 +7373,10 @@
       "college": "Michigan",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4277956.png",
+      "injury": null,
       "starter": null,
-      "minutes": 14.8,
-      "rotation": false
+      "minutes": 17.8,
+      "rotation": true
     },
     {
       "id": "4869780",
@@ -7060,6 +7394,7 @@
       "college": "Maryland",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4869780.png",
+      "injury": null,
       "starter": null,
       "minutes": 22.4,
       "rotation": true
@@ -7080,6 +7415,7 @@
       "college": "Maryland",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4683742.png",
+      "injury": null,
       "starter": null,
       "minutes": 3.9,
       "rotation": false
@@ -7100,8 +7436,9 @@
       "college": "LSU",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4431675.png",
+      "injury": "Out",
       "starter": null,
-      "minutes": 8.4,
+      "minutes": 10.6,
       "rotation": false
     },
     {
@@ -7120,8 +7457,9 @@
       "college": "Duke",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4395628.png",
+      "injury": "Day-To-Day",
       "starter": "PF",
-      "minutes": 28.8,
+      "minutes": 30.2,
       "rotation": true
     },
     {
@@ -7140,6 +7478,7 @@
       "college": "Michigan State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4683730.png",
+      "injury": null,
       "starter": null,
       "minutes": 0.1,
       "rotation": false
@@ -7160,6 +7499,7 @@
       "college": "Georgia Tech",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4277869.png",
+      "injury": null,
       "starter": null,
       "minutes": 13.4,
       "rotation": true
@@ -7180,8 +7520,9 @@
       "college": "Indiana",
       "country": "England",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3934719.png",
+      "injury": "Out",
       "starter": "PF",
-      "minutes": 31.8,
+      "minutes": 32.7,
       "rotation": true
     },
     {
@@ -7200,6 +7541,7 @@
       "college": "Villanova",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3147657.png",
+      "injury": null,
       "starter": "SF",
       "minutes": 27.4,
       "rotation": true
@@ -7220,6 +7562,7 @@
       "college": "Villanova",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3934672.png",
+      "injury": null,
       "starter": "PG",
       "minutes": 34.6,
       "rotation": true
@@ -7240,6 +7583,7 @@
       "college": "Missouri",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/2528426.png",
+      "injury": "Out",
       "starter": null,
       "minutes": 12.5,
       "rotation": false
@@ -7260,8 +7604,9 @@
       "college": null,
       "country": "France",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5211983.png",
+      "injury": null,
       "starter": null,
-      "minutes": 1.8,
+      "minutes": 3.3,
       "rotation": false
     },
     {
@@ -7280,8 +7625,9 @@
       "college": null,
       "country": "France",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5289900.png",
+      "injury": null,
       "starter": null,
-      "minutes": 6.2,
+      "minutes": 7.5,
       "rotation": false
     },
     {
@@ -7300,6 +7646,7 @@
       "college": "UConn",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/6585.png",
+      "injury": null,
       "starter": null,
       "minutes": 14,
       "rotation": true
@@ -7320,8 +7667,9 @@
       "college": "Villanova",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3062679.png",
+      "injury": null,
       "starter": "SG",
-      "minutes": 24.5,
+      "minutes": 26.8,
       "rotation": true
     },
     {
@@ -7340,8 +7688,9 @@
       "college": "Tennessee",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4897943.png",
+      "injury": null,
       "starter": null,
-      "minutes": 5.4,
+      "minutes": 10.9,
       "rotation": false
     },
     {
@@ -7360,8 +7709,9 @@
       "college": "Marquette",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4433225.png",
+      "injury": null,
       "starter": null,
-      "minutes": 11.8,
+      "minutes": 12.4,
       "rotation": false
     },
     {
@@ -7380,6 +7730,7 @@
       "college": "West Virginia",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4431823.png",
+      "injury": null,
       "starter": null,
       "minutes": 17.2,
       "rotation": true
@@ -7400,6 +7751,7 @@
       "college": "Vanderbilt",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4838721.png",
+      "injury": null,
       "starter": null,
       "minutes": 0,
       "rotation": false
@@ -7420,6 +7772,7 @@
       "college": "Wichita State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3914044.png",
+      "injury": null,
       "starter": null,
       "minutes": 26.6,
       "rotation": true
@@ -7440,8 +7793,9 @@
       "college": "Kentucky",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3136195.png",
+      "injury": "Day-To-Day",
       "starter": "C",
-      "minutes": 30.7,
+      "minutes": 31.6,
       "rotation": true
     },
     {
@@ -7460,8 +7814,9 @@
       "college": "Memphis",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4432808.png",
+      "injury": null,
       "starter": null,
-      "minutes": 3.4,
+      "minutes": 5.1,
       "rotation": false
     },
     {
@@ -7480,8 +7835,9 @@
       "college": "Northwestern",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4684208.png",
+      "injury": null,
       "starter": null,
-      "minutes": 3.4,
+      "minutes": 3.9,
       "rotation": false
     },
     {
@@ -7500,8 +7856,9 @@
       "college": "Texas A&M",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/2991350.png",
+      "injury": "Out",
       "starter": null,
-      "minutes": 14.5,
+      "minutes": 16.4,
       "rotation": false
     },
     {
@@ -7520,6 +7877,7 @@
       "college": "Colorado State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4702384.png",
+      "injury": null,
       "starter": null,
       "minutes": 18.4,
       "rotation": true
@@ -7540,8 +7898,9 @@
       "college": "Creighton",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5105800.png",
+      "injury": null,
       "starter": null,
-      "minutes": 7.5,
+      "minutes": 10.5,
       "rotation": false
     },
     {
@@ -7560,6 +7919,7 @@
       "college": "Kentucky",
       "country": "Canada",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4278073.png",
+      "injury": "Out",
       "starter": "PG",
       "minutes": 33.4,
       "rotation": true
@@ -7580,6 +7940,7 @@
       "college": null,
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4222252.png",
+      "injury": null,
       "starter": "C",
       "minutes": 25.2,
       "rotation": true
@@ -7600,6 +7961,7 @@
       "college": "Gonzaga",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4433255.png",
+      "injury": "Out",
       "starter": null,
       "minutes": 19.5,
       "rotation": true
@@ -7620,6 +7982,7 @@
       "college": "Michigan",
       "country": "Spain",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5174983.png",
+      "injury": null,
       "starter": "PF",
       "minutes": 22.4,
       "rotation": true
@@ -7640,6 +8003,7 @@
       "college": "Duke",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4683778.png",
+      "injury": null,
       "starter": "SG",
       "minutes": 27.3,
       "rotation": true
@@ -7660,8 +8024,9 @@
       "college": "UC Santa Barbara",
       "country": "Belgium",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4900671.png",
+      "injury": null,
       "starter": "SF",
-      "minutes": 24.5,
+      "minutes": 25.9,
       "rotation": true
     },
     {
@@ -7680,8 +8045,9 @@
       "college": "Georgetown",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4432185.png",
+      "injury": null,
       "starter": null,
-      "minutes": 10.1,
+      "minutes": 12.2,
       "rotation": false
     },
     {
@@ -7700,6 +8066,7 @@
       "college": "Georgetown",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5061603.png",
+      "injury": "Out",
       "starter": null,
       "minutes": 0,
       "rotation": false
@@ -7720,6 +8087,7 @@
       "college": "Iowa",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5241364.png",
+      "injury": null,
       "starter": null,
       "minutes": 18.4,
       "rotation": false
@@ -7740,8 +8108,9 @@
       "college": null,
       "country": null,
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5159925.png",
+      "injury": "Out",
       "starter": null,
-      "minutes": 2.1,
+      "minutes": 5.8,
       "rotation": false
     },
     {
@@ -7760,6 +8129,7 @@
       "college": "Kentucky",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4683692.png",
+      "injury": "Out",
       "starter": null,
       "minutes": 20,
       "rotation": true
@@ -7780,8 +8150,9 @@
       "college": "Santa Clara",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4593803.png",
+      "injury": "Out",
       "starter": null,
-      "minutes": 9.1,
+      "minutes": 16.4,
       "rotation": false
     },
     {
@@ -7800,8 +8171,9 @@
       "college": "Arkansas",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4432823.png",
+      "injury": "Out",
       "starter": null,
-      "minutes": 12.5,
+      "minutes": 12.6,
       "rotation": false
     },
     {
@@ -7820,6 +8192,7 @@
       "college": "TCU",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3133626.png",
+      "injury": null,
       "starter": null,
       "minutes": 20.8,
       "rotation": true
@@ -7840,6 +8213,7 @@
       "college": "Duke",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4432573.png",
+      "injury": "Out",
       "starter": null,
       "minutes": 24.4,
       "rotation": true
@@ -7860,8 +8234,9 @@
       "college": "TCU",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4066320.png",
+      "injury": null,
       "starter": "SF",
-      "minutes": 32.8,
+      "minutes": 33.5,
       "rotation": true
     },
     {
@@ -7880,8 +8255,9 @@
       "college": null,
       "country": "Georgia",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4348700.png",
+      "injury": null,
       "starter": null,
-      "minutes": 11.4,
+      "minutes": 12,
       "rotation": false
     },
     {
@@ -7900,8 +8276,9 @@
       "college": "Arkansas",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4712849.png",
+      "injury": null,
       "starter": "SG",
-      "minutes": 26.3,
+      "minutes": 29,
       "rotation": true
     },
     {
@@ -7920,8 +8297,9 @@
       "college": "Oakland",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4278572.png",
+      "injury": null,
       "starter": null,
-      "minutes": 14.6,
+      "minutes": 15.5,
       "rotation": false
     },
     {
@@ -7940,8 +8318,9 @@
       "college": "West Virginia",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3133635.png",
+      "injury": null,
       "starter": null,
-      "minutes": 10.5,
+      "minutes": 12.1,
       "rotation": false
     },
     {
@@ -7960,6 +8339,7 @@
       "college": "Duke",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4277847.png",
+      "injury": null,
       "starter": "C",
       "minutes": 32.5,
       "rotation": true
@@ -7980,8 +8360,9 @@
       "college": "Florida",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4397204.png",
+      "injury": null,
       "starter": null,
-      "minutes": 0.9,
+      "minutes": 3.2,
       "rotation": false
     },
     {
@@ -8000,8 +8381,9 @@
       "college": "Colorado",
       "country": "Germany",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4702382.png",
+      "injury": null,
       "starter": null,
-      "minutes": 25.9,
+      "minutes": 27.5,
       "rotation": true
     },
     {
@@ -8020,8 +8402,9 @@
       "college": "Florida State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4065654.png",
+      "injury": "Out",
       "starter": null,
-      "minutes": 5.1,
+      "minutes": 8,
       "rotation": false
     },
     {
@@ -8040,8 +8423,9 @@
       "college": "Wagner",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4593034.png",
+      "injury": null,
       "starter": null,
-      "minutes": 6.7,
+      "minutes": 9,
       "rotation": false
     },
     {
@@ -8060,6 +8444,7 @@
       "college": "South Florida",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5107251.png",
+      "injury": "Out",
       "starter": null,
       "minutes": 0,
       "rotation": false
@@ -8080,6 +8465,7 @@
       "college": null,
       "country": "France",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5214637.png",
+      "injury": "Out",
       "starter": null,
       "minutes": 7.4,
       "rotation": false
@@ -8100,8 +8486,9 @@
       "college": "Michigan State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5239561.png",
+      "injury": null,
       "starter": null,
-      "minutes": 15.9,
+      "minutes": 18.3,
       "rotation": true
     },
     {
@@ -8120,8 +8507,9 @@
       "college": "Gonzaga",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4432165.png",
+      "injury": null,
       "starter": "PG",
-      "minutes": 15.4,
+      "minutes": 20.1,
       "rotation": true
     },
     {
@@ -8140,6 +8528,7 @@
       "college": "USC",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/6478.png",
+      "injury": null,
       "starter": null,
       "minutes": 17.7,
       "rotation": true
@@ -8160,6 +8549,7 @@
       "college": "Michigan",
       "country": "Germany",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4566434.png",
+      "injury": null,
       "starter": "PF",
       "minutes": 36.7,
       "rotation": true
@@ -8180,6 +8570,7 @@
       "college": null,
       "country": null,
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4870562.png",
+      "injury": null,
       "starter": null,
       "minutes": 16.5,
       "rotation": true
@@ -8200,6 +8591,7 @@
       "college": "UCLA",
       "country": "Nigeria",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5105637.png",
+      "injury": "Out",
       "starter": null,
       "minutes": 12,
       "rotation": false
@@ -8220,8 +8612,9 @@
       "college": "California",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3917376.png",
+      "injury": "Day-To-Day",
       "starter": "SF",
-      "minutes": 28.7,
+      "minutes": 31,
       "rotation": true
     },
     {
@@ -8240,6 +8633,7 @@
       "college": "Georgia",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/2581018.png",
+      "injury": null,
       "starter": null,
       "minutes": 23.8,
       "rotation": true
@@ -8260,8 +8654,9 @@
       "college": "Baylor",
       "country": "Bahamas",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5124612.png",
+      "injury": null,
       "starter": "SG",
-      "minutes": 32.3,
+      "minutes": 33.1,
       "rotation": true
     },
     {
@@ -8280,6 +8675,7 @@
       "college": "Kentucky",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4711297.png",
+      "injury": null,
       "starter": null,
       "minutes": 9.5,
       "rotation": false
@@ -8300,8 +8696,9 @@
       "college": "Kansas",
       "country": "Cameroon",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3059318.png",
+      "injury": null,
       "starter": "C",
-      "minutes": 26.4,
+      "minutes": 28.7,
       "rotation": true
     },
     {
@@ -8320,8 +8717,9 @@
       "college": "UCF",
       "country": "Senegal",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3904625.png",
+      "injury": null,
       "starter": null,
-      "minutes": 1.2,
+      "minutes": 2.3,
       "rotation": false
     },
     {
@@ -8340,6 +8738,7 @@
       "college": null,
       "country": "Germany",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4871141.png",
+      "injury": "Out",
       "starter": null,
       "minutes": 4.9,
       "rotation": false
@@ -8360,8 +8759,9 @@
       "college": null,
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/1966.png",
+      "injury": null,
       "starter": "PF",
-      "minutes": 25,
+      "minutes": 28.1,
       "rotation": true
     },
     {
@@ -8380,6 +8780,7 @@
       "college": "Arizona",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4433144.png",
+      "injury": null,
       "starter": null,
       "minutes": 9.9,
       "rotation": false
@@ -8400,8 +8801,9 @@
       "college": "Kentucky",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4431678.png",
+      "injury": null,
       "starter": "PG",
-      "minutes": 33.9,
+      "minutes": 34.8,
       "rotation": true
     },
     {
@@ -8420,8 +8822,9 @@
       "college": "Alabama",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4873090.png",
+      "injury": null,
       "starter": null,
-      "minutes": 4.4,
+      "minutes": 5.1,
       "rotation": false
     },
     {
@@ -8440,6 +8843,7 @@
       "college": null,
       "country": "France",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5099752.png",
+      "injury": null,
       "starter": null,
       "minutes": 10.5,
       "rotation": false
@@ -8460,6 +8864,7 @@
       "college": null,
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4351851.png",
+      "injury": null,
       "starter": null,
       "minutes": 22.8,
       "rotation": true
@@ -8480,8 +8885,9 @@
       "college": "Kansas State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3912848.png",
+      "injury": "Day-To-Day",
       "starter": null,
-      "minutes": 20.3,
+      "minutes": 22.8,
       "rotation": true
     },
     {
@@ -8500,8 +8906,9 @@
       "college": "Colorado",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4432446.png",
+      "injury": null,
       "starter": null,
-      "minutes": 10.6,
+      "minutes": 11.9,
       "rotation": false
     },
     {
@@ -8520,6 +8927,7 @@
       "college": "Kentucky",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3136193.png",
+      "injury": null,
       "starter": "PG",
       "minutes": 34,
       "rotation": true
@@ -8540,6 +8948,7 @@
       "college": "San Francisco",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4280245.png",
+      "injury": null,
       "starter": null,
       "minutes": 6.3,
       "rotation": false
@@ -8560,6 +8969,7 @@
       "college": "Michigan State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4066383.png",
+      "injury": null,
       "starter": "PF",
       "minutes": 28.9,
       "rotation": true
@@ -8580,6 +8990,7 @@
       "college": "Oregon",
       "country": "Canada",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3155526.png",
+      "injury": null,
       "starter": "SF",
       "minutes": 28.9,
       "rotation": true
@@ -8600,9 +9011,10 @@
       "college": "Virginia",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4888725.png",
+      "injury": "Day-To-Day",
       "starter": null,
       "minutes": 16.3,
-      "rotation": true
+      "rotation": false
     },
     {
       "id": "5105977",
@@ -8620,6 +9032,7 @@
       "college": "Saint Joseph's",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5105977.png",
+      "injury": null,
       "starter": null,
       "minutes": 6.6,
       "rotation": false
@@ -8640,6 +9053,7 @@
       "college": "Villanova",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4278585.png",
+      "injury": null,
       "starter": null,
       "minutes": 25.3,
       "rotation": true
@@ -8660,9 +9074,10 @@
       "college": "Saint Louis",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4278402.png",
+      "injury": null,
       "starter": null,
-      "minutes": 16.1,
-      "rotation": false
+      "minutes": 17.3,
+      "rotation": true
     },
     {
       "id": "4437244",
@@ -8680,6 +9095,7 @@
       "college": null,
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4437244.png",
+      "injury": null,
       "starter": "SG",
       "minutes": 26.8,
       "rotation": true
@@ -8700,8 +9116,9 @@
       "college": "Marquette",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4601023.png",
+      "injury": null,
       "starter": "C",
-      "minutes": 20.5,
+      "minutes": 21.2,
       "rotation": true
     },
     {
@@ -8720,6 +9137,7 @@
       "college": "Duke",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3913174.png",
+      "injury": null,
       "starter": null,
       "minutes": 17.2,
       "rotation": true
@@ -8740,6 +9158,7 @@
       "college": "Duke",
       "country": "South Sudan",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5203685.png",
+      "injury": null,
       "starter": null,
       "minutes": 18.5,
       "rotation": true
@@ -8760,8 +9179,9 @@
       "college": "Arizona",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5041953.png",
+      "injury": null,
       "starter": null,
-      "minutes": 2.8,
+      "minutes": 3.4,
       "rotation": false
     },
     {
@@ -8780,8 +9200,9 @@
       "college": "LSU",
       "country": "Australia",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4066268.png",
+      "injury": null,
       "starter": null,
-      "minutes": 2.5,
+      "minutes": 3.5,
       "rotation": false
     },
     {
@@ -8800,6 +9221,7 @@
       "college": "Northwestern",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4592714.png",
+      "injury": null,
       "starter": null,
       "minutes": 12,
       "rotation": false
@@ -8820,6 +9242,7 @@
       "college": "Gonzaga",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4431695.png",
+      "injury": null,
       "starter": null,
       "minutes": 2.3,
       "rotation": false
@@ -8840,6 +9263,7 @@
       "college": "Duke",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4701232.png",
+      "injury": "Out",
       "starter": null,
       "minutes": 13.8,
       "rotation": false
@@ -8860,8 +9284,9 @@
       "college": null,
       "country": "Israel",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4683021.png",
+      "injury": null,
       "starter": "PF",
-      "minutes": 28.6,
+      "minutes": 30.3,
       "rotation": true
     },
     {
@@ -8880,6 +9305,7 @@
       "college": "Dayton",
       "country": "Belgium",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4431736.png",
+      "injury": null,
       "starter": "SF",
       "minutes": 30.6,
       "rotation": true
@@ -8900,8 +9326,9 @@
       "college": "Utah",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4592435.png",
+      "injury": null,
       "starter": null,
-      "minutes": 6.5,
+      "minutes": 7.7,
       "rotation": false
     },
     {
@@ -8920,6 +9347,7 @@
       "college": null,
       "country": "France",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5081727.png",
+      "injury": null,
       "starter": "SG",
       "minutes": 24.6,
       "rotation": true
@@ -8940,6 +9368,7 @@
       "college": "UConn",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5105565.png",
+      "injury": null,
       "starter": "C",
       "minutes": 26.1,
       "rotation": true
@@ -8960,8 +9389,9 @@
       "college": null,
       "country": null,
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5217746.png",
+      "injury": null,
       "starter": null,
-      "minutes": 5.3,
+      "minutes": 7,
       "rotation": false
     },
     {
@@ -8980,6 +9410,7 @@
       "college": null,
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4683678.png",
+      "injury": null,
       "starter": null,
       "minutes": 22.9,
       "rotation": true
@@ -9000,6 +9431,7 @@
       "college": "UCLA",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3995.png",
+      "injury": null,
       "starter": null,
       "minutes": 27.1,
       "rotation": true
@@ -9020,8 +9452,9 @@
       "college": "Texas",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4703889.png",
+      "injury": null,
       "starter": null,
-      "minutes": 5.5,
+      "minutes": 8.3,
       "rotation": false
     },
     {
@@ -9040,9 +9473,10 @@
       "college": null,
       "country": "Czech Republic",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4578893.png",
+      "injury": "Out",
       "starter": null,
       "minutes": 13.6,
-      "rotation": true
+      "rotation": false
     },
     {
       "id": "6606",
@@ -9060,6 +9494,7 @@
       "college": "Weber State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/6606.png",
+      "injury": null,
       "starter": "PG",
       "minutes": 29.7,
       "rotation": true
@@ -9080,8 +9515,9 @@
       "college": "Murray State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4279888.png",
+      "injury": "Out",
       "starter": null,
-      "minutes": 6.5,
+      "minutes": 14.2,
       "rotation": false
     },
     {
@@ -9100,6 +9536,7 @@
       "college": "Wisconsin",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4066399.png",
+      "injury": null,
       "starter": null,
       "minutes": 8.9,
       "rotation": false
@@ -9120,8 +9557,9 @@
       "college": "Kentucky",
       "country": "Canada",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4914336.png",
+      "injury": "Out",
       "starter": null,
-      "minutes": 14.4,
+      "minutes": 16.5,
       "rotation": true
     },
     {
@@ -9140,8 +9578,9 @@
       "college": "Wisconsin",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4593043.png",
+      "injury": null,
       "starter": null,
-      "minutes": 1.1,
+      "minutes": 3.1,
       "rotation": false
     },
     {
@@ -9160,9 +9599,10 @@
       "college": "Texas A&M",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4066211.png",
+      "injury": null,
       "starter": null,
-      "minutes": 13.3,
-      "rotation": false
+      "minutes": 14.5,
+      "rotation": true
     },
     {
       "id": "4706557",
@@ -9180,8 +9620,9 @@
       "college": "Alabama",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4706557.png",
+      "injury": "Out",
       "starter": null,
-      "minutes": 5,
+      "minutes": 8.3,
       "rotation": false
     },
     {
@@ -9200,8 +9641,9 @@
       "college": "Memphis",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4431679.png",
+      "injury": null,
       "starter": null,
-      "minutes": 20.2,
+      "minutes": 21.7,
       "rotation": true
     },
     {
@@ -9220,6 +9662,7 @@
       "college": "Arkansas",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5142620.png",
+      "injury": null,
       "starter": "PG",
       "minutes": 36.9,
       "rotation": true
@@ -9240,8 +9683,9 @@
       "college": "North Carolina",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4395650.png",
+      "injury": null,
       "starter": null,
-      "minutes": 13.4,
+      "minutes": 15.2,
       "rotation": false
     },
     {
@@ -9260,8 +9704,9 @@
       "college": "Auburn",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4433174.png",
+      "injury": null,
       "starter": null,
-      "minutes": 9,
+      "minutes": 11.1,
       "rotation": false
     },
     {
@@ -9280,8 +9725,9 @@
       "college": "Virginia",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4065732.png",
+      "injury": null,
       "starter": "SF",
-      "minutes": 29.3,
+      "minutes": 31,
       "rotation": true
     },
     {
@@ -9300,8 +9746,9 @@
       "college": "UConn",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4917149.png",
+      "injury": null,
       "starter": null,
-      "minutes": 5.1,
+      "minutes": 7.8,
       "rotation": false
     },
     {
@@ -9320,8 +9767,9 @@
       "college": "UCLA",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3064440.png",
+      "injury": null,
       "starter": "SG",
-      "minutes": 31.1,
+      "minutes": 31.9,
       "rotation": true
     },
     {
@@ -9340,8 +9788,9 @@
       "college": "San Francisco",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5107897.png",
+      "injury": null,
       "starter": null,
-      "minutes": 4.5,
+      "minutes": 9.4,
       "rotation": false
     },
     {
@@ -9360,8 +9809,9 @@
       "college": "Kentucky",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4066262.png",
+      "injury": null,
       "starter": null,
-      "minutes": 15.5,
+      "minutes": 15.7,
       "rotation": true
     },
     {
@@ -9380,8 +9830,9 @@
       "college": "Iowa",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4594327.png",
+      "injury": null,
       "starter": "PF",
-      "minutes": 17,
+      "minutes": 22.3,
       "rotation": true
     },
     {
@@ -9400,6 +9851,7 @@
       "college": "Ole Miss",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4709131.png",
+      "injury": null,
       "starter": null,
       "minutes": 0.3,
       "rotation": false
@@ -9420,8 +9872,9 @@
       "college": "Bowling Green",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4279318.png",
+      "injury": null,
       "starter": null,
-      "minutes": 8.2,
+      "minutes": 8.7,
       "rotation": false
     },
     {
@@ -9440,8 +9893,9 @@
       "college": "Duke",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/2488653.png",
+      "injury": null,
       "starter": null,
-      "minutes": 1.7,
+      "minutes": 9.5,
       "rotation": false
     },
     {
@@ -9460,6 +9914,7 @@
       "college": "Stanford",
       "country": "France",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4898371.png",
+      "injury": "Out",
       "starter": null,
       "minutes": 19.2,
       "rotation": true
@@ -9480,8 +9935,9 @@
       "college": "Gonzaga",
       "country": "Lithuania",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3155942.png",
+      "injury": null,
       "starter": "C",
-      "minutes": 31.4,
+      "minutes": 32.3,
       "rotation": true
     },
     {
@@ -9500,6 +9956,7 @@
       "college": "Houston",
       "country": "Israel",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5106058.png",
+      "injury": null,
       "starter": null,
       "minutes": 16.8,
       "rotation": true
@@ -9520,8 +9977,9 @@
       "college": "LSU",
       "country": "Australia",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3907387.png",
+      "injury": "Out",
       "starter": null,
-      "minutes": 0,
+      "minutes": 8.2,
       "rotation": false
     },
     {
@@ -9540,6 +9998,7 @@
       "college": "North Carolina",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/6578.png",
+      "injury": null,
       "starter": null,
       "minutes": 19.4,
       "rotation": true
@@ -9560,6 +10019,7 @@
       "college": "Duke",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5105337.png",
+      "injury": null,
       "starter": null,
       "minutes": 0.1,
       "rotation": false
@@ -9580,8 +10040,9 @@
       "college": "Arizona",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5061568.png",
+      "injury": null,
       "starter": null,
-      "minutes": 10.5,
+      "minutes": 10.8,
       "rotation": false
     },
     {
@@ -9600,6 +10061,7 @@
       "college": "UConn",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4845367.png",
+      "injury": null,
       "starter": "SG",
       "minutes": 29.6,
       "rotation": true
@@ -9620,6 +10082,7 @@
       "college": "St. John's",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4592479.png",
+      "injury": null,
       "starter": null,
       "minutes": 26.6,
       "rotation": true
@@ -9640,8 +10103,9 @@
       "college": "Kentucky",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4066259.png",
+      "injury": null,
       "starter": "PG",
-      "minutes": 27.2,
+      "minutes": 27.9,
       "rotation": true
     },
     {
@@ -9660,6 +10124,7 @@
       "college": "Tennessee",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5107968.png",
+      "injury": null,
       "starter": null,
       "minutes": 0.2,
       "rotation": false
@@ -9680,8 +10145,9 @@
       "college": "Rutgers",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5037871.png",
+      "injury": "Out",
       "starter": "SF",
-      "minutes": 27.9,
+      "minutes": 29.4,
       "rotation": true
     },
     {
@@ -9700,6 +10166,7 @@
       "college": "Tennessee",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/6440.png",
+      "injury": "Out",
       "starter": null,
       "minutes": 17,
       "rotation": true
@@ -9720,6 +10187,7 @@
       "college": "Kentucky",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4395723.png",
+      "injury": null,
       "starter": null,
       "minutes": 24,
       "rotation": true
@@ -9740,8 +10208,9 @@
       "college": "Memphis",
       "country": "Dominican Republic",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4713010.png",
+      "injury": null,
       "starter": null,
-      "minutes": 1.1,
+      "minutes": 2.1,
       "rotation": false
     },
     {
@@ -9760,6 +10229,7 @@
       "college": "Vanderbilt",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3064560.png",
+      "injury": null,
       "starter": null,
       "minutes": 15,
       "rotation": false
@@ -9780,8 +10250,9 @@
       "college": "USC",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3134916.png",
+      "injury": null,
       "starter": null,
-      "minutes": 6.7,
+      "minutes": 8.2,
       "rotation": false
     },
     {
@@ -9800,6 +10271,7 @@
       "college": "Kentucky",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5101845.png",
+      "injury": "Out",
       "starter": null,
       "minutes": 0,
       "rotation": false
@@ -9820,8 +10292,9 @@
       "college": "UConn",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5105809.png",
+      "injury": null,
       "starter": null,
-      "minutes": 3.5,
+      "minutes": 4.5,
       "rotation": false
     },
     {
@@ -9840,8 +10313,9 @@
       "college": "Florida State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4395630.png",
+      "injury": null,
       "starter": "PF",
-      "minutes": 26.4,
+      "minutes": 27.8,
       "rotation": true
     },
     {
@@ -9860,6 +10334,7 @@
       "college": null,
       "country": "France",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5104157.png",
+      "injury": null,
       "starter": "C",
       "minutes": 30.3,
       "rotation": true
@@ -9880,6 +10355,7 @@
       "college": "UCLA",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/2993874.png",
+      "injury": null,
       "starter": null,
       "minutes": 8.3,
       "rotation": false
@@ -9900,8 +10376,9 @@
       "college": "Florida State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4433134.png",
+      "injury": null,
       "starter": "PF",
-      "minutes": 26.2,
+      "minutes": 27.6,
       "rotation": true
     },
     {
@@ -9920,8 +10397,9 @@
       "college": "Duke",
       "country": "Canada",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4395625.png",
+      "injury": "Out",
       "starter": "SF",
-      "minutes": 29.8,
+      "minutes": 31.5,
       "rotation": true
     },
     {
@@ -9940,6 +10418,7 @@
       "college": "Ohio State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4431893.png",
+      "injury": null,
       "starter": null,
       "minutes": 18.8,
       "rotation": true
@@ -9960,6 +10439,7 @@
       "college": "Oregon",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4432586.png",
+      "injury": "Out",
       "starter": null,
       "minutes": 0,
       "rotation": false
@@ -9980,8 +10460,9 @@
       "college": "Arizona",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4432737.png",
+      "injury": null,
       "starter": null,
-      "minutes": 2.6,
+      "minutes": 3.4,
       "rotation": false
     },
     {
@@ -10000,6 +10481,7 @@
       "college": "Santa Clara",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5149115.png",
+      "injury": null,
       "starter": null,
       "minutes": 16.1,
       "rotation": false
@@ -10020,8 +10502,9 @@
       "college": "Indiana",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4431684.png",
+      "injury": null,
       "starter": null,
-      "minutes": 6.2,
+      "minutes": 7.4,
       "rotation": false
     },
     {
@@ -10040,6 +10523,7 @@
       "college": "San Diego State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/6450.png",
+      "injury": "Out",
       "starter": null,
       "minutes": 20.3,
       "rotation": true
@@ -10060,8 +10544,9 @@
       "college": "Florida",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4702656.png",
+      "injury": null,
       "starter": null,
-      "minutes": 11.8,
+      "minutes": 12.1,
       "rotation": false
     },
     {
@@ -10080,6 +10565,7 @@
       "college": "Kansas",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4411057.png",
+      "injury": null,
       "starter": null,
       "minutes": 1.5,
       "rotation": false
@@ -10100,8 +10586,9 @@
       "college": "South Carolina",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5093267.png",
+      "injury": "Day-To-Day",
       "starter": "C",
-      "minutes": 20.6,
+      "minutes": 21.7,
       "rotation": true
     },
     {
@@ -10120,8 +10607,9 @@
       "college": "Utah",
       "country": "Austria",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3134908.png",
+      "injury": null,
       "starter": null,
-      "minutes": 20.9,
+      "minutes": 22.1,
       "rotation": true
     },
     {
@@ -10140,8 +10628,9 @@
       "college": "Kentucky",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4395724.png",
+      "injury": null,
       "starter": "PG",
-      "minutes": 28,
+      "minutes": 29.6,
       "rotation": true
     },
     {
@@ -10160,6 +10649,7 @@
       "college": "Houston",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4432241.png",
+      "injury": null,
       "starter": null,
       "minutes": 23.3,
       "rotation": true
@@ -10180,6 +10670,7 @@
       "college": "Gonzaga",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4397784.png",
+      "injury": null,
       "starter": null,
       "minutes": 3.5,
       "rotation": false
@@ -10200,6 +10691,7 @@
       "college": "Baylor",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4684272.png",
+      "injury": null,
       "starter": "SG",
       "minutes": 31.4,
       "rotation": true
@@ -10220,6 +10712,7 @@
       "college": "Arkansas",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4684682.png",
+      "injury": null,
       "starter": null,
       "minutes": 0,
       "rotation": false
@@ -10240,6 +10733,7 @@
       "college": "Rutgers",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4873138.png",
+      "injury": null,
       "starter": "PF",
       "minutes": 30.1,
       "rotation": true
@@ -10260,8 +10754,9 @@
       "college": "Texas",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4277919.png",
+      "injury": null,
       "starter": null,
-      "minutes": 15.8,
+      "minutes": 17.7,
       "rotation": false
     },
     {
@@ -10280,8 +10775,9 @@
       "college": "North Carolina",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4065673.png",
+      "injury": null,
       "starter": null,
-      "minutes": 4.4,
+      "minutes": 6.1,
       "rotation": false
     },
     {
@@ -10300,6 +10796,7 @@
       "college": "Michigan",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4683736.png",
+      "injury": null,
       "starter": null,
       "minutes": 1.2,
       "rotation": false
@@ -10320,6 +10817,7 @@
       "college": "USC",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4683766.png",
+      "injury": null,
       "starter": null,
       "minutes": 14.8,
       "rotation": false
@@ -10340,9 +10838,10 @@
       "college": "Duke",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4684793.png",
+      "injury": null,
       "starter": null,
       "minutes": 17.6,
-      "rotation": true
+      "rotation": false
     },
     {
       "id": "4433627",
@@ -10360,8 +10859,9 @@
       "college": "Baylor",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4433627.png",
+      "injury": null,
       "starter": "PG",
-      "minutes": 31.5,
+      "minutes": 32.3,
       "rotation": true
     },
     {
@@ -10380,8 +10880,9 @@
       "college": "Arizona",
       "country": "Australia",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4432811.png",
+      "injury": null,
       "starter": "SF",
-      "minutes": 17.6,
+      "minutes": 18.6,
       "rotation": true
     },
     {
@@ -10400,8 +10901,9 @@
       "college": "Texas",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4397077.png",
+      "injury": null,
       "starter": "C",
-      "minutes": 20.2,
+      "minutes": 22,
       "rotation": true
     },
     {
@@ -10420,6 +10922,7 @@
       "college": "North Carolina",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4433618.png",
+      "injury": null,
       "starter": null,
       "minutes": 0.3,
       "rotation": false
@@ -10440,8 +10943,9 @@
       "college": "Michigan State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4277961.png",
+      "injury": "Out",
       "starter": null,
-      "minutes": 14.2,
+      "minutes": 16.1,
       "rotation": false
     },
     {
@@ -10460,9 +10964,10 @@
       "college": "Arizona",
       "country": "Finland",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4066336.png",
+      "injury": "Out",
       "starter": null,
-      "minutes": 15,
-      "rotation": false
+      "minutes": 21.1,
+      "rotation": true
     },
     {
       "id": "3133602",
@@ -10480,6 +10985,7 @@
       "college": "Kansas",
       "country": "Ukraine",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3133602.png",
+      "injury": null,
       "starter": null,
       "minutes": 18.6,
       "rotation": true
@@ -10500,6 +11006,7 @@
       "college": null,
       "country": "Bosnia & Herzegovina",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3102530.png",
+      "injury": "Out",
       "starter": null,
       "minutes": 10.6,
       "rotation": false
@@ -10520,8 +11027,9 @@
       "college": "Georgia Tech",
       "country": "Nigeria",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4065663.png",
+      "injury": null,
       "starter": null,
-      "minutes": 18,
+      "minutes": 18.5,
       "rotation": true
     },
     {
@@ -10540,6 +11048,7 @@
       "college": "Kansas",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5041955.png",
+      "injury": null,
       "starter": "SG",
       "minutes": 30.6,
       "rotation": true
@@ -10560,6 +11069,7 @@
       "college": "Ohio State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5105839.png",
+      "injury": null,
       "starter": null,
       "minutes": 18.7,
       "rotation": true
@@ -10580,6 +11090,7 @@
       "college": "Arizona",
       "country": "Bahamas",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4278129.png",
+      "injury": "Day-To-Day",
       "starter": null,
       "minutes": 19.1,
       "rotation": true
@@ -10600,8 +11111,9 @@
       "college": "Virginia",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4432187.png",
+      "injury": "Out",
       "starter": null,
-      "minutes": 0.1,
+      "minutes": 3.4,
       "rotation": false
     },
     {
@@ -10620,6 +11132,7 @@
       "college": "Pittsburgh",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4845374.png",
+      "injury": "Day-To-Day",
       "starter": null,
       "minutes": 22.2,
       "rotation": true
@@ -10640,6 +11153,7 @@
       "college": "Pittsburgh",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4432907.png",
+      "injury": "Out",
       "starter": null,
       "minutes": 13.4,
       "rotation": false
@@ -10660,8 +11174,9 @@
       "college": null,
       "country": "France",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5104155.png",
+      "injury": null,
       "starter": null,
-      "minutes": 23.5,
+      "minutes": 24.1,
       "rotation": true
     },
     {
@@ -10680,8 +11195,9 @@
       "college": "Kentucky",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/6583.png",
+      "injury": null,
       "starter": "PF",
-      "minutes": 29.9,
+      "minutes": 31.5,
       "rotation": true
     },
     {
@@ -10700,8 +11216,9 @@
       "college": "BYU",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5142718.png",
+      "injury": null,
       "starter": "SF",
-      "minutes": 26.1,
+      "minutes": 29.3,
       "rotation": true
     },
     {
@@ -10720,6 +11237,7 @@
       "college": "Miami",
       "country": "Switzerland",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5174563.png",
+      "injury": null,
       "starter": "SG",
       "minutes": 33.7,
       "rotation": true
@@ -10740,6 +11258,7 @@
       "college": "Virginia",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/2581184.png",
+      "injury": null,
       "starter": null,
       "minutes": 9.3,
       "rotation": false
@@ -10760,8 +11279,9 @@
       "college": "Texas",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5238230.png",
+      "injury": null,
       "starter": null,
-      "minutes": 18.6,
+      "minutes": 19.6,
       "rotation": true
     },
     {
@@ -10780,6 +11300,7 @@
       "college": "Florida",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4432819.png",
+      "injury": null,
       "starter": null,
       "minutes": 6.5,
       "rotation": false
@@ -10800,6 +11321,7 @@
       "college": "Texas A&M",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/6609.png",
+      "injury": null,
       "starter": null,
       "minutes": 14,
       "rotation": false
@@ -10820,8 +11342,9 @@
       "college": "Tennessee",
       "country": "Nigeria",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5105841.png",
+      "injury": null,
       "starter": null,
-      "minutes": 0.3,
+      "minutes": 0.8,
       "rotation": false
     },
     {
@@ -10840,6 +11363,7 @@
       "college": "Illinois",
       "country": "Canada",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5144126.png",
+      "injury": null,
       "starter": null,
       "minutes": 15.9,
       "rotation": false
@@ -10860,8 +11384,9 @@
       "college": null,
       "country": "France",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5160992.png",
+      "injury": null,
       "starter": "C",
-      "minutes": 25.1,
+      "minutes": 25.7,
       "rotation": true
     },
     {
@@ -10880,6 +11405,7 @@
       "college": null,
       "country": "Italy",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4997537.png",
+      "injury": "Out",
       "starter": null,
       "minutes": 6.5,
       "rotation": false
@@ -10900,6 +11426,7 @@
       "college": "Florida State",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4606840.png",
+      "injury": "Out",
       "starter": null,
       "minutes": 10.1,
       "rotation": false
@@ -10920,6 +11447,7 @@
       "college": "Oklahoma",
       "country": "USA",
       "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4277905.png",
+      "injury": null,
       "starter": "PG",
       "minutes": 35.1,
       "rotation": true

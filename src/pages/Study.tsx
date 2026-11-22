@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CONFERENCE_LABEL, DIVISIONS, STARTER_SLOTS, rosterOf, teamById, teams, type Player } from '../data';
+import { CONFERENCE_LABEL, DIVISIONS, STARTER_SLOTS, injuryLabel, rosterOf, teamById, teams, type Player } from '../data';
 import { navigate } from '../router';
 import { Img, PlayerFacts } from '../components/Cards';
 import { PlayerStatsModal } from '../components/PlayerStats';
@@ -95,6 +95,11 @@ function TeamRoster({ teamId }: { teamId: string }) {
         )}
         <Img src={p.headshot} kind="photo" />
         {p.jersey && <span className="jersey-badge">#{p.jersey}</span>}
+        {p.injury && (
+          <span className="injury-badge" title={injuryLabel(p.injury) ?? ''}>
+            {p.injury === 'Day-To-Day' ? '🤕' : '🚑'}
+          </span>
+        )}
         {hidden ? (
           <div className="hidden-name">Clicca per scoprire</div>
         ) : (

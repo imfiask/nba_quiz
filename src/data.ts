@@ -37,6 +37,8 @@ export interface Player {
   minutes: number;
   /** Titolare o tra i primi 9 della squadra per minuti: i giocatori da sapere. */
   rotation: boolean;
+  /** Stato infortuni ESPN al momento dell'aggiornamento ("Out", "Day-To-Day"…); null se sta bene. */
+  injury: string | null;
 }
 
 export const season: string = raw.season ?? '';
@@ -84,6 +86,14 @@ export const STARTER_SLOTS: Record<string, string> = {
   PF: 'Ala grande',
   C: 'Centro',
 };
+
+/** Stato infortuni in italiano, con icona. */
+export function injuryLabel(status: string | null): string | null {
+  if (!status) return null;
+  if (status === 'Out') return '🚑 Infortunato';
+  if (status === 'Day-To-Day') return '🤕 In dubbio';
+  return `🚑 ${status}`;
+}
 
 export const POSITION_LABEL: Record<string, string> = {
   G: 'Guardia',

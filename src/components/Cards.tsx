@@ -1,4 +1,4 @@
-import { CONFERENCE_LABEL, POSITION_LABEL, STARTER_SLOTS, teamById, type Player, type Team } from '../data';
+import { CONFERENCE_LABEL, POSITION_LABEL, STARTER_SLOTS, injuryLabel, teamById, type Player, type Team } from '../data';
 
 export function Img({ src, kind, alt = '' }: { src?: string | null; kind: 'logo' | 'photo'; alt?: string }) {
   if (!src) return <div className={`img ${kind} missing`}>?</div>;
@@ -10,6 +10,7 @@ export function PlayerFacts({ p, starter = true }: { p: Player; starter?: boolea
   const facts = [
     p.position && (POSITION_LABEL[p.position] ?? p.position),
     starter && p.starter && `Titolare (${STARTER_SLOTS[p.starter] ?? p.starter})`,
+    injuryLabel(p.injury),
     p.heightCm && `${p.heightCm} cm`,
     p.age && `${p.age} anni`,
     p.country && p.country !== 'USA' ? p.country : null,

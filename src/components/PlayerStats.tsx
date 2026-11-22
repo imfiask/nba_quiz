@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { CONFERENCE_LABEL, POSITION_LABEL, STARTER_SLOTS, teamById, type Player } from '../data';
+import { CONFERENCE_LABEL, POSITION_LABEL, STARTER_SLOTS, injuryLabel, teamById, type Player } from '../data';
 import { currentSeasonYear, tierOf, usePlayerStats, type SeasonStats } from '../espn';
 import { Img } from './Cards';
 
@@ -32,6 +32,7 @@ export function PlayerStatsModal({ player: p, onClose }: { player: Player; onClo
   const facts = [
     p.position && (POSITION_LABEL[p.position] ?? p.position),
     p.starter && `Titolare (${STARTER_SLOTS[p.starter] ?? p.starter})`,
+    injuryLabel(p.injury),
     p.heightCm && `${p.heightCm} cm`,
     p.weightKg && `${p.weightKg} kg`,
     p.age && `${p.age} anni`,
