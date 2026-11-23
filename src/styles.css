@@ -400,3 +400,37 @@ th { color: var(--muted); font-weight: 500; font-size: 0.85rem; }
 @media (max-width: 700px) {
   .lineup-slots { grid-template-columns: repeat(3, 1fr); }
 }
+
+/* ---------- impara una squadra ---------- */
+.learn-intro { margin-bottom: 16px; }
+.learn-intro p { margin: 0 0 8px; line-height: 1.5; }
+.team-tile .learn-status { margin-left: auto; font-size: 0.78rem; color: var(--muted); white-space: nowrap; }
+.team-tile.learned { background: color-mix(in srgb, var(--ok) 14%, var(--panel-2)); }
+.learn-path { max-width: 760px; margin: 0 auto; }
+.learn-header { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; border-top: 4px solid var(--team); }
+.learn-header > .img.logo { width: 72px; height: 72px; }
+.learn-header h2 { margin: 0 0 8px; }
+.path-dots { display: flex; flex-wrap: wrap; gap: 6px; }
+.path-dot { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; font-size: 0.8rem; font-weight: 700; background: var(--panel-2); border: 2px solid var(--border); color: var(--muted); }
+.path-dot.done { background: var(--ok); border-color: var(--ok); color: #fff; }
+.path-dot.current { border-color: var(--accent); color: var(--text); box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 40%, transparent); }
+.learn-card { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.learn-card.center { text-align: center; }
+.intro-card > .img.photo { width: 320px; height: 234px; }
+.intro-card h2 { margin: 0; font-size: 1.7rem; }
+.intro-role { font-weight: 600; }
+.intro-hooks { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 6px; width: 100%; max-width: 480px; }
+.intro-hooks li { padding: 8px 12px; border-radius: 8px; background: var(--panel-2); border-left: 4px solid var(--team); }
+.learn-faces { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.learn-faces > div { display: flex; flex-direction: column; align-items: center; gap: 4px; font-weight: 600; }
+.learn-faces .img.photo { width: 120px; height: 88px; }
+.practice { align-items: stretch; }
+.practice > .img.photo { align-self: center; width: 260px; height: 190px; }
+.practice .prompt-text, .practice .prompt-sub { text-align: center; }
+.practice-head { display: flex; justify-content: space-between; }
+.learn-solution { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: 10px; background: var(--panel-2); border-left: 4px solid var(--team); width: 100%; }
+.learn-solution .img.photo { width: 96px; height: 70px; }
+@media (max-width: 700px) {
+  .intro-card > .img.photo { width: 100%; height: auto; aspect-ratio: 260 / 190; }
+}
+.primary .muted { color: inherit; opacity: 0.65; }

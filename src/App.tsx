@@ -8,8 +8,10 @@ import Quiz from './pages/Quiz';
 import Study from './pages/Study';
 import Stats from './pages/Stats';
 import Guide from './pages/Guide';
+import Learn from './pages/Learn';
 
 const NAV = [
+  { page: 'learn', label: '🎓 Impara' },
   { page: 'home', label: 'Gioca' },
   { page: 'study', label: 'Studia' },
   { page: 'stats', label: 'Progressi' },
@@ -40,6 +42,8 @@ export default function App() {
     content = <Stats />;
   } else if (page === 'guide') {
     content = <Guide />;
+  } else if (page === 'learn') {
+    content = <Learn teamId={params.get('team') ?? undefined} />;
   } else {
     content = <Home initialScope={(params.get('scope') ?? undefined) as Scope | undefined} />;
   }
