@@ -32,7 +32,7 @@ function TeamsByDivision() {
         conference e division.
       </p>
       <div className="conferences">
-        {(['East', 'West'] as const).map((conf) => (
+        {(['West', 'East'] as const).map((conf) => (
           <section key={conf} className="panel">
             <h2>Conference {CONFERENCE_LABEL[conf]}</h2>
             {DIVISIONS.filter((d) => d.conference === conf).map((d) => (

@@ -59,13 +59,14 @@ export const playerById = new Map(players.map((p) => [p.id, p]));
 
 export const CONFERENCE_LABEL: Record<Conference, string> = { East: 'Est', West: 'Ovest' };
 
+/** Come sulla cartina: prima l'Ovest, poi l'Est; dentro ogni conference da nord a sud. */
 export const DIVISIONS: { name: string; conference: Conference }[] = [
-  { name: 'Atlantic', conference: 'East' },
-  { name: 'Central', conference: 'East' },
-  { name: 'Southeast', conference: 'East' },
   { name: 'Northwest', conference: 'West' },
   { name: 'Pacific', conference: 'West' },
   { name: 'Southwest', conference: 'West' },
+  { name: 'Atlantic', conference: 'East' },
+  { name: 'Central', conference: 'East' },
+  { name: 'Southeast', conference: 'East' },
 ];
 
 /** Colori delle division sulla mappa: caldi a Ovest (il tramonto), freddi a Est. */

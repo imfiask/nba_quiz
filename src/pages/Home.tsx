@@ -67,7 +67,8 @@ function TeamPicker({ selected }: { selected: string[] }) {
         </button>
       ) : (
         <div className="picker-divisions">
-          {DIVISIONS.map((d) => {
+          {/* due colonne come sulla cartina: Ovest a sinistra, Est a destra; righe nord, centro, sud */}
+          {DIVISIONS.filter((d) => d.conference === 'West').flatMap((w, i) => [w, DIVISIONS.filter((d) => d.conference === 'East')[i]]).map((d) => {
             const divTeams = teams.filter((t) => t.division === d.name);
             return (
               <div key={d.name} className="picker-division">
